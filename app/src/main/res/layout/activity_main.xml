@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.rey.material.widget.ProgressView
+        android:id="@+id/id_progressView_main"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        style="@style/LightQueryLinearProgressView"/>
+
+    <com.qx.www.shuang_la_master.View.ProgressWebView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/id_webview_main"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+    </com.qx.www.shuang_la_master.View.ProgressWebView>
+</LinearLayout>
