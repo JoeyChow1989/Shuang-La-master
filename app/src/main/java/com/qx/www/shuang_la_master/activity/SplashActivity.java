@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.telephony.TelephonyManager;
 
 import com.qx.www.shuang_la_master.BaseActivity;
+import com.qx.www.shuang_la_master.MainActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.service.UpdateService;
 
@@ -17,17 +18,22 @@ public class SplashActivity extends BaseActivity
     String szImei = null;
 
     @Override
+    public void initData()
+    {
+
+    }
+
+    @Override
+    public void initView()
+    {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-//        Intent intent = new Intent(this,
-//                UpdateService.class);
-//        intent.putExtra("dowurl",
-//                "http://hb.kuaihuala.com/wxhb.apk");
-//        startService(intent);
-
         GetThePhoneInfo();
         JumpToMain();
     }
@@ -51,5 +57,14 @@ public class SplashActivity extends BaseActivity
                 SplashActivity.this.finish();
             }
         }, 2500);
+    }
+
+    private void DownLoadApk()
+    {
+        Intent intent = new Intent(this,
+                UpdateService.class);
+        intent.putExtra("dowurl",
+                "http://hb.kuaihuala.com/wxhb.apk");
+        startService(intent);
     }
 }

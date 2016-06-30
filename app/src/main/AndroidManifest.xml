@@ -14,19 +14,29 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.MainActivity"
-            ></activity>
+        <activity android:name=".MainActivity"/>
 
         <service android:name=".service.UpdateService"/>
+
+        <activity android:name=".activity.DetilActivity">
+        </activity>
+        <activity android:name=".activity.MoreActivity">
+        </activity>
+        <activity android:name=".activity.ZiLiaoActivity">
+        </activity>
+        <activity android:name=".activity.PhoneBindActivity">
+        </activity>
+        <activity android:name=".activity.MakeMonneyActivity">
+        </activity>
+        <activity android:name=".activity.ShouTuActivity">
+        </activity>
     </application>
 
 </manifest>

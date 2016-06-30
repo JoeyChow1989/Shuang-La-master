@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f8eb5</color>
-    <color name="colorPrimaryDark">#0190b7</color>
+    <color name="colorPrimary">#02b3df</color>
+    <color name="colorPrimaryDark">#02abd6</color>
     <color name="colorAccent">#ff6a9d</color>
+    <color name="buleDark">#019dc4</color>
 
+    <color name="top_bg">#fef9f8f8</color>
+    <color name="line_color">#FEDADADA</color>
 
     <color name="colorPrimaryQuarter">#fd3dd4fa</color>
-    <color name="colorPrimaryHalf">#f5307df9</color>
+    <color name="colorPrimaryHalf">#03a7d4</color>
+    <color name="friend_shane_shoutu">#FFF45D34</color>
 </resources>

@@ -1,6 +1,8 @@
 package com.qx.www.shuang_la_master;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -13,8 +15,19 @@ public class BaseActivity extends AppCompatActivity
     {
     }
 
-    public void showWebView()
+    public void initData()
     {
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+    }
 }

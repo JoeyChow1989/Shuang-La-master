@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -12,27 +12,4 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="LightLinearProgressView">
-        <item name="pv_autostart">false</item>
-        <item name="pv_circular">false</item>
-        <item name="pv_progressStyle">@style/LightLinearProgressDrawable</item>
-        <item name="pv_progressMode">indeterminate</item>
-    </style>
-
-    <style name="LightLinearProgressDrawable" parent="Material.Drawable.LinearProgress">
-        <item name="lpd_strokeColor">@color/colorPrimaryHalf</item>
-        <item name="lpd_strokeSecondaryColor">@android:color/transparent</item>
-    </style>
-
-    <style name="LightDeterminateLinearProgressDrawable" parent="Material.Drawable.LinearProgress.Determinate">
-        <item name="lpd_strokeColor">@color/colorPrimaryHalf</item>
-        <item name="lpd_strokeSecondaryColor">@color/colorPrimaryQuarter</item>
-    </style>
-
-    <style name="LightQueryLinearProgressView" parent="LightLinearProgressView">
-        <item name="pv_progressStyle">@style/LightDeterminateLinearProgressDrawable</item>
-        <item name="pv_progressMode">query</item>
-    </style>
-
 </resources>

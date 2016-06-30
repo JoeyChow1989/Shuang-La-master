@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    tools:context="com.qx.www.shuang_la_master.activity.PhoneBindActivity">
+
+    <include
+        android:id="@+id/id_phone_toolbar"
+        layout="@layout/toolbar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/id_phone_relattop"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/id_phone_toolbar"></RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/id_phone_relat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_phone_relattop">
+
+        <LinearLayout
+            android:id="@+id/id_phone_lin_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="手机号:"
+                android:textSize="16sp"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/id_phone_edit_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_phone_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_phone_lin_phone"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_phone_lin_yanzheng"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_phone_line"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="验证码:"
+                android:textSize="16sp"/>
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/id_phone_edit_yanzheng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                />
+
+            <Button
+                android:id="@+id/id_phone_bt_getyanzheng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/colorPrimaryDark"
+                android:text="语音验证码"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/id_phone_sendup"
+            android:layout_width="match_parent"
+            android:layout_below="@id/id_phone_lin_yanzheng"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:text="提交"
+            android:background="@android:color/white"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

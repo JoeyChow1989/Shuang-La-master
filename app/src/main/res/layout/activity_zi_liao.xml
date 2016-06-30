@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    tools:context="com.qx.www.shuang_la_master.activity.ZiLiaoActivity">
+
+    <include
+        android:id="@+id/id_ziliao_toolbar"
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_ziliao_toolbar">
+
+        <LinearLayout
+            android:id="@+id/id_ziliao_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="昵称"
+                android:textSize="18sp"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/id_ziliao_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_ziliao_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_ziliao_nickname"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_ziliao_headimg"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_ziliao_line1"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="头像"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/id_ziliao_linear_imgs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+                <ImageView
+                    android:id="@+id/id_ziliao_imgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:src="@mipmap/ic_launcher"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_ziliao_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_ziliao_headimg"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_ziliao_sex"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_ziliao_line2"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="性别"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/id_ziliao_sexup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_ziliao_line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_ziliao_sex"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_ziliao_brith"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_ziliao_line3"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="生日"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/id_ziliao_brithup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_ziliao_line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_ziliao_brith"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_ziliao_job"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_ziliao_line4"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="职业"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/id_ziliao_jobup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/id_ziliao_sendup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_ziliao_job"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:text="提交"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">爽啦</string>
+
+    <string name="zhuanqian">赚钱</string>
+    <string name="shoutu">收徒</string>
+    <string name="duobao">一元夺宝</string>
+    <string name="qiankafanli">钱咖返利</string>
+    <string name="youhujuan">优惠劵</string>
+    <string name="shengqian">省钱</string>
+    <string name="duihuan">兑换</string>
+
+    <string name="common_error">糟糕，加载失败</string>
+    <string name="click_retry">点击重试</string>
+
 </resources>

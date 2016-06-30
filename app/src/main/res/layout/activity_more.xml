@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    tools:context="com.qx.www.shuang_la_master.activity.MoreActivity">
+
+    <include
+        android:id="@+id/id_more_toolbar"
+        layout="@layout/toolbar"/>
+
+    <com.rey.material.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_more_toolbar"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/id_more_id"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="ID"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:gravity="left|center"
+                android:text="35661122"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_id"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_ziliao"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line1"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="资料"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_ziliao"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_weixin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line2"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="微信"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_weixin"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_shouji"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line3"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="手机"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_shouji"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_chenjidan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line4"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="成绩单"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_chenjidan"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_kefu"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line5"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="客服中心"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_kefu"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_xinwen"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line6"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="新闻公告"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_xinwen"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_shangwu"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line7"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="商务合作"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_shangwu"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_check"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line8"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="检查升级"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/more_line9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_more_check"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_more_changeid"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/more_line9"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="切换账号"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+        </LinearLayout>
+
+    </com.rey.material.widget.RelativeLayout>
+
+
+</RelativeLayout>
