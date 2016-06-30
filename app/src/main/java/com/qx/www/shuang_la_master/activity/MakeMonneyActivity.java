@@ -31,6 +31,7 @@ public class MakeMonneyActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_monney);
         ButterKnife.bind(this);
+        initView();
     }
 
     @OnClick({R.id.id_makemonney_renwu, R.id.id_makemonney_xianshi, R.id.id_makemonney_youchang})

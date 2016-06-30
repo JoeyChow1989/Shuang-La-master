@@ -1,4 +1,4 @@
-package com.qx.www.shuang_la_master.View;
+package com.qx.www.shuang_la_master.ui;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;

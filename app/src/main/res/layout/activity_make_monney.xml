@@ -17,6 +17,7 @@
         android:layout_height="40dp"
         android:layout_below="@id/id_makemonney_toolbar"
         android:layout_marginTop="20dp"
+        android:background="@android:color/white"
         android:orientation="horizontal">
 
         <ImageView
@@ -40,7 +41,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:paddingLeft="10dp"
             android:text="下载试用立得现金"
             />
 
@@ -64,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/id_makemonney_line1"
+        android:background="@android:color/white"
         android:orientation="horizontal">
 
         <ImageView
@@ -86,7 +87,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:paddingLeft="10dp"
             android:text="100%实时返现"
             />
 
@@ -110,6 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/id_makemonney_line2"
+        android:background="@android:color/white"
         android:orientation="horizontal">
 
         <ImageView
@@ -132,7 +133,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:paddingLeft="10dp"
             android:text="有人看就有钱"
             />
 
