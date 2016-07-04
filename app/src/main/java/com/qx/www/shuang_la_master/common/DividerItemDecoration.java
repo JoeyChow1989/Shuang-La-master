@@ -1,4 +1,6 @@
 package com.qx.www.shuang_la_master.common;
+
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;

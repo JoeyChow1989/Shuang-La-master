@@ -5,19 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qx.www.shuang_la_master.activity.DetilActivity">
+    tools:context="com.qx.www.shuang_la_master.activity.XianshiActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:fitsSystemWindows="true">
-
-        <include
-            layout="@layout/toolbar"/>
+        android:fitsSystemWindows="true"
+        >
+        <include layout="@layout/toolbar"/>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tab_layout_xianshi"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="bottom"
@@ -36,11 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/main_vp_container"
+            android:id="@+id/main_vp_container_xianshi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

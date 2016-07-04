@@ -37,6 +37,29 @@
         </activity>
         <activity android:name=".activity.ShouTuActivity">
         </activity>
+        <activity android:name=".activity.AllianceActivity">
+        </activity>
+        <activity android:name=".activity.XianshiActivity">
+        </activity>
+        <activity
+            android:name=".activity.YinYuanActivity"
+            >
+        </activity>
+        <activity
+            android:name=".activity.QiankaActivity">
+        </activity>
+        <activity
+            android:name=".activity.YouHuiJuanActivity"
+            >
+        </activity>
+        <activity
+            android:name=".activity.ShengQianActivity"
+            >
+        </activity>
+        <activity
+            android:name=".activity.DuiHuanActivity"
+            >
+        </activity>
     </application>
 
 </manifest>

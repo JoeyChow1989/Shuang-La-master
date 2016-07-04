@@ -27,7 +27,7 @@
 
             <com.rey.material.widget.LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 >
@@ -45,14 +45,14 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:background="@color/buleDark">
+                        android:background="@drawable/main_top_img_bg">
 
                         <com.qx.www.shuang_la_master.ui.RoundImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="20dp"
                             android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
                             android:src="@drawable/aa"
                             />
 
@@ -65,10 +65,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="right|center"
+                                android:layout_weight="1.5"
+                                android:gravity="right|bottom"
                                 android:paddingRight="30dp"
-                                android:paddingTop="25dp"
                                 android:text="我的余额(元)"
                                 android:textColor="@android:color/white"
                                 android:textSize="15sp"
@@ -78,11 +77,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="top|center|right"
-                                android:paddingRight="50dp"
+                                android:gravity="top|right"
+                                android:paddingRight="40dp"
                                 android:text="2.50"
                                 android:textColor="@android:color/white"
-                                android:textSize="35sp"
+                                android:textSize="40sp"
                                 />
 
                         </com.rey.material.widget.LinearLayout>
@@ -102,7 +101,7 @@
                             android:layout_marginRight="3dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
-                            android:background="@color/buleDark"
+                            android:background="@drawable/main_top_img_bg"
                             android:gravity="center"
                             android:text="今日收入0元"
                             android:textColor="@android:color/white"
@@ -117,7 +116,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
-                            android:background="@color/buleDark"
+                            android:background="@drawable/main_top_img_bg"
                             android:gravity="center"
                             android:text="今日收徒0个"
                             android:textColor="@android:color/white"
@@ -159,11 +158,22 @@
 
             </com.rey.material.widget.LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_color"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/line_color"
+                />
 
             <com.rey.material.widget.LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -196,8 +206,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="累计 5381万人参与"/>
+                        android:gravity="right|center"
+                        android:text="累计 5381万人参与"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -241,8 +252,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="超高奖励，上不封顶"/>
+                        android:gravity="right|center"
+                        android:text="超高奖励，上不封顶"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -258,6 +270,7 @@
                     />
 
                 <com.rey.material.widget.LinearLayout
+                    android:id="@+id/id_linear_yiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -285,8 +298,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="1元买手机充值卡"/>
+                        android:gravity="right|center"
+                        android:text="1元买手机充值卡"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -302,6 +316,7 @@
                     />
 
                 <com.rey.material.widget.LinearLayout
+                    android:id="@+id/id_linear_qiankafanli"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -329,8 +344,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="最低价，最高返90%"/>
+                        android:gravity="right|center"
+                        android:text="最低价，最高返90%"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -346,6 +362,7 @@
                     />
 
                 <com.rey.material.widget.LinearLayout
+                    android:id="@+id/id_linear_youhuijuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -373,8 +390,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="累计 17万人参加"/>
+                        android:gravity="right|center"
+                        android:text="累计 17万人参加"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -390,6 +408,7 @@
                     />
 
                 <com.rey.material.widget.LinearLayout
+                    android:id="@+id/id_linear_shengqian"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -417,8 +436,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="累计 1793万人参加"/>
+                        android:gravity="right|center"
+                        android:text="累计 1793万人参加"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -434,6 +454,7 @@
                     />
 
                 <com.rey.material.widget.LinearLayout
+                    android:id="@+id/id_linear_duihuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -461,8 +482,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="left|center"
-                        android:text="累计兑换35188万元"/>
+                        android:gravity="right|center"
+                        android:text="累计兑换35188万元"
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"

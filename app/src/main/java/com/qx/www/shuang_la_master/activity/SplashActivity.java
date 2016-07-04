@@ -58,13 +58,4 @@ public class SplashActivity extends BaseActivity
             }
         }, 2500);
     }
-
-    private void DownLoadApk()
-    {
-        Intent intent = new Intent(this,
-                UpdateService.class);
-        intent.putExtra("dowurl",
-                "http://hb.kuaihuala.com/wxhb.apk");
-        startService(intent);
-    }
 }

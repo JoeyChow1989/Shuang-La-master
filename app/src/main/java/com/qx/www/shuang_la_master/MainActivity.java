@@ -2,6 +2,7 @@ package com.qx.www.shuang_la_master;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.qx.www.shuang_la_master.activity.DetilActivity;
+import com.qx.www.shuang_la_master.activity.DuiHuanActivity;
 import com.qx.www.shuang_la_master.activity.MakeMonneyActivity;
 import com.qx.www.shuang_la_master.activity.MoreActivity;
+import com.qx.www.shuang_la_master.activity.QiankaActivity;
+import com.qx.www.shuang_la_master.activity.ShengQianActivity;
 import com.qx.www.shuang_la_master.activity.ShouTuActivity;
+import com.qx.www.shuang_la_master.activity.YinYuanActivity;
+import com.qx.www.shuang_la_master.activity.YouHuiJuanActivity;
 import com.rey.material.widget.LinearLayout;
 
 import butterknife.Bind;
@@ -30,6 +36,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     LinearLayout idLinearZhuanqian;
     @Bind(R.id.id_linear_shoutu)
     LinearLayout idLinearShoutu;
+    @Bind(R.id.id_linear_yiyuan)
+    LinearLayout idLinearYiyuan;
+    @Bind(R.id.id_linear_qiankafanli)
+    LinearLayout idLinearQiankafanli;
+    @Bind(R.id.id_linear_youhuijuan)
+    LinearLayout idLinearYouhuijuan;
+    @Bind(R.id.id_linear_shengqian)
+    LinearLayout idLinearShengqian;
+    @Bind(R.id.id_linear_duihuan)
+    LinearLayout idLinearDuihuan;
     private long exitTime = 0;
 
     @Override
@@ -70,7 +86,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.id_detil, R.id.id_more, R.id.id_linear_zhuanqian, R.id.id_linear_shoutu})
+    @OnClick({R.id.id_detil, R.id.id_more, R.id.id_linear_zhuanqian, R.id.id_linear_shoutu, R.id.id_linear_yiyuan, R.id.id_linear_qiankafanli,
+            R.id.id_linear_youhuijuan, R.id.id_linear_shengqian, R.id.id_linear_duihuan})
     public void onClick(View view)
     {
 
@@ -89,8 +106,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             case R.id.id_linear_shoutu:
                 intent.setClass(this, ShouTuActivity.class);
                 break;
+            case R.id.id_linear_yiyuan:
+                intent.setClass(this, YinYuanActivity.class);
+                break;
+            case R.id.id_linear_qiankafanli:
+                intent.setClass(this, QiankaActivity.class);
+                break;
+            case R.id.id_linear_youhuijuan:
+                intent.setClass(this, YouHuiJuanActivity.class);
+                break;
+            case R.id.id_linear_shengqian:
+                intent.setClass(this, ShengQianActivity.class);
+                break;
+            case R.id.id_linear_duihuan:
+                intent.setClass(this, DuiHuanActivity.class);
+                break;
         }
         startActivity(intent);
     }
-
 }

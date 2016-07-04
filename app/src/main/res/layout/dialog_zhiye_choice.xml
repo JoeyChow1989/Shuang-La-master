@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="480dp"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_txt_student"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:text="学生"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_student"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="教师"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_worker"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="上班族"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_worker"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_boss"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="老板"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_boss"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_gongwuyuan"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="公务员"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_gongwuyuan"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_free"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="自由"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_free"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_backup"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="退休"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_backup"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_zhiye_text_other"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:textSize="20sp"
+            android:text="其他"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/id_zhiye_rt_other"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="4"/>
+    </LinearLayout>
+</LinearLayout>

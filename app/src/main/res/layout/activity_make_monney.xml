@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_renwu"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_below="@id/id_makemonney_toolbar"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
@@ -62,7 +62,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_xianshi"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_below="@id/id_makemonney_line1"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -106,10 +106,56 @@
         />
 
     <LinearLayout
+        android:id="@+id/id_makemonney_newguy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_makemonney_line2"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:src="@mipmap/ic_launcher"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:text="新手任务"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:text="完成就赚0.3元"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/id_makemonney_line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/id_makemonney_newguy"
+        android:background="@color/line_color"
+        />
+
+    <LinearLayout
         android:id="@+id/id_makemonney_youchang"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/id_makemonney_line2"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_makemonney_line3"
         android:background="@android:color/white"
         android:orientation="horizontal">
 
