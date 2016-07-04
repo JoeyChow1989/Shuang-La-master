@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/top_bg"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_duihuan_toolbar"
+        layout="@layout/toolbar"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:id="@+id/id_linear_huafei"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="2.8"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center|left"
+                    android:paddingLeft="10dp"
+                    android:text="话费充值"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="快速充值，充的多送的多"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_duihuan_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_linear_huafei"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_linear_tixia"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_duihuan_line1"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="2.8"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center|left"
+                    android:paddingLeft="10dp"
+                    android:text="支付宝提现"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="直接提现，快速安全"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_duihuan_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_linear_tixia"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/id_linear_duibaobi"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_duihuan_line2"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="2.8"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center|left"
+                    android:paddingLeft="10dp"
+                    android:text="夺宝币兑换"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="超值优惠"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

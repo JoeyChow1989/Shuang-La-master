@@ -41,24 +41,21 @@
         </activity>
         <activity android:name=".activity.XianshiActivity">
         </activity>
-        <activity
-            android:name=".activity.YinYuanActivity"
-            >
+        <activity android:name=".activity.YinYuanActivity">
         </activity>
-        <activity
-            android:name=".activity.QiankaActivity">
+        <activity android:name=".activity.QiankaActivity">
         </activity>
-        <activity
-            android:name=".activity.YouHuiJuanActivity"
-            >
+        <activity android:name=".activity.YouHuiJuanActivity">
         </activity>
-        <activity
-            android:name=".activity.ShengQianActivity"
-            >
+        <activity android:name=".activity.ShengQianActivity">
         </activity>
-        <activity
-            android:name=".activity.DuiHuanActivity"
-            >
+        <activity android:name=".activity.DuiHuanActivity">
+        </activity>
+        <activity android:name=".activity.TixianActivity">
+        </activity>
+        <activity android:name=".activity.HuaFeiActivity">
+        </activity>
+        <activity android:name=".activity.DuobaoBiActivity">
         </activity>
     </application>
 

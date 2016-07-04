@@ -8,6 +8,7 @@
     <color name="top_bg">#fef9f8f8</color>
     <color name="line_color">#FEDADADA</color>
     <color name="tab_text_color">#fefffca0</color>
+    <color name="color_text_yellow">#FEEAE302</color>
 
     <color name="colorPrimaryQuarter">#fd0272fc</color>
     <color name="colorPrimaryHalf">#03a7d4</color>

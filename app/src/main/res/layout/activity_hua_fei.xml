@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    android:orientation="vertical"
+    tools:context="com.qx.www.shuang_la_master.activity.HuaFeiActivity">
+
+
+    <include
+        android:id="@+id/id_huafei_toolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/text_huanfei"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="一个工作日内到账，法定节假日三天内到账。"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="@color/friend_shane_shoutu"
+        android:layout_below="@id/id_huafei_toolbar"
+        android:background="@color/color_text_yellow"/>
+
+    <LinearLayout
+        android:id="@+id/id_huafei_phonenum"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/text_huanfei"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="手机号码:"
+            android:textSize="16sp"
+            />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/id_edittext_huafei_phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/id_huafei_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/id_huafei_phonenum"
+        android:background="@color/line_color"/>
+
+    <LinearLayout
+        android:id="@+id/id_huanfei_chongzhimoney"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_huafei_line"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="充值金额:"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/id_edittext_huafei_chongzhimoney"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/huanfei_sendup"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/id_huanfei_chongzhimoney"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:text="提交"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

@@ -117,7 +117,6 @@ public class ZiLiaoActivity extends BaseActivity
                 onBackPressed();
             }
         });
-
     }
 
     @Override
@@ -171,7 +170,7 @@ public class ZiLiaoActivity extends BaseActivity
     private void showZhiyePopup()
     {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setCancelable(false);
+        alertDialog.setCancelable(true);
         alertDialog.show();
         Window window = alertDialog.getWindow();
         window.setContentView(R.layout.dialog_zhiye_choice);
@@ -185,42 +184,42 @@ public class ZiLiaoActivity extends BaseActivity
         idZhiyeRtBackup = (RadioButton) window.findViewById(R.id.id_zhiye_rt_backup);
         idZhiyeRtOther = (RadioButton) window.findViewById(R.id.id_zhiye_rt_other);
 
-        if (idZhiyeRtStudent.getText().equals("学生"))
+        if (idZiliaoJobup.getText().equals("学生"))
         {
             idZhiyeRtStudent.setChecked(true);
         }
 
-        if (idZhiyeRtTeacher.getText().equals("教师"))
+        if (idZiliaoJobup.getText().equals("教师"))
         {
             idZhiyeRtTeacher.setChecked(true);
         }
 
-        if (idZhiyeRtWorker.getText().equals("上班族"))
+        if (idZiliaoJobup.getText().equals("上班族"))
         {
             idZhiyeRtWorker.setChecked(true);
         }
 
-        if (idZhiyeRtBoss.getText().equals("老板"))
+        if (idZiliaoJobup.getText().equals("老板"))
         {
             idZhiyeRtBoss.setChecked(true);
         }
 
-        if (idZhiyeRtGongwuyuan.getText().equals("公务员"))
+        if (idZiliaoJobup.getText().equals("公务员"))
         {
             idZhiyeRtGongwuyuan.setChecked(true);
         }
 
-        if (idZhiyeRtFree.getText().equals("自由"))
+        if (idZiliaoJobup.getText().equals("自由"))
         {
             idZhiyeRtFree.setChecked(true);
         }
 
-        if (idZhiyeRtBackup.getText().equals("退休"))
+        if (idZiliaoJobup.getText().equals("退休"))
         {
             idZhiyeRtBackup.setChecked(true);
         }
 
-        if (idZhiyeRtOther.getText().equals("其他"))
+        if (idZiliaoJobup.getText().equals("其他"))
         {
             idZhiyeRtOther.setChecked(true);
         }
@@ -334,7 +333,7 @@ public class ZiLiaoActivity extends BaseActivity
     private void showSexChoicePopup()
     {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setCancelable(false);
+        alertDialog.setCancelable(true);
         alertDialog.show();
         Window window = alertDialog.getWindow();
         window.setContentView(R.layout.dialog_sex_choice);

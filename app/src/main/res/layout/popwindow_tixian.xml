@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/top_bg"
+              android:orientation="vertical"
+              android:padding="10dp"
+    >
+
+        <!-- 这里的linearLayout加android:background=""这个属性要谨慎，如果加了后，popwindow是不能半透明了的 -->
+        <Button
+            android:id="@+id/first_tixian"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/popwin_bg"
+            android:text="10元 (优惠：10.5元)"/>
+
+
+        <Button
+            android:id="@+id/second_tixian"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/popwin_bg"
+            android:text="30元 (优惠：30.5元)"/>
+
+
+        <Button
+            android:id="@+id/third_tixian"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/popwin_bg"
+            android:text="50元 (优惠：50.5元)"/>
+
+        <Button
+            android:id="@+id/five_tixian"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:text="取消"/>
+
+</LinearLayout>

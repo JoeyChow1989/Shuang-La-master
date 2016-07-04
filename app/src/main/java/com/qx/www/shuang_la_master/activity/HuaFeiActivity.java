@@ -1,10 +1,11 @@
 package com.qx.www.shuang_la_master.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
@@ -13,23 +14,23 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DuiHuanActivity extends BaseActivity
+public class HuaFeiActivity extends BaseActivity
 {
 
-    @Bind(R.id.id_linear_huafei)
-    LinearLayout idLinearHuafei;
-    @Bind(R.id.id_linear_tixia)
-    LinearLayout idLinearTixia;
-    @Bind(R.id.id_linear_duibaobi)
-    LinearLayout idLinearDuibaobi;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.id_edittext_huafei_phonenum)
+    TextInputEditText idEdittextHuafeiPhonenum;
+    @Bind(R.id.id_edittext_huafei_chongzhimoney)
+    TextView idEdittextHuafeiChongzhimoney;
+    @Bind(R.id.huanfei_sendup)
+    Button huanfeiSendup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_duihuan);
+        setContentView(R.layout.activity_hua_fei);
         ButterKnife.bind(this);
         initView();
         initData();
@@ -38,7 +39,7 @@ public class DuiHuanActivity extends BaseActivity
     @Override
     public void initView()
     {
-        toolbar.setTitle("兑换");
+        toolbar.setTitle("话费充值");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener()
@@ -56,22 +57,15 @@ public class DuiHuanActivity extends BaseActivity
     {
     }
 
-    @OnClick({R.id.id_linear_huafei, R.id.id_linear_tixia, R.id.id_linear_duibaobi})
+    @OnClick({R.id.id_edittext_huafei_chongzhimoney, R.id.huanfei_sendup})
     public void onClick(View view)
     {
-        Intent intent = new Intent();
         switch (view.getId())
         {
-            case R.id.id_linear_huafei:
-                intent.setClass(this, HuaFeiActivity.class);
+            case R.id.id_edittext_huafei_chongzhimoney:
                 break;
-            case R.id.id_linear_tixia:
-                intent.setClass(this, TixianActivity.class);
-                break;
-            case R.id.id_linear_duibaobi:
-                intent.setClass(this, DuobaoBiActivity.class);
+            case R.id.huanfei_sendup:
                 break;
         }
-        startActivity(intent);
     }
 }
