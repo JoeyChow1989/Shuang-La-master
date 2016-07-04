@@ -1,5 +1,8 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
@@ -16,11 +19,15 @@ import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.bigkoo.pickerview.TimePickerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.galleryfinal.listener.GlidePauseOnScrollListener;
 import com.qx.www.shuang_la_master.galleryfinal.loader.GlideImageLoader;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,8 +56,6 @@ public class ZiLiaoActivity extends BaseActivity
     LinearLayout idZiliaoNickname;
     @Bind(R.id.id_ziliao_imgs)
     ImageView idZiliaoImgs;
-    @Bind(R.id.id_ziliao_linear_imgs)
-    LinearLayout idZiliaoLinearImgs;
     @Bind(R.id.id_ziliao_headimg)
     LinearLayout idZiliaoHeadimg;
     @Bind(R.id.id_ziliao_sexup)
@@ -147,12 +152,12 @@ public class ZiLiaoActivity extends BaseActivity
         });
     }
 
-    @OnClick({R.id.id_ziliao_linear_imgs, R.id.id_ziliao_sex, R.id.id_ziliao_brith, R.id.id_ziliao_job})
+    @OnClick({R.id.id_ziliao_headimg, R.id.id_ziliao_sex, R.id.id_ziliao_brith, R.id.id_ziliao_job})
     public void onClick(View view)
     {
         switch (view.getId())
         {
-            case R.id.id_ziliao_linear_imgs:
+            case R.id.id_ziliao_headimg:
                 showPopupWinUpLoadPic();
                 break;
             case R.id.id_ziliao_sex:
@@ -468,6 +473,9 @@ public class ZiLiaoActivity extends BaseActivity
             }
 
             // TODO: 2016/6/30  图片上传
+            Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
+            idZiliaoImgs .setImageBitmap(bitmap); //设置Bitmap
+
 
             System.out.println("-------------path-------------" + mPhotoList.get(0).getPhotoPath());
         }
@@ -485,4 +493,20 @@ public class ZiLiaoActivity extends BaseActivity
         return format.format(date);
     }
 
+
+    /**
+     * 加载本地图片
+     * @param url
+     * @return
+     */
+    public static Bitmap getLoacalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

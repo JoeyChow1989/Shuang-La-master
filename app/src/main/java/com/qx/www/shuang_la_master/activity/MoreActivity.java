@@ -74,7 +74,7 @@ public class MoreActivity extends BaseActivity
                 intent.setClass(this, ZiLiaoActivity.class);
                 break;
             case R.id.id_more_weixin:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this, WeiXinActivity.class);
                 break;
             case R.id.id_more_shouji:
                 intent.setClass(this, PhoneBindActivity.class);
@@ -83,7 +83,7 @@ public class MoreActivity extends BaseActivity
                 intent.setClass(this, ZiLiaoActivity.class);
                 break;
             case R.id.id_more_kefu:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this, KeFuCenterActivity.class);
                 break;
             case R.id.id_more_xinwen:
                 intent.setClass(this, ZiLiaoActivity.class);

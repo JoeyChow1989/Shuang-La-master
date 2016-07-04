@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_renwu"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_below="@id/id_makemonney_toolbar"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
@@ -62,7 +62,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_xianshi"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_below="@id/id_makemonney_line1"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -108,7 +108,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_newguy"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_below="@id/id_makemonney_line2"
         android:background="@android:color/white"
         android:orientation="horizontal">
@@ -154,7 +154,7 @@
     <LinearLayout
         android:id="@+id/id_makemonney_youchang"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_below="@id/id_makemonney_line3"
         android:background="@android:color/white"
         android:orientation="horizontal">

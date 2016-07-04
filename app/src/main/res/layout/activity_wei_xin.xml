@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/id_weixin_toolbar"
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:layout_below="@id/id_weixin_toolbar"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/id_weinxin_txt1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:text="为了您的账户安全，请先进行微信号绑定，完成绑定即可安心兑换。"/>
+
+        <TextView
+            android:id="@+id/id_weinxin_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_weinxin_txt1"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="步骤一：长按并存储以下二维码图片，打开微信扫一扫识别该二维码，关注爽啦服务号。"/>
+
+        <ImageView
+            android:id="@+id/id_weinxin_img"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@id/id_weinxin_txt2"
+            android:src="@mipmap/ic_launcher"
+            />
+
+        <TextView
+            android:id="@+id/id_weinxin_txt3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_weinxin_img"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="步骤二：关注完成后，在微信中点击“绑定账号”，获取验证码"/>
+
+        <TextView
+            android:id="@+id/id_weinxin_txt4"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/id_weinxin_txt3"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="步骤三：在下方输入从爽啦微信公众号中获得的验证码"/>
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/id_weinxin_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_weinxin_txt4"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:numeric="integer"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:hint="请输入验证码"
+            />
+
+        <Button
+            android:id="@+id/id_weinxin_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/id_weinxin_edit"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/weinxin_tijiao"
+            android:text="提交"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

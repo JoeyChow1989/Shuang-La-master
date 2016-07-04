@@ -31,7 +31,7 @@
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="昵称"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
 
             <android.support.v7.widget.AppCompatEditText
@@ -62,30 +62,22 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="头像"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
-            <LinearLayout
-                android:id="@+id/id_ziliao_linear_imgs"
-                android:layout_width="match_parent"
+
+            <com.qx.www.shuang_la_master.ui.RoundImageView
+                android:id="@+id/id_ziliao_imgs"
+                android:layout_width="87dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
-
-                <com.qx.www.shuang_la_master.ui.RoundImageView
-                    android:id="@+id/id_ziliao_imgs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="195dp"
-                    android:src="@drawable/aa"/>
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginRight="28dp"
+                android:src="@drawable/aa"/>
 
         </LinearLayout>
 
@@ -112,7 +104,7 @@
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="性别"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -122,7 +114,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="男"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 />
 
@@ -151,7 +143,7 @@
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="生日"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/id_ziliao_brithup"
@@ -190,7 +182,7 @@
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="职业"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -199,7 +191,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>

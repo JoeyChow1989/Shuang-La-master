@@ -57,6 +57,12 @@
         </activity>
         <activity android:name=".activity.DuobaoBiActivity">
         </activity>
+        <activity
+            android:name=".activity.WeiXinActivity"
+            android:windowSoftInputMode="adjustUnspecified">
+        </activity>
+        <activity android:name=".activity.KeFuCenterActivity">
+        </activity>
     </application>
 
 </manifest>

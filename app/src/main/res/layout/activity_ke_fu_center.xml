@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    tools:context="com.qx.www.shuang_la_master.activity.KeFuCenterActivity">
+
+    <include
+        android:id="@+id/id_kefu_toolbar"
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_below="@id/id_kefu_toolbar"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/id_kefu_jifenwenti"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="积分问题"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/id_kefu_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/id_kefu_jifenwenti"
+            android:background="@color/line_color"/>
+
+        <LinearLayout
+            android:id="@+id/id_kefu_weixinkefu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:layout_below="@id/id_kefu_line1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="微信客服"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_kefu_normalqu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:layout_below="@id/id_kefu_weixinkefu"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="常见问题"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
