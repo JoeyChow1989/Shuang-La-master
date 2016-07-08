@@ -27,7 +27,7 @@
 
             <com.rey.material.widget.LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="200dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 >
@@ -45,116 +45,142 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:background="@drawable/main_top_img_bg">
+                        android:orientation="horizontal">
 
-                        <com.qx.www.shuang_la_master.ui.RoundImageView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
                             android:layout_weight="1"
-                            android:src="@drawable/aa"
-                            />
-
-                        <com.rey.material.widget.LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1.5"
-                                android:gravity="right|bottom"
-                                android:paddingRight="30dp"
-                                android:text="我的余额(元)"
-                                android:textColor="@android:color/white"
-                                android:textSize="15sp"
-                                />
+                            android:orientation="vertical"
+                            >
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="top|right"
-                                android:paddingRight="40dp"
-                                android:text="2.50"
+                                android:gravity="left|bottom"
+                                android:paddingLeft="10dp"
+                                android:text="9.20"
                                 android:textColor="@android:color/white"
-                                android:textSize="40sp"
+                                android:textSize="55sp"
                                 />
 
-                        </com.rey.material.widget.LinearLayout>
-                    </com.rey.material.widget.LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.8"
+                                android:paddingLeft="20dp"
+                                android:text="我的余额(元)"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"/>
 
-                    <com.rey.material.widget.LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
 
-                        <TextView
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="3dp"
-                            android:layout_marginTop="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/main_top_img_bg"
-                            android:gravity="center"
-                            android:text="今日收入0元"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp"
-                            />
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/main_top_img_bg"
-                            android:gravity="center"
-                            android:text="今日收徒0个"
-                            android:textColor="@android:color/white"
-                            android:textSize="15sp"
-                            />
+                            <com.rey.material.widget.Button
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="18dp"
+                                android:layout_marginLeft="80dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/timoneny_bg"
+                                android:text="提    现"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.8"
+                                />
+
+                        </LinearLayout>
+
                     </com.rey.material.widget.LinearLayout>
+
                 </com.rey.material.widget.LinearLayout>
 
 
-                <android.support.v7.widget.ButtonBarLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:orientation="horizontal"
                     >
 
-                    <Button
+                    <com.rey.material.widget.LinearLayout
                         android:id="@+id/id_detil"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="1dp"
                         android:layout_weight="1"
                         android:background="@android:color/white"
-                        android:text="明细"
-                        android:textSize="18sp"
-                        />
+                        android:orientation="vertical"
+                        >
 
-                    <Button
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="00.50"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.2"
+                            android:gravity="center"
+                            android:text="今天收入"
+                            android:textSize="12sp"
+                            />
+
+
+                    </com.rey.material.widget.LinearLayout>
+
+                    <com.rey.material.widget.LinearLayout
                         android:id="@+id/id_more"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="1dp"
                         android:layout_weight="1"
                         android:background="@android:color/white"
+                        android:orientation="vertical"
                         android:text="更多"
                         android:textSize="18sp"
-                        />
+                        >
 
-                </android.support.v7.widget.ButtonBarLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="70.50"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.2"
+                            android:gravity="center"
+                            android:text="累计收入"
+                            android:textSize="12sp"
+                            />
+                    </com.rey.material.widget.LinearLayout>
+
+                </LinearLayout>
 
             </com.rey.material.widget.LinearLayout>
 

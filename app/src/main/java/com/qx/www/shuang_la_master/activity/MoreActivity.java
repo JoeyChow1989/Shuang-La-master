@@ -86,10 +86,10 @@ public class MoreActivity extends BaseActivity
                 intent.setClass(this, KeFuCenterActivity.class);
                 break;
             case R.id.id_more_xinwen:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this, NewsNoticeActivity.class);
                 break;
             case R.id.id_more_shangwu:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this, ShangwuActivity.class);
                 break;
             case R.id.id_more_check:
                 intent.setClass(this, ZiLiaoActivity.class);

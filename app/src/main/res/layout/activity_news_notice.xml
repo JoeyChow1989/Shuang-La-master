@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qx.www.shuang_la_master.activity.NewsNoticeActivity">
+
+    <include
+        android:id="@+id/id_newsnotice_toolbar"
+        layout="@layout/toolbar"/>
+
+    <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
+        android:id="@+id/id_autorecyler_newsnotice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_newsnotice_toolbar">
+    </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
+</RelativeLayout>

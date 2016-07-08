@@ -51,7 +51,6 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
             xianshiRenwu.setCount("10223");
             xianshiRenwu.setMsg("是时候有一个随心理财顾问");
             xianshiRenwu.setPic(R.mipmap.ic_launcher);
-
             mList.add(xianshiRenwu);
         }
 

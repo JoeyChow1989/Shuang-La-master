@@ -2,11 +2,11 @@ package com.qx.www.shuang_la_master;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.qx.www.shuang_la_master.activity.DetilActivity;
@@ -29,9 +29,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.id_detil)
-    Button idDetil;
+    LinearLayout idDetil;
     @Bind(R.id.id_more)
-    Button idMore;
+    LinearLayout idMore;
     @Bind(R.id.id_linear_zhuanqian)
     LinearLayout idLinearZhuanqian;
     @Bind(R.id.id_linear_shoutu)
@@ -61,7 +61,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initView()
     {
-        toolbar.setTitle("爽啦");
+        toolbar.setTitle("");
+        toolbar.setLogo(R.mipmap.ic_launcher);
+        toolbar.setOnMenuItemClickListener(onMenuItemClick);
         setSupportActionBar(toolbar);
     }
 
@@ -124,4 +126,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         }
         startActivity(intent);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener()
+    {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem)
+        {
+            switch (menuItem.getItemId())
+            {
+                case R.id.action_main:
+
+                    break;
+            }
+            return true;
+        }
+    };
 }

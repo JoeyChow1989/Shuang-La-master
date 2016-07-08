@@ -1,5 +1,6 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
@@ -60,14 +61,19 @@ public class KeFuCenterActivity extends BaseActivity
     @OnClick({R.id.id_kefu_jifenwenti, R.id.id_kefu_weixinkefu, R.id.id_kefu_normalqu})
     public void onClick(View view)
     {
+        Intent intent = new Intent();
         switch (view.getId())
         {
             case R.id.id_kefu_jifenwenti:
+                intent.setClass(KeFuCenterActivity.this,WeiXinKeFuActivity.class);
                 break;
             case R.id.id_kefu_weixinkefu:
+                intent.setClass(KeFuCenterActivity.this,WeiXinKeFuActivity.class);
                 break;
             case R.id.id_kefu_normalqu:
+                intent.setClass(KeFuCenterActivity.this,WeiXinKeFuActivity.class);
                 break;
         }
+        startActivity(intent);
     }
 }

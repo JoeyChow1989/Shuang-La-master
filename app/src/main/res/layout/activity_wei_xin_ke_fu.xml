@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    tools:context="com.qx.www.shuang_la_master.activity.WeiXinKeFuActivity">
+
+    <include
+        android:id="@+id/id_weixinkefu_toolbar"
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_below="@id/id_weixinkefu_toolbar"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="账户解冻、积分未到账至客服中心自助提交处理，其他问题请联系爽啦官方微信客服。"
+            />
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/id_weixinkefu_txt1"
+            android:text="工作时间：每天9:00 - 18:00( 节假日不休息 )"/>
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_weixinkefu_txt2"
+            android:gravity="left|center"
+            android:text="关注 爽啦客服 服务号 ：爽啦客服（shuanglakefu）"/>
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/id_weixinkefu_txt3"
+            android:text="1、长按一下二维码，点“存储图像”，将二维码保存到手机相册；"/>
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt5"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/id_weixinkefu_txt4"
+            android:text="2、打开微信，找到“扫一扫”，点击“相册”"/>
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt6"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/id_weixinkefu_txt5"
+            android:text="3、选择二维码，手机会自动识别；"/>
+
+        <TextView
+            android:id="@+id/id_weixinkefu_txt7"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/id_weixinkefu_txt6"
+            android:text="4、关注爽啦服务号完成！"/>
+
+        <ImageView
+            android:id="@+id/id_weixinkefu_img"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@id/id_weixinkefu_txt7"
+            android:src="@mipmap/ic_launcher"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.ui;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.service.UpdateService;
+import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.rey.material.widget.ProgressView;
 
 import java.io.File;
@@ -43,6 +45,8 @@ public class CustemDialog extends AlertDialog.Builder
 
     Button mBtStart, mBtShenhe, mBtCancel;
     ProgressView mProgressView;
+
+    private String mPackageName;
 
     private Context context;
     private String title;
@@ -88,7 +92,20 @@ public class CustemDialog extends AlertDialog.Builder
             {
                 mBtStart.setVisibility(View.GONE);
                 mDialogLinear.setVisibility(View.VISIBLE);
-                DownLoadApk();
+
+                if (AppUtils.isAvilible(context, "com.hb.qx"))
+                {
+                    Uri uri = Uri.fromFile(downFile);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                //未安装，跳转至market下载该程序
+                else
+                {
+                    DownLoadApk();
+                }
             }
         });
 
@@ -127,13 +144,10 @@ public class CustemDialog extends AlertDialog.Builder
         @Override
         public void handleMessage(Message msg)
         {
-
-
             float temp = msg.getData().getInt("size")
                     / (float) totalSize;
             mProgressView.setProgress(temp);
             System.out.println("ssssssssssssssssssssssss" + temp);
-
             mDialogContent.setText(String.valueOf(temp * 100).substring(0, 4) + "%");
             // int progress = (int) (temp * 100);
             if (temp == 1.0)
@@ -143,7 +157,6 @@ public class CustemDialog extends AlertDialog.Builder
                 mBtStart.setVisibility(View.VISIBLE);
                 mBtStart.setText("安装");
                 mBtStart.setBackgroundColor(context.getResources().getColor(R.color.instll_color));
-
             }
         }
     };
@@ -159,7 +172,7 @@ public class CustemDialog extends AlertDialog.Builder
             filedir.mkdir();
         }
         // 判断文件是否存在
-        String filename = getSDPath() + "/shuangla/abc.apk";
+        String filename = getSDPath() + "/shuangla/" + mPackageName + ".apk";
         downFile = new File(filename);
         if (!downFile.exists())
         {
@@ -207,7 +220,6 @@ public class CustemDialog extends AlertDialog.Builder
                         break;
                     case DOWN_ERROR:
                         break;
-
                     default:
                         break;
                 }
@@ -287,7 +299,7 @@ public class CustemDialog extends AlertDialog.Builder
 //                // notification.setLatestEventInfo(this, "正在下载...", updateCount
 //                // + "%" + "", pendingIntent);
 ////                contentView.setTextViewText(R.id.notificationPercent, updateCount + "%");
-////                contentView.setProgressBar(R.id.notificationProgress, 100, updateCount, false);\
+//                  contentView.setProgressBar(R.id.notificationProgress, 100, updateCount, false);
 //
 //                System.out.println("ssssssssssss" + updateCount);
 //            }
