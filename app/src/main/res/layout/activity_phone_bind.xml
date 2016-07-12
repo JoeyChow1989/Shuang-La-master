@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/id_phone_toolbar"
-        layout="@layout/toolbar"
+        layout="@layout/toolbar1"
         />
 
     <RelativeLayout

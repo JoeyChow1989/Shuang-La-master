@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">爽啦</string>
 
-    <string name="zhuanqian">赚钱</string>
+    <string name="zhuanqian">赚钱中心</string>
+    <string name="gaoe">高额任务</string>
+    <string name="lianmeng">联盟任务</string>
+    <string name="newgay">新手任务</string>
     <string name="shoutu">收徒</string>
-    <string name="duobao">一元夺宝</string>
-    <string name="qiankafanli">钱咖返利</string>
-    <string name="youhujuan">优惠劵</string>
     <string name="shengqian">省钱</string>
     <string name="duihuan">兑换</string>
 

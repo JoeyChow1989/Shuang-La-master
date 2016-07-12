@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 public class AllianceActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_allance_renwu_recy)
     ListView idAllanceRenwuRecy;

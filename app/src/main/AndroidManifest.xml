@@ -34,29 +34,17 @@
         </activity>
         <activity android:name=".activity.PhoneBindActivity">
         </activity>
-        <activity android:name=".activity.MakeMonneyActivity">
-        </activity>
         <activity android:name=".activity.ShouTuActivity">
         </activity>
         <activity android:name=".activity.AllianceActivity">
         </activity>
-        <activity android:name=".activity.XianshiActivity">
+        <activity android:name=".activity.MakeMoneyCenterActivity">
         </activity>
-        <activity android:name=".activity.YinYuanActivity">
+        <activity android:name=".activity.GaoeRenwuActivity">
         </activity>
-        <activity android:name=".activity.QiankaActivity">
-        </activity>
-        <activity android:name=".activity.YouHuiJuanActivity">
-        </activity>
-        <activity android:name=".activity.ShengQianActivity">
-        </activity>
-        <activity android:name=".activity.DuiHuanActivity">
+        <activity android:name=".activity.NewGuyActivity">
         </activity>
         <activity android:name=".activity.TixianActivity">
-        </activity>
-        <activity android:name=".activity.HuaFeiActivity">
-        </activity>
-        <activity android:name=".activity.DuobaoBiActivity">
         </activity>
         <activity
             android:name=".activity.WeiXinActivity"
@@ -69,6 +57,8 @@
         <activity android:name=".activity.NewsNoticeActivity">
         </activity>
         <activity android:name=".activity.ShangwuActivity">
+        </activity>
+        <activity android:name=".activity.RenwuDetailActivity">
         </activity>
     </application>
 

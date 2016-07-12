@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class DetilActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
@@ -101,7 +101,7 @@ public class DetilActivity extends BaseActivity
                 case 2:
                     return "学徒";
                 default:
-                    return "兑换";
+                    return "提现";
             }
         }
 

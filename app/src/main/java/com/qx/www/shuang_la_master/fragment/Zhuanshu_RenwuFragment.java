@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,9 +11,12 @@ import android.view.ViewGroup;
 
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
+import com.qx.www.shuang_la_master.adapter.Xianshi_RenwuAdapter;
 import com.qx.www.shuang_la_master.adapter.Zhuanshu_RenwuAdapter;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
+import com.qx.www.shuang_la_master.domain.XianshiRenwu;
 import com.qx.www.shuang_la_master.domain.ZhanshuRenwu;
 
 import java.util.ArrayList;
@@ -43,7 +47,31 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
     @Override
     protected void initData()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            ZhanshuRenwu zhanshuRenwu = new ZhanshuRenwu();
+            zhanshuRenwu.setImg(R.mipmap.ic_launcher);
+            zhanshuRenwu.setTitle("平安天下通");
+            zhanshuRenwu.setMsg("是时候有一个随心理财顾问");
+            zhanshuRenwu.setPic(R.mipmap.ic_launcher);
+            mList.add(zhanshuRenwu);
+        }
 
+        adapter.setOnItemClickListener(new Zhuanshu_RenwuAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+                Intent intent = new Intent();
+                intent.setClass(context, RenwuDetailActivity.class);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position)
+            {
+            }
+        });
     }
 
     @Override

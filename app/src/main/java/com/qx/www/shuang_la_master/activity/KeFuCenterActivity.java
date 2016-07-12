@@ -17,7 +17,7 @@ import butterknife.OnClick;
 public class KeFuCenterActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_kefu_jifenwenti)
     LinearLayout idKefuJifenwenti;

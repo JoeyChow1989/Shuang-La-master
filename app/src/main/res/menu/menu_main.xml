@@ -8,5 +8,10 @@
         android:title="我的名片"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_more"
+        android:orderInCategory="100"
+        android:title="资料"
+        app:showAsAction="never"/>
 
 </menu>

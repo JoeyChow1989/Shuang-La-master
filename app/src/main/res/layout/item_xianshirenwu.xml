@@ -30,11 +30,12 @@
                 android:id="@+id/id_xianshirenwu_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
                 android:text="平安通天下"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 />
 
             <LinearLayout
@@ -42,25 +43,40 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="left|center"
                 android:layout_marginLeft="10dp"
-                android:orientation="horizontal"
                 android:layout_weight="1"
+                android:orientation="horizontal"
                 >
 
-                <ImageView
+                <TextView
+                    android:id="@+id/id_xianshirenwu_zhuanshu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:paddingLeft="5dp"
-                    android:layout_weight="2"/>
+                    android:layout_weight="2.8"
+                    android:background="@color/zhuanshu"
+                    android:gravity="center"
+                    android:text="专属"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:id="@+id/id_xianshirenwu_count"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="剩 1295 份"
-                    android:paddingLeft="5dp"
-                    android:layout_weight="1"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.2"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@color/item_left"
+                    android:gravity="center"
+                    android:text="剩余1295"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    />
 
 
             </LinearLayout>
@@ -69,11 +85,12 @@
                 android:id="@+id/id_xianshirenwu_msg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="left|center"
+                android:layout_weight="1"
+                android:gravity="left|center|top"
                 android:paddingLeft="10dp"
-                android:textColor="@color/friend_shane_shoutu"
+
                 android:text="是时候有一个随身的理财顾问了！"
-                android:layout_weight="1"/>
+                android:textColor="@color/friend_shane_shoutu"/>
 
         </LinearLayout>
 

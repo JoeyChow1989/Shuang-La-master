@@ -17,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qx.www.shuang_la_master.CountDownTimerListener;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.service.CountDownTimerService;
 import com.qx.www.shuang_la_master.service.UpdateService;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.rey.material.widget.ProgressView;
@@ -46,13 +48,19 @@ public class CustemDialog extends AlertDialog.Builder
     Button mBtStart, mBtShenhe, mBtCancel;
     ProgressView mProgressView;
 
-    private String mPackageName;
-
+    private boolean mSdCardIsExist = false;
+    private String mPackageName = "xxx";
+    File f;
+    String filename;
     private Context context;
     private String title;
     private String msg;
     private String size;
     private int pic;
+
+    private CountDownTimerService countDownTimerService;
+    private long timer_unit = 1000;
+    private long service_distination_total = timer_unit * 200;
 
     public CustemDialog(Context context, String title, int pic, String size, String msg)
     {
@@ -62,6 +70,20 @@ public class CustemDialog extends AlertDialog.Builder
         this.msg = msg;
         this.pic = pic;
         this.size = size;
+
+        //计时器
+        countDownTimerService = CountDownTimerService.getInstance(new MyCountDownLisener()
+                , service_distination_total);
+        //initServiceCountDownTimerStatus();
+    }
+
+    private class MyCountDownLisener implements CountDownTimerListener
+    {
+        @Override
+        public void onChange()
+        {
+            mHandler.sendEmptyMessage(2);
+        }
     }
 
     public void showDialog()
@@ -85,26 +107,40 @@ public class CustemDialog extends AlertDialog.Builder
         mDialogContent = (TextView) window.findViewById(R.id.id_dialog_centent);
         mProgressView = (ProgressView) window.findViewById(R.id.id_dialog_prog);
 
+        if (!getSDPath().equals(""))
+        {
+            System.out.println("dddddddddddddddddddddd");
+            if (fileIsExists(mPackageName) == true)
+            {
+                mBtStart.setText("安装");
+                mBtStart.setBackgroundColor(context.getResources().getColor(R.color.instll_color));
+            }
+        }
+
         mBtStart.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                mBtStart.setVisibility(View.GONE);
-                mDialogLinear.setVisibility(View.VISIBLE);
-
-                if (AppUtils.isAvilible(context, "com.hb.qx"))
+                if (!getSDPath().equals(""))
                 {
-                    Uri uri = Uri.fromFile(downFile);
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(uri, "application/vnd.android.package-archive");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                }
-                //未安装，跳转至market下载该程序
-                else
-                {
-                    DownLoadApk();
+                    if (fileIsExists(mPackageName) == true)
+                    {
+                        Uri uri = Uri.fromFile(f);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    } else if (AppUtils.isAvilible(context, "com.hb.qx"))
+                    {
+                        Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage("com.hb.qx");
+                        context.startActivity(LaunchIntent);
+                    } else
+                    {
+                        mBtStart.setVisibility(View.GONE);
+                        mDialogLinear.setVisibility(View.VISIBLE);
+                        DownLoadApk();
+                    }
                 }
             }
         });
@@ -125,6 +161,8 @@ public class CustemDialog extends AlertDialog.Builder
         mDialogMsg1.setText(msg.substring(0, msg.indexOf("2")));
         mDialogMsg2.setText(msg.substring(msg.indexOf("2"), msg.indexOf("3")));
         mDialogMsg3.setText(msg.substring(msg.indexOf("3")));
+
+
     }
 
     private String url = "http://hb.kuaihuala.com/wxhb.apk";
@@ -172,7 +210,7 @@ public class CustemDialog extends AlertDialog.Builder
             filedir.mkdir();
         }
         // 判断文件是否存在
-        String filename = getSDPath() + "/shuangla/" + mPackageName + ".apk";
+        filename = getSDPath() + "/shuangla/" + mPackageName + "_shangla.apk";
         downFile = new File(filename);
         if (!downFile.exists())
         {
@@ -194,6 +232,7 @@ public class CustemDialog extends AlertDialog.Builder
         if (sdCardExist)
         {
             sdDir = Environment.getExternalStorageDirectory();// 获取跟目录
+            mSdCardIsExist = true;
         }
         return sdDir.toString();
     }
@@ -311,5 +350,23 @@ public class CustemDialog extends AlertDialog.Builder
         inputStream.close();
         outputStream.close();
         return downloadCount;
+    }
+
+    public boolean fileIsExists(String packageName)
+    {
+        try
+        {
+            f = new File(getSDPath() + "/shuangla/" + packageName + "_shangla.apk");
+            if (!f.exists())
+            {
+                return false;
+            }
+
+        } catch (Exception e)
+        {
+            // TODO: handle exception
+            return false;
+        }
+        return true;
     }
 }

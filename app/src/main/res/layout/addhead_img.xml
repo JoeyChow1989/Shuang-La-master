@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="80dp"
+              android:layout_height="130dp"
               android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@mipmap/ic_launcher"
-        />
+        android:layout_height="120dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="温馨提示"
+            android:textColor="@color/friend_shane_shoutu"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:text="联盟任务中100积分=1元"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="联盟任务是广告主给奖励，任务审核由广告主判定，所以条件严格，可能会出现不返奖励，或者奖励延迟的情况，可查看帮助中心详情"
+            />
+    </LinearLayout>
 </LinearLayout>

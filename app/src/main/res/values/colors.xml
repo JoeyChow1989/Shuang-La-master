@@ -3,17 +3,19 @@
     <color name="colorPrimary">#4a78e9</color>
     <color name="colorPrimaryDark">#3354a3</color>
     <color name="colorAccent">#ff6a9d</color>
-    <color name="buleDark">#0194d2</color>
+    <color name="buleDark">#034aae</color>
 
     <color name="top_bg">#fef9f8f8</color>
     <color name="line_color">#FEDADADA</color>
-    <color name="tab_text_color">#fefffca0</color>
+    <color name="tab_text_color">#fefc6c44</color>
     <color name="color_text_yellow">#FEEAE302</color>
 
-    <color name="colorPrimaryQuarter">#fd0272fc</color>
+    <color name="colorPrimaryQuarter">#fdffffff</color>
     <color name="colorPrimaryHalf">#03a7d4</color>
     <color name="colorButtonProgressBar">#39e1ff</color>
     <color name="friend_shane_shoutu">#FFF45D34</color>
     <color name="instll_color">#FF1BD602</color>
     <color name="weinxin_tijiao">#FF8BB8C4</color>
+    <color name="item_left">#FFC2C2C2</color>
+    <color name="zhuanshu">#FFF3C62B</color>
 </resources>

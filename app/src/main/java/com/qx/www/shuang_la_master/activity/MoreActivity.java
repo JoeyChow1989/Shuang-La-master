@@ -16,7 +16,7 @@ import butterknife.OnClick;
 public class MoreActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_more_id)
     LinearLayout idMoreId;
@@ -51,7 +51,7 @@ public class MoreActivity extends BaseActivity
     @Override
     public void initView()
     {
-        toolbar.setTitle("更多");
+        toolbar.setTitle("资料");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener()

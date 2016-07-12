@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class TixianActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_taobaotixian_zhanghao)
     TextInputEditText idTaobaotixianZhanghao;

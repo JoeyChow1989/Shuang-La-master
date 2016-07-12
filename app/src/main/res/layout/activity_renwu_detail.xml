@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/top_bg"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_renwudetail_toolbar"
+        layout="@layout/toolbar2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/id_renwudetail_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:padding="10dp"
+                android:src="@mipmap/ic_launcher"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/id_renwudetail_appname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|bottom"
+                    android:paddingLeft="10dp"
+                    android:text="借贷宝"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/id_renwudetail_appsize"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:text="大小 78.7M"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/id_renwudetail_yuan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="right|center"
+                android:text="0.55"
+                android:textColor="@color/friend_shane_shoutu"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:gravity="left|bottom"
+                android:paddingBottom="20dp"
+                android:text="元"
+                android:textColor="@color/friend_shane_shoutu"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/line_color"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="结束:"
+                    android:textColor="@android:color/black"
+                    android:textSize="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_renwudetail_times"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="2016-07-31"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="审核:"
+                    android:textColor="@android:color/black"
+                    android:textSize="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_renwudetail_tianshu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="2天"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="余量:"
+                    android:textColor="@android:color/black"
+                    android:textSize="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_renwudetail_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="1000个"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:text="任务详情"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/line_color"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/id_renwudetail_detailtitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="第三方登录并玩到40级，提交游戏ID跟游戏名字"
+                android:textColor="@color/friend_shane_shoutu"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="1.申请任务;"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="2.成功下载安装该应用;"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="3.打开应用,选择“QQ登录”,对“授权并登录”页面进行截图(见截图示例1);"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="4.登录后,点击“+”-“小视频”拍摄制作视频发布;"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="5.成功发布后,点击“我的-我的发布,对“我的发布”页面进行截图(见截图示例2);"
+                android:textSize="11sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="6.上传2张截图成功,点击“提交任务”(截图示例见“任务攻略详解”);"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/id_renwudetail_detail7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="7.工作人员在2个工作日内进行审核,审核通过即获得奖励。"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/id_start_download"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"
+        android:text="开始下载"
+        android:textColor="@color/friend_shane_shoutu"
+        />
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout android:id="@+id/appbar"
+                                            xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--app:layout_scrollFlags="scroll|enterAlways"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+        <!--&gt;-->
+
+        <!--<com.qx.www.shuang_la_master.ui.RoundImageView-->
+            <!--android:id="@+id/id_toolbar_img"-->
+            <!--android:layout_width="65dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="10dp"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/id_toolbar_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--/>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/id_toolbar_menu"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="3"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:src="@drawable/ic_more_vert"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+
+</android.support.design.widget.AppBarLayout>

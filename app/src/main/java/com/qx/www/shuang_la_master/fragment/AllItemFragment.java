@@ -1,7 +1,9 @@
 package com.qx.www.shuang_la_master.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,13 @@ import android.widget.TextView;
 
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.adapter.DetailAdatper;
+import com.qx.www.shuang_la_master.adapter.Zhuanshu_RenwuAdapter;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
+import com.qx.www.shuang_la_master.common.DividerItemDecoration;
 import com.qx.www.shuang_la_master.domain.Detail;
+import com.qx.www.shuang_la_master.domain.XianshiRenwu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +27,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener
+public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AutoLoadRecylerView.loadMoreListener
 {
-
 
     @Bind(R.id.id_all_item_autorecy)
     AutoLoadRecylerView idAllItemAutorecy;
@@ -35,7 +40,8 @@ public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.
     RelativeLayout commonError;
 
     private List<Detail> mList;
-    private DetailAdatper adatper;
+    private DetailAdatper adapter;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected int getLayoutResource()
@@ -46,15 +52,44 @@ public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     protected void initData()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            Detail detail = new Detail();
+            detail.setImg(R.mipmap.ic_launcher);
+            detail.setTitle("你的益达");
+            detail.setMsgs("完成任务限时推荐《你的英雄》，赚了1.5元");
+            detail.setTime("03月17 15:52");
+            mList.add(detail);
+        }
 
+        adapter.setOnItemClickListener(new DetailAdatper.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+//                Intent intent = new Intent();
+//                intent.setClass(context, RenwuDetailActivity.class);
+//                context.startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position)
+            {
+
+            }
+        });
     }
 
     @Override
     protected void initView()
     {
-        mList = new ArrayList<>();
-        adatper = new DetailAdatper(mList, context);
-        idAllItemAutorecy.setAdapter(adatper);
+        mList = new ArrayList<Detail>();
+        layoutManager = new LinearLayoutManager(context);
+        idAllItemAutorecy.setLayoutManager(layoutManager);
+        idAllItemAutorecy.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+        idAllItemAutorecy.setLoadMoreListener(this);
+        adapter = new DetailAdatper(mList, context);
+        idAllItemAutorecy.setAdapter(adapter);
     }
 
     @Override
@@ -76,5 +111,11 @@ public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.
     {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onLoadMore()
+    {
+
     }
 }

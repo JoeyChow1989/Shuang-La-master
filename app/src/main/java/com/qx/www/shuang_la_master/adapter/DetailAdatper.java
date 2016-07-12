@@ -33,6 +33,55 @@ public class DetailAdatper extends RecyclerView.Adapter
         this.context = context;
     }
 
+    //Onclik接口
+    public interface OnItemClickListener
+    {
+
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.mOnItemClickListener = listener;
+    }
+
+    protected void setUpItemEvent(final AllitemViewHolder holder)
+    {
+        if (mOnItemClickListener != null)
+        {
+            holder.itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+
+                    int layoutpostion = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, layoutpostion);
+                }
+            });
+
+            //longclick
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
+                @Override
+                public boolean onLongClick(View v)
+                {
+
+                    int layoutpostion = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);
+
+                    return false;
+                }
+            });
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -50,12 +99,17 @@ public class DetailAdatper extends RecyclerView.Adapter
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(allitemViewHolder.idAllItemImg);
 
+        allitemViewHolder.idAllItemNickname.setText(mList.get(position).getTitle());
+        allitemViewHolder.idAllItemMsg.setText(mList.get(position).getMsgs());
+        allitemViewHolder.idAllItemTime.setText(mList.get(position).getTime());
+
+        setUpItemEvent(allitemViewHolder);
     }
 
     @Override
     public int getItemCount()
     {
-        return 0;
+        return mList.size();
     }
 
     static class AllitemViewHolder extends RecyclerView.ViewHolder

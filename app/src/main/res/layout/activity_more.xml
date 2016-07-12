@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/id_more_toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar1"/>
 
     <com.rey.material.widget.RelativeLayout
         android:layout_width="match_parent"

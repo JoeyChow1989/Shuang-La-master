@@ -48,7 +48,7 @@ import cn.finalteam.galleryfinal.model.PhotoInfo;
 public class ZiLiaoActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_ziliao_edit)
     AppCompatEditText idZiliaoEdit;
@@ -398,13 +398,10 @@ public class ZiLiaoActivity extends BaseActivity
         pauseOnScrollListener = new GlidePauseOnScrollListener(false, true);
 
         muti = false;
-        int maxSize = 1;
-        functionConfigBuilder.setMutiSelectMaxSize(maxSize);
-
+//        int maxSize = 1;
+//        functionConfigBuilder.setMutiSelectMaxSize(maxSize);
         themeConfig = ThemeConfig.DEFAULT;
-
         final boolean mutiSelect = muti;
-
         functionConfigBuilder.setEnableEdit(true);
         functionConfigBuilder.setRotateReplaceSource(true);
         functionConfigBuilder.setEnableCrop(true);
@@ -432,9 +429,7 @@ public class ZiLiaoActivity extends BaseActivity
                                  @Override
                                  public void onDismiss(ActionSheet actionSheet, boolean isCancel)
                                  {
-
                                  }
-
                                  @Override
                                  public void onOtherButtonClick(ActionSheet actionSheet, int index)
                                  {
@@ -474,7 +469,7 @@ public class ZiLiaoActivity extends BaseActivity
 
             // TODO: 2016/6/30  图片上传
             Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
-            idZiliaoImgs .setImageBitmap(bitmap); //设置Bitmap
+            idZiliaoImgs.setImageBitmap(bitmap); //设置Bitmap
 
 
             System.out.println("-------------path-------------" + mPhotoList.get(0).getPhotoPath());
@@ -496,15 +491,19 @@ public class ZiLiaoActivity extends BaseActivity
 
     /**
      * 加载本地图片
+     *
      * @param url
      * @return
      */
-    public static Bitmap getLoacalBitmap(String url) {
-        try {
+    public static Bitmap getLoacalBitmap(String url)
+    {
+        try
+        {
             FileInputStream fis = new FileInputStream(url);
             return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             e.printStackTrace();
             return null;
         }

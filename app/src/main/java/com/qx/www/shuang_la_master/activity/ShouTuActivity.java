@@ -20,7 +20,7 @@ import butterknife.OnClick;
 public class ShouTuActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_shoutu_jiangli_leiji)
     TextView idShoutuJiangliLeiji;

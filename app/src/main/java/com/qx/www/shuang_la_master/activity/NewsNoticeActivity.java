@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class NewsNoticeActivity extends BaseActivity implements AutoLoadRecylerView.loadMoreListener
 {
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_autorecyler_newsnotice)
     AutoLoadRecylerView idAutorecylerNewsnotice;

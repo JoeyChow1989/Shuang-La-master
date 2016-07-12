@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.adapter.Xianshi_RenwuAdapter;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
@@ -59,7 +61,9 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
             @Override
             public void onItemClick(View view, int position)
             {
-                mDialog.showDialog();
+                Intent intent = new Intent();
+                intent.setClass(context, RenwuDetailActivity.class);
+                context.startActivity(intent);
             }
 
             @Override
@@ -81,7 +85,7 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
         adapter = new Xianshi_RenwuAdapter(mList, context);
         idAutorecyxiashishurenwu.setAdapter(adapter);
 
-        mDialog = new CustemDialog(context, "平安通天下", R.mipmap.ic_action_camera, "29M","1、首次下载并安装2、使用手机号注册并向专家提问一个问题3、回到钱咖，提交审核获取奖励");
+        mDialog = new CustemDialog(context, "平安通天下", R.mipmap.ic_action_camera, "29M", "1、首次下载并安装2、使用手机号注册并向专家提问一个问题3、回到钱咖，提交审核获取奖励");
     }
 
     @Override

@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 public class ShangwuActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
 
     @Override

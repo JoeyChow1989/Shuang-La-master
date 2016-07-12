@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/top_bg">
+
+    <include
+        android:id="@+id/id_newpople_toolbar"
+        layout="@layout/toolbar2"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        android:layout_below="@id/id_newpople_toolbar"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/id_newpop_wanshan"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="完善个人资料"
+                    android:paddingLeft="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:gravity="left|center"
+                    android:text="创建你的个人资料"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/id_newpop_bindphone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/id_newpop_wanshan"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:background="@android:color/white"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:text="绑定手机"
+                    android:paddingLeft="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:gravity="left|center"
+                    android:text="再也不担心丢失账号"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="3"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,11 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.qx.www.shuang_la_master.fragment.RenwuFragment">
 
-    <TextView
+    <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
+        android:id="@+id/id_renwu_autorecy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
 
-</FrameLayout>
+    <include layout="@layout/common_error"/>
+
+</android.support.v4.widget.SwipeRefreshLayout>

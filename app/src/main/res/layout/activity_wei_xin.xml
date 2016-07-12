@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/id_weixin_toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar1"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

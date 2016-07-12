@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
@@ -16,17 +18,21 @@ import com.qx.www.shuang_la_master.fragment.Zhuanshu_RenwuFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class XianshiActivity extends BaseActivity
+public class MakeMoneyCenterActivity extends BaseActivity
 {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
     @Bind(R.id.tab_layout_xianshi)
     TabLayout tabLayoutXianshi;
     @Bind(R.id.main_vp_container_xianshi)
     ViewPager mainVpContainerXianshi;
-
     PagerAdapter mPagerAdapter;
+    @Bind(R.id.id_toolbar_img)
+    ImageView idToolbarImg;
+    @Bind(R.id.id_toolbar_title)
+    TextView idToolbarTitle;
+    @Bind(R.id.id_toolbar_menu)
+    LinearLayout idToolbarMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,17 +47,7 @@ public class XianshiActivity extends BaseActivity
     @Override
     public void initView()
     {
-        toolbar.setTitle("限时推荐");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                onBackPressed();
-            }
-        });
+        idToolbarTitle.setText("赚钱中心");
     }
 
     @Override
@@ -59,6 +55,20 @@ public class XianshiActivity extends BaseActivity
     {
         mainVpContainerXianshi.setAdapter(mPagerAdapter = new PagerAdapter(getSupportFragmentManager()));
         tabLayoutXianshi.setupWithViewPager(mainVpContainerXianshi);
+    }
+
+    @OnClick({R.id.id_toolbar_img, R.id.id_toolbar_menu})
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.id_toolbar_img:
+                finish();
+                break;
+            case R.id.id_toolbar_menu:
+
+                break;
+        }
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter

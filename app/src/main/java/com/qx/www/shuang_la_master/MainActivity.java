@@ -2,22 +2,25 @@ package com.qx.www.shuang_la_master;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qx.www.shuang_la_master.activity.AllianceActivity;
 import com.qx.www.shuang_la_master.activity.DetilActivity;
-import com.qx.www.shuang_la_master.activity.DuiHuanActivity;
-import com.qx.www.shuang_la_master.activity.MakeMonneyActivity;
+import com.qx.www.shuang_la_master.activity.GaoeRenwuActivity;
+import com.qx.www.shuang_la_master.activity.MakeMoneyCenterActivity;
 import com.qx.www.shuang_la_master.activity.MoreActivity;
-import com.qx.www.shuang_la_master.activity.QiankaActivity;
-import com.qx.www.shuang_la_master.activity.ShengQianActivity;
+import com.qx.www.shuang_la_master.activity.NewGuyActivity;
 import com.qx.www.shuang_la_master.activity.ShouTuActivity;
-import com.qx.www.shuang_la_master.activity.YinYuanActivity;
-import com.qx.www.shuang_la_master.activity.YouHuiJuanActivity;
+import com.qx.www.shuang_la_master.activity.TixianActivity;
+import com.rey.material.widget.Button;
 import com.rey.material.widget.LinearLayout;
 
 import butterknife.Bind;
@@ -26,8 +29,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener
 {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
     @Bind(R.id.id_detil)
     LinearLayout idDetil;
     @Bind(R.id.id_more)
@@ -42,10 +43,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     LinearLayout idLinearQiankafanli;
     @Bind(R.id.id_linear_youhuijuan)
     LinearLayout idLinearYouhuijuan;
-    @Bind(R.id.id_linear_shengqian)
-    LinearLayout idLinearShengqian;
-    @Bind(R.id.id_linear_duihuan)
-    LinearLayout idLinearDuihuan;
+    @Bind(R.id.id_toolbar_img)
+    ImageView idToolbarImg;
+    @Bind(R.id.id_toolbar_title)
+    TextView idToolbarTitle;
+    @Bind(R.id.id_toolbar_menu)
+    ImageView idToolbarMenu;
+    @Bind(R.id.id_nestedscrollView_main)
+    NestedScrollView idNestedscrollViewMain;
+    @Bind(R.id.main_content)
+    CoordinatorLayout mainContent;
+    @Bind(R.id.id_main_yue)
+    android.widget.LinearLayout idMainYue;
+    @Bind(R.id.id_main_tixian)
+    Button idMainTixian;
     private long exitTime = 0;
 
     @Override
@@ -61,10 +72,55 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initView()
     {
-        toolbar.setTitle("");
-        toolbar.setLogo(R.mipmap.ic_launcher);
-        toolbar.setOnMenuItemClickListener(onMenuItemClick);
-        setSupportActionBar(toolbar);
+        idToolbarImg.setImageResource(R.drawable.aa);
+        idToolbarMenu.setImageResource(R.drawable.ic_more_vert);
+        idToolbarMenu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                showPopupMenu(idToolbarMenu);
+            }
+        });
+    }
+
+    private void showPopupMenu(View view)
+    {
+        // View当前PopupMenu显示的相对View的位置
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        // menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+        {
+            @Override
+            public boolean onMenuItemClick(MenuItem item)
+            {
+
+                switch (item.getItemId())
+                {
+                    case R.id.action_settings1:
+                        Toast.makeText(MainActivity.this, "action_settings", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_more:
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, MoreActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+                return false;
+            }
+        });
+        // PopupMenu关闭事件
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener()
+        {
+            @Override
+            public void onDismiss(PopupMenu menu)
+            {
+                // Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
     }
 
     @Override
@@ -88,64 +144,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.id_detil, R.id.id_more, R.id.id_linear_zhuanqian, R.id.id_linear_shoutu, R.id.id_linear_yiyuan, R.id.id_linear_qiankafanli,
-            R.id.id_linear_youhuijuan, R.id.id_linear_shengqian, R.id.id_linear_duihuan})
+    @OnClick({R.id.id_main_yue, R.id.id_main_tixian, R.id.id_linear_zhuanqian, R.id.id_linear_shoutu, R.id.id_linear_yiyuan, R.id.id_linear_qiankafanli,
+            R.id.id_linear_youhuijuan})
     public void onClick(View view)
     {
 
         Intent intent = new Intent();
         switch (view.getId())
         {
-            case R.id.id_detil:
+            case R.id.id_main_yue:
                 intent.setClass(this, DetilActivity.class);
                 break;
-            case R.id.id_more:
-                intent.setClass(this, MoreActivity.class);
+            case R.id.id_main_tixian:
+                intent.setClass(this, TixianActivity.class);
                 break;
             case R.id.id_linear_zhuanqian:
-                intent.setClass(this, MakeMonneyActivity.class);
+                intent.setClass(this, MakeMoneyCenterActivity.class);
                 break;
             case R.id.id_linear_shoutu:
-                intent.setClass(this, ShouTuActivity.class);
+                intent.setClass(this, GaoeRenwuActivity.class);
                 break;
             case R.id.id_linear_yiyuan:
-                intent.setClass(this, YinYuanActivity.class);
+                intent.setClass(this, AllianceActivity.class);
                 break;
             case R.id.id_linear_qiankafanli:
-                intent.setClass(this, QiankaActivity.class);
+                intent.setClass(this, NewGuyActivity.class);
                 break;
             case R.id.id_linear_youhuijuan:
-                intent.setClass(this, YouHuiJuanActivity.class);
-                break;
-            case R.id.id_linear_shengqian:
-                intent.setClass(this, ShengQianActivity.class);
-                break;
-            case R.id.id_linear_duihuan:
-                intent.setClass(this, DuiHuanActivity.class);
+                intent.setClass(this, ShouTuActivity.class);
                 break;
         }
         startActivity(intent);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener()
-    {
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem)
-        {
-            switch (menuItem.getItemId())
-            {
-                case R.id.action_main:
-
-                    break;
-            }
-            return true;
-        }
-    };
 }

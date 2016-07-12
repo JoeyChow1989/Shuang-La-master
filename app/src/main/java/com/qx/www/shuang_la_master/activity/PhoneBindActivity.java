@@ -16,7 +16,7 @@ import butterknife.OnClick;
 public class PhoneBindActivity extends BaseActivity
 {
 
-    @Bind(R.id.toolbar)
+    @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_phone_bt_getyanzheng)
     Button idPhoneBtGetyanzheng;

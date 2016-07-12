@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.domain.XianshiRenwu;
 import com.qx.www.shuang_la_master.domain.ZhanshuRenwu;
 
 import java.util.List;
@@ -34,10 +33,25 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
         this.context = context;
     }
 
+    //Onclik接口
+    public interface OnItemClickListener {
+
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_xianshirenwu, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_zhuanshurenwu, parent, false);
         ZhuanshuViewHolder holder = new ZhuanshuViewHolder(view);
         return holder;
     }
@@ -45,23 +59,23 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-        ZhuanshuViewHolder xianshiViewHolder = (ZhuanshuViewHolder) holder;
+        ZhuanshuViewHolder zhuanshuViewHolder = (ZhuanshuViewHolder) holder;
 
         // TODO: 2016/7/1 adapter
         Glide.with(context)
-                .load(mList.get(position))
+                .load(mList.get(position).getImg())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(xianshiViewHolder.idXianshirenwuImg);
+                .into(zhuanshuViewHolder.idzhuanshurenwuImg);
 
         Glide.with(context)
-                .load(mList.get(position))
+                .load(mList.get(position).getPic())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(xianshiViewHolder.idXianshirenwuPics);
+                .into(zhuanshuViewHolder.idzhuanshurenwuPics);
 
-        xianshiViewHolder.idXianshirenwuTitle.setText("");
-        xianshiViewHolder.idXianshirenwuCount.setText("");
-        xianshiViewHolder.idXianshirenwuMsg.setText("");
+        zhuanshuViewHolder.idzhuanshurenwuTitle.setText(mList.get(position).getTitle());
+        zhuanshuViewHolder.idzhuanshurenwuMsg.setText(mList.get(position).getMsg());
 
+        setUpItemEvent(zhuanshuViewHolder);
     }
 
     @Override
@@ -70,19 +84,44 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
         return mList.size();
     }
 
+    protected void setUpItemEvent(final ZhuanshuViewHolder holder) {
+        if (mOnItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int layoutpostion = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, layoutpostion);
+                }
+            });
+
+            //longclick
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    int layoutpostion = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);
+
+                    return false;
+                }
+            });
+        }
+    }
+
     static class ZhuanshuViewHolder extends RecyclerView.ViewHolder
     {
-
-        @Bind(R.id.id_xianshirenwu_img)
-        ImageView idXianshirenwuImg;
-        @Bind(R.id.id_xianshirenwu_title)
-        TextView idXianshirenwuTitle;
-        @Bind(R.id.id_xianshirenwu_count)
-        TextView idXianshirenwuCount;
-        @Bind(R.id.id_xianshirenwu_msg)
-        TextView idXianshirenwuMsg;
-        @Bind(R.id.id_xianshirenwu_pics)
-        ImageView idXianshirenwuPics;
+        @Bind(R.id.id_zhuanshurenwu_time)
+        TextView idZhuanshurenwuTime;
+        @Bind(R.id.id_zhuanshurenwu_img)
+        ImageView idzhuanshurenwuImg;
+        @Bind(R.id.id_zhuanshurenwu_title)
+        TextView idzhuanshurenwuTitle;
+        @Bind(R.id.id_zhuanshurenwu_msg)
+        TextView idzhuanshurenwuMsg;
+        @Bind(R.id.id_zhuanshurenwu_pics)
+        ImageView idzhuanshurenwuPics;
 
         public ZhuanshuViewHolder(View view)
         {

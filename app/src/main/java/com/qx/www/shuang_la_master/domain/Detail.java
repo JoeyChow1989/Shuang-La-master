@@ -5,17 +5,17 @@ package com.qx.www.shuang_la_master.domain;
  */
 public class Detail
 {
-    private String img;
+    private int img;
     private String title;
     private String time;
     private String msgs;
 
-    public String getImg()
+    public int getImg()
     {
         return img;
     }
 
-    public void setImg(String img)
+    public void setImg(int img)
     {
         this.img = img;
     }
