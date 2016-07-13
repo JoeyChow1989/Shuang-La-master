@@ -57,6 +57,7 @@ public class PhoneBindActivity extends BaseActivity
     @Override
     public void initData()
     {
+
     }
 
     @OnClick({R.id.id_phone_bt_getyanzheng, R.id.id_phone_sendup})

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
+import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,10 @@ import com.qx.www.shuang_la_master.activity.MoreActivity;
 import com.qx.www.shuang_la_master.activity.NewGuyActivity;
 import com.qx.www.shuang_la_master.activity.ShouTuActivity;
 import com.qx.www.shuang_la_master.activity.TixianActivity;
+import com.qx.www.shuang_la_master.application.BaseApp;
+import com.qx.www.shuang_la_master.ui.Dialog_NewGuyFuli;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.LinearLayout;
 
@@ -59,6 +64,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     Button idMainTixian;
     private long exitTime = 0;
 
+    private int status;
+
+    Dialog_NewGuyFuli dialog;
+    String token_fuli;
+    String tokenBeforeMD5_Fuli;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,6 +93,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 showPopupMenu(idToolbarMenu);
             }
         });
+        tokenBeforeMD5_Fuli = GetThePhoneInfo() + Constants.KEY + "/" + Constants.FULI_Url;
+        token_fuli = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_Fuli).replace(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4), ""));
+
+        System.out.println("---tokenBeforeMD5_Fuli---:" + tokenBeforeMD5_Fuli);
+        System.out.println("---token_Fuli---:" + token_fuli);
+
+        dialog = new Dialog_NewGuyFuli(this, GetThePhoneInfo(), token_fuli);
+    }
+
+    @Override
+    public void initData()
+    {
+        status = getIntent().getIntExtra("status", 2);
+        if (status == AppUtils.LOGIN_SUSSES)
+        {
+            dialog.showDialog();
+        }
     }
 
     private void showPopupMenu(View view)
@@ -175,5 +203,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 break;
         }
         startActivity(intent);
+    }
+
+    public String GetThePhoneInfo()
+    {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        BaseApp.getHttpQueues().cancelAll("fuli");
     }
 }

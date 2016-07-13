@@ -1,12 +1,13 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,14 +18,20 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.baoyz.actionsheet.ActionSheet;
 import com.bigkoo.pickerview.TimePickerView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.application.BaseApp;
+import com.qx.www.shuang_la_master.domain.RegCallBack;
 import com.qx.www.shuang_la_master.galleryfinal.listener.GlidePauseOnScrollListener;
 import com.qx.www.shuang_la_master.galleryfinal.loader.GlideImageLoader;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
+import com.qx.www.shuang_la_master.utils.VolleyInterface;
+import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,7 +39,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,6 +107,16 @@ public class ZiLiaoActivity extends BaseActivity
     RadioButton idZhiyeRtBackup;
     RadioButton idZhiyeRtOther;
 
+    SharedPreferences sp;
+    String uid;
+    String name;
+    String sex;
+    String birth;
+    String work;
+    String img;
+    String token_ziliao;
+    String token_ziliaoBeforeMd5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -106,6 +125,13 @@ public class ZiLiaoActivity extends BaseActivity
         ButterKnife.bind(this);
         initView();
         initData();
+    }
+
+    public String GetThePhoneInfo()
+    {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
     }
 
     @Override
@@ -122,6 +148,17 @@ public class ZiLiaoActivity extends BaseActivity
                 onBackPressed();
             }
         });
+        sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
+        uid = String.valueOf(sp.getInt("uid", 0));
+
+        token_ziliaoBeforeMd5 = GetThePhoneInfo() + Constants.KEY + "/" + Constants.ZILIAO_Url;
+        token_ziliao = AppUtils.getMd5Value(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4) + AppUtils.getMd5Value(token_ziliaoBeforeMd5).
+                replace(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4), ""));
+
+
+        System.out.println("token_ziliaoMD5Before--------------:" + token_ziliaoBeforeMd5);
+        System.out.println("token_ziliao--------------:" + token_ziliao);
+
     }
 
     @Override
@@ -152,7 +189,7 @@ public class ZiLiaoActivity extends BaseActivity
         });
     }
 
-    @OnClick({R.id.id_ziliao_headimg, R.id.id_ziliao_sex, R.id.id_ziliao_brith, R.id.id_ziliao_job})
+    @OnClick({R.id.id_ziliao_headimg, R.id.id_ziliao_sex, R.id.id_ziliao_brith, R.id.id_ziliao_job, R.id.id_ziliao_sendup})
     public void onClick(View view)
     {
         switch (view.getId())
@@ -169,7 +206,58 @@ public class ZiLiaoActivity extends BaseActivity
             case R.id.id_ziliao_job:
                 showZhiyePopup();
                 break;
+            case R.id.id_ziliao_sendup:
+                SendupZiliao();
+                break;
         }
+    }
+
+    private void SendupZiliao()
+    {
+        name = AppUtils.StringFilter(idZiliaoEdit.getText().toString().trim());
+        birth = idZiliaoBrithup.getText().toString().trim();
+        String url = Constants.BaseUrl + "/user/index";
+        System.out.println("uid" + uid + "name" + name + "sex" + sex + "birth" + birth + "token" + token_ziliao);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("name", name);
+        params.put("sex", sex);
+        params.put("birth", birth);
+        params.put("work", work);
+        params.put("img", img);
+        params.put("token", token_ziliao);
+
+        VolleyRequest.RequestPost(this, url, "abcPost", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                System.out.println("result-----------------" + result);
+
+                Gson gson = new Gson();
+                RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
+                if ("ok".equals(regCallBack.getStatus()))
+                {
+                    Toast.makeText(ZiLiaoActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                System.out.println("error----------------" + error);
+                Toast.makeText(ZiLiaoActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        BaseApp.getHttpQueues().cancelAll("abcPost");
     }
 
     private void showZhiyePopup()
@@ -237,6 +325,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("学生");
+                    work = "1";
                     alertDialog.dismiss();
                 }
             }
@@ -250,6 +339,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("教师");
+                    work = "2";
                     alertDialog.dismiss();
                 }
             }
@@ -263,6 +353,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("上班族");
+                    work = "3";
                     alertDialog.dismiss();
                 }
             }
@@ -276,6 +367,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("老板");
+                    work = "4";
                     alertDialog.dismiss();
                 }
             }
@@ -290,6 +382,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("公务员");
+                    work = "5";
                     alertDialog.dismiss();
                 }
             }
@@ -303,6 +396,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("自由");
+                    work = "6";
                     alertDialog.dismiss();
                 }
             }
@@ -316,6 +410,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("退休");
+                    work = "7";
                     alertDialog.dismiss();
                 }
             }
@@ -329,6 +424,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("其他");
+                    work = "8";
                     alertDialog.dismiss();
                 }
             }
@@ -364,6 +460,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoSexup.setText("男");
+                    sex = "1";
                     alertDialog.dismiss();
                 }
             }
@@ -377,6 +474,7 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoSexup.setText("女");
+                    sex = "2";
                     alertDialog.dismiss();
                 }
             }
@@ -430,6 +528,7 @@ public class ZiLiaoActivity extends BaseActivity
                                  public void onDismiss(ActionSheet actionSheet, boolean isCancel)
                                  {
                                  }
+
                                  @Override
                                  public void onOtherButtonClick(ActionSheet actionSheet, int index)
                                  {
@@ -470,9 +569,12 @@ public class ZiLiaoActivity extends BaseActivity
             // TODO: 2016/6/30  图片上传
             Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
             idZiliaoImgs.setImageBitmap(bitmap); //设置Bitmap
+            img = AppUtils.bitmaptoString(bitmap);
 
 
-            System.out.println("-------------path-------------" + mPhotoList.get(0).getPhotoPath());
+            System.out.println("-------------img-------------" + img);
+
+            //System.out.println("----------base64_img--------:" + AppUtils.encode(ss.getBytes()));
         }
 
         @Override

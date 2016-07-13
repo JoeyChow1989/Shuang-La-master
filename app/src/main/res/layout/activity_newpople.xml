@@ -56,7 +56,6 @@
                     android:gravity="left|center"
                     android:text="创建你的个人资料"
                     />
-
             </LinearLayout>
 
             <ImageView
@@ -64,7 +63,6 @@
                 android:layout_height="60dp"
                 android:layout_weight="3"
                 />
-
         </LinearLayout>
 
 
@@ -119,10 +117,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="3"
                 />
-
         </LinearLayout>
-
     </RelativeLayout>
-
 
 </RelativeLayout>

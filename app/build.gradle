@@ -31,5 +31,7 @@ dependencies {
     compile 'com.baoyz.actionsheet:library:1.1.4'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.bigkoo:pickerview:2.0.8'
-    compile project(':tipsview')
+    //gson
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile files('libs/Volley.jar')
 }
