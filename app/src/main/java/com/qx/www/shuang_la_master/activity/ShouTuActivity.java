@@ -36,16 +36,16 @@ public class ShouTuActivity extends BaseActivity
 
     @Bind(R.id.toolbar1)
     Toolbar toolbar;
-    @Bind(R.id.id_shoutu_jiangli_leiji)
-    TextView idShoutuJiangliLeiji;
-    @Bind(R.id.id_shoutu_tudi_geshu)
-    TextView idShoutuTudiGeshu;
-    @Bind(R.id.id_shoutu_jiangli_tudi)
-    TextView idShoutuJiangliTudi;
-    @Bind(R.id.id_shoutu_share)
-    Button idShoutuShare;
-    @Bind(R.id.id_shoutu_bidu)
-    LinearLayout idShoutuBidu;
+//    @Bind(R.id.id_shoutu_jiangli_leiji)
+//    TextView idShoutuJiangliLeiji;
+//    @Bind(R.id.id_shoutu_tudi_geshu)
+//    TextView idShoutuTudiGeshu;
+//    @Bind(R.id.id_shoutu_jiangli_tudi)
+//    TextView idShoutuJiangliTudi;
+//    @Bind(R.id.id_shoutu_share)
+//    Button idShoutuShare;
+//    @Bind(R.id.id_shoutu_bidu)
+//    LinearLayout idShoutuBidu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,7 +62,6 @@ public class ShouTuActivity extends BaseActivity
     {
         toolbar.setTitle("收徒");
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(onMenuItemClick);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener()
         {
@@ -75,43 +74,8 @@ public class ShouTuActivity extends BaseActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_shoutu, menu);
-        return true;
-    }
-
-    @OnClick({R.id.id_shoutu_share, R.id.id_shoutu_bidu})
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.id_shoutu_share:
-                break;
-            case R.id.id_shoutu_bidu:
-                break;
-        }
-    }
-
-    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener()
-    {
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem)
-        {
-            switch (menuItem.getItemId())
-            {
-                case R.id.action_settings1:
-
-                    break;
-            }
-            return true;
-        }
-    };
-
-    @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        BaseApp.getHttpQueues().cancelAll("info");
     }
 }

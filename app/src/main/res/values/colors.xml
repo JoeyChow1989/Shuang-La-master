@@ -9,6 +9,7 @@
     <color name="line_color">#FEDADADA</color>
     <color name="tab_text_color">#fefc6c44</color>
     <color name="color_text_yellow">#FEEAE302</color>
+    <color name="color_bt_shoutu_share">#FFF2D823</color>
 
     <color name="colorPrimaryQuarter">#fdffffff</color>
     <color name="colorPrimaryHalf">#03a7d4</color>
