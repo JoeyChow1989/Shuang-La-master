@@ -51,7 +51,7 @@ public class ShouTuActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shou_tu);
+        setContentView(R.layout.activity_shoutu);
         ButterKnife.bind(this);
         initView();
         initData();
