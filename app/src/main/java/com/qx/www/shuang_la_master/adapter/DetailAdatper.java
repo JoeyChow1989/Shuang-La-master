@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
 public class DetailAdatper extends RecyclerView.Adapter
 {
 
-    private List<Detail> mList;
+    private Detail detail;
     private Context context;
 
-    public DetailAdatper(List<Detail> mList, Context context)
+    public DetailAdatper(Detail detail, Context context)
     {
-        this.mList = mList;
+        this.detail = detail;
         this.context = context;
     }
 
@@ -95,21 +95,19 @@ public class DetailAdatper extends RecyclerView.Adapter
     {
         AllitemViewHolder allitemViewHolder = (AllitemViewHolder) holder;
         Glide.with(context)
-                .load(mList.get(position).getImg())
+                .load(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(allitemViewHolder.idAllItemImg);
 
-        allitemViewHolder.idAllItemNickname.setText(mList.get(position).getTitle());
-        allitemViewHolder.idAllItemMsg.setText(mList.get(position).getMsgs());
-        allitemViewHolder.idAllItemTime.setText(mList.get(position).getTime());
-
+        allitemViewHolder.idAllItemMsg.setText("完成任务赚了" + detail.getInfos().get(position).getMoney() + "元");
+        allitemViewHolder.idAllItemTime.setText(detail.getInfos().get(position).getTime());
         setUpItemEvent(allitemViewHolder);
     }
 
     @Override
     public int getItemCount()
     {
-        return mList.size();
+        return detail.getInfos().size();
     }
 
     static class AllitemViewHolder extends RecyclerView.ViewHolder

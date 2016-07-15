@@ -112,7 +112,7 @@ public class SplashActivity extends BaseActivity
             @Override
             public void onMyError(VolleyError error)
             {
-                Toast.makeText(SplashActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(error.toString());
             }
         });
     }
@@ -120,43 +120,13 @@ public class SplashActivity extends BaseActivity
 
     private void GetRegData()
     {
-//        RxService.getRegApi().getReg(GetThePhoneInfo(), token_login)
-//                .subscribeOn(Schedulers.io())//在非UI线程中获取数据
-//                .observeOn(AndroidSchedulers.mainThread())//在UI线程中执行更新UI
-//                .subscribe(new Observer<RegCallBack>()
-//                {
-//                    @Override
-//                    public void onCompleted()
-//                    {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e)
-//                    {
-//                        System.out.println("eeeeeeeeeeeeeeeeeee" + e);
-//                    }
-//
-//                    @Override
-//                    public void onNext(RegCallBack regCallBack)
-//                    {
-//                        if (regCallBack.getStatus().equals("ok"))
-//                        {
-//                            JumpToMain(AppUtils.REG_SUSSES);
-//                        } else
-//                        {
-//                            Login();
-//                        }
-//                    }
-//                });
-
         String url = Constants.BaseUrl + "/user/reg";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("semi", GetThePhoneInfo());
         params.put("token", token_reg);
 
-        VolleyRequest.RequestPost(this, url, "login", params, new VolleyInterface(this,
+        VolleyRequest.RequestPost(this, url, "reg", params, new VolleyInterface(this,
                 VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
         {
             @Override
@@ -177,7 +147,7 @@ public class SplashActivity extends BaseActivity
             @Override
             public void onMyError(VolleyError error)
             {
-                Toast.makeText(SplashActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(error.toString());
             }
         });
 

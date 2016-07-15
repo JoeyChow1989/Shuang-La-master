@@ -1,13 +1,18 @@
 package com.qx.www.shuang_la_master.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.ui.RoundImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +43,13 @@ public class MoreActivity extends BaseActivity
     LinearLayout idMoreCheck;
     @Bind(R.id.id_more_changeid)
     LinearLayout idMoreChangeid;
+    @Bind(R.id.id_more_ziliao_nickname)
+    TextView idMoreZiliaoNickname;
+    @Bind(R.id.id_more_ziliao_headpic)
+    RoundImageView idMoreZiliaoHeadpic;
+    @Bind(R.id.id_more_ziliao_shouji)
+    TextView idMoreZiliaoShouji;
+    private SharedPreferences info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +74,17 @@ public class MoreActivity extends BaseActivity
                 onBackPressed();
             }
         });
+
+        info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+
+        idMoreZiliaoNickname.setText(info.getString("nickname", ""));
+        Glide.with(MoreActivity.this)
+                .load(info.getString("avatar", ""))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(idMoreZiliaoHeadpic);
+
+        idMoreZiliaoShouji.setText(info.getString("mobile", ""));
+
     }
 
     @OnClick({R.id.id_more_ziliao, R.id.id_more_weixin, R.id.id_more_shouji, R.id.id_more_chenjidan, R.id.id_more_kefu, R.id.id_more_xinwen, R.id.id_more_shangwu, R.id.id_more_check, R.id.id_more_changeid})

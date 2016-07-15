@@ -269,9 +269,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         />
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout

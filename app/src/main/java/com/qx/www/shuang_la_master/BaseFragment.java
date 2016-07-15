@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import com.qx.www.shuang_la_master.View.MvpView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public abstract class BaseFragment extends Fragment implements MvpView
 {

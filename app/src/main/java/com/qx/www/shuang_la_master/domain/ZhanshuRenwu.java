@@ -1,34 +1,41 @@
 package com.qx.www.shuang_la_master.domain;
 
+import java.util.List;
+
 /**
  * Created by pc on 2016/7/1.
  */
 public class ZhanshuRenwu
 {
-    private String times;
-    private int img;
-    private String title;
-    private String msg;
-    private int pic;
+    String status;
+    String title;
+    String packet;
+    String icon;
+    String status_info;
+    String zs_reward;
+    String tid;
 
-    public String getTimes()
+    public String getTid()
     {
-        return times;
+        return tid;
     }
 
-    public void setTimes(String times)
+    public void setTid(String tid)
     {
-        this.times = times;
+        this.tid = tid;
     }
 
-    public int getImg()
+    String[] tomorrow;
+    String[] today;
+
+    public String getStatus()
     {
-        return img;
+        return status;
     }
 
-    public void setImg(int img)
+    public void setStatus(String status)
     {
-        this.img = img;
+        this.status = status;
     }
 
     public String getTitle()
@@ -41,24 +48,64 @@ public class ZhanshuRenwu
         this.title = title;
     }
 
-    public String getMsg()
+    public String getPacket()
     {
-        return msg;
+        return packet;
     }
 
-    public void setMsg(String msg)
+    public void setPacket(String packet)
     {
-        this.msg = msg;
+        this.packet = packet;
     }
 
-    public int getPic()
+    public String getIcon()
     {
-        return pic;
+        return icon;
     }
 
-    public void setPic(int pic)
+    public void setIcon(String icon)
     {
-        this.pic = pic;
+        this.icon = icon;
+    }
+
+    public String getStatus_info()
+    {
+        return status_info;
+    }
+
+    public void setStatus_info(String status_info)
+    {
+        this.status_info = status_info;
+    }
+
+    public String getZs_reward()
+    {
+        return zs_reward;
+    }
+
+    public void setZs_reward(String zs_reward)
+    {
+        this.zs_reward = zs_reward;
+    }
+
+    public String[] getTomorrow()
+    {
+        return tomorrow;
+    }
+
+    public void setTomorrow(String[] tomorrow)
+    {
+        this.tomorrow = tomorrow;
+    }
+
+    public String[] getToday()
+    {
+        return today;
+    }
+
+    public void setToday(String[] today)
+    {
+        this.today = today;
     }
 }
 

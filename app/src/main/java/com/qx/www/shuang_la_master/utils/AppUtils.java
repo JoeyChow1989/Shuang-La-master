@@ -1,20 +1,18 @@
 package com.qx.www.shuang_la_master.utils;
 
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,63 +28,58 @@ public class AppUtils
 
     //判断app是否正在运行
 
-    /**
-     * 判断app是否正在运行
-     *
-     * @param context
-     * @param packageName
-     * @return
-     */
-    public static boolean appI3sRunning(Context context, String packageName)
+    public static ArrayList<HashMap<String, Object>> LoadList(Context context, PackageManager pm)
     {
-        ActivityManager am = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
-
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
-
-        if (runningAppProcesses != null)
+        ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+        try
         {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses)
+            ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);  //获得ActivityManager对象
+            List<ActivityManager.RunningAppProcessInfo> runningTasks = am.getRunningAppProcesses();  //获得所有正在进行的程序存放在一个list中
+            for (int i = 0; i < runningTasks.size(); i++)
             {
-
-                if (runningAppProcessInfo.processName.startsWith(packageName))
+                PackageInfos pInfo = new PackageInfos(context);//获得PackageInfo对象
+                //get application which is not in system and the usually
+                //如果是非系统应用程序以及一些常用的应用程序就加到list中
+                if ((pInfo.getInfo(runningTasks.get(i).processName).flags & pInfo.getInfo(runningTasks.get(i).processName).FLAG_SYSTEM) == 0
+                        || (runningTasks.get(i).processName).equals("com.android.contacts")
+                        || (runningTasks.get(i).processName).equals("com.android.email")
+                        || (runningTasks.get(i).processName).equals("com.android.settings")
+                        || (runningTasks.get(i).processName).equals("com.android.music")
+                        || (runningTasks.get(i).processName).equals("com.android.calendar")
+                        || (runningTasks.get(i).processName).equals("com.android.calculator2")
+                        || (runningTasks.get(i).processName).equals("com.android.browser")
+                        || (runningTasks.get(i).processName).equals("com.android.camera")
+                        || (runningTasks.get(i).processName).equals("com.cooliris.media")
+                        || (runningTasks.get(i).processName).equals("com.android.bluetooth")
+                        || (runningTasks.get(i).processName).equals("com.android.mms"))
                 {
-                    return true;
+                    String dir = pInfo.getInfo(runningTasks.get(i).processName).publicSourceDir;
+
+                    Float size = Float.valueOf((float) ((new File(dir).length() * 1.0)));//获得应用程序的大小如果size大于一M就用M为单位，否则用KB
+                    //long date = new Date(new File(dir).lastModified()).getTime();
+                    //System.out.println(pInfo.getInfo(runningTasks.get(i).processName).loadIcon(pm));
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("icon", pInfo.getInfo(runningTasks.get(i).processName).loadIcon(pm));
+                    map.put("name", pInfo.getInfo(runningTasks.get(i).processName).loadLabel(pm));
+                    if (size > 1024 * 1024)
+                        map.put("info", size / 1024 / 1024 + " MB");
+                    else
+                        map.put("info", size / 1024 + " KB");
+                    map.put("packagename", runningTasks.get(i).processName.toString());//获得包名给后面用
+                    list.add(map);
                 }
             }
-        }
-
-        return false;
-    }
-
-    /**
-     * app 是否在后台运行
-     *
-     * @param context
-     * @param packageName
-     * @return
-     */
-    public static boolean appIsBackgroundRunning(Context context, String packageName)
-    {
-        ActivityManager am = (ActivityManager) context.getSystemService(context.ACTIVITY_SERVICE);
-
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
-
-        if (runningAppProcesses != null)
+        } catch (Exception ex)
         {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses)
-            {
-
-                if (runningAppProcessInfo.processName.startsWith(packageName))
-                {
-                    return runningAppProcessInfo.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND && runningAppProcessInfo.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE; //排除无界面的app
-                }
-            }
+            ex.printStackTrace();
         }
-        return false;
+
+        return list;
     }
 
 
     //判断app是否安装
+
     public static boolean isAvilible(Context context, String packageName)
     {
         final PackageManager packageManager = context.getPackageManager();
@@ -140,7 +133,8 @@ public class AppUtils
     }
 
     //base64位加密图片
-    public static String bitmaptoString(Bitmap bitmap) {
+    public static String bitmaptoString(Bitmap bitmap)
+    {
         // 将Bitmap转换成字符串
         String string = null;
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();

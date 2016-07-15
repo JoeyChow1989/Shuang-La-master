@@ -62,23 +62,23 @@ public class GaoeRenwuActivity extends BaseActivity implements AutoLoadRecylerVi
         idGaoeRecyler.setLayoutManager(layoutManager);
         idGaoeRecyler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         idGaoeRecyler.setLoadMoreListener(this);
-        adapter = new Xianshi_RenwuAdapter(mList, this);
+        //adapter = new Xianshi_RenwuAdapter(mList, this);
         idGaoeRecyler.setAdapter(adapter);
     }
 
     @Override
     public void initData()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            XianshiRenwu xianshiRenwu = new XianshiRenwu();
-            xianshiRenwu.setImg(R.mipmap.ic_launcher);
-            xianshiRenwu.setTitle("澎湃新闻");
-            xianshiRenwu.setCount("剩余10223");
-            xianshiRenwu.setMsg("是时候有一个随心理财顾问");
-            xianshiRenwu.setPic(R.mipmap.ic_launcher);
-            mList.add(xianshiRenwu);
-        }
+//        for (int i = 0; i < 10; i++)
+//        {
+//            XianshiRenwu xianshiRenwu = new XianshiRenwu();
+//            xianshiRenwu.setImg(R.mipmap.ic_launcher);
+//            xianshiRenwu.setTitle("澎湃新闻");
+//            xianshiRenwu.setCount("剩余10223");
+//            xianshiRenwu.setMsg("是时候有一个随心理财顾问");
+//            xianshiRenwu.setPic(R.mipmap.ic_launcher);
+//            mList.add(xianshiRenwu);
+//        }
 
         adapter.setOnItemClickListener(new Xianshi_RenwuAdapter.OnItemClickListener()
         {

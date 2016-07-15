@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.domain.ZhanshuRenwu;
 
 import java.util.List;
@@ -34,7 +36,8 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
     }
 
     //Onclik接口
-    public interface OnItemClickListener {
+    public interface OnItemClickListener
+    {
 
         void onItemClick(View view, int position);
 
@@ -44,7 +47,8 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
 
     private OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
         this.mOnItemClickListener = listener;
     }
 
@@ -63,19 +67,27 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
 
         // TODO: 2016/7/1 adapter
         Glide.with(context)
-                .load(mList.get(position).getImg())
+                .load(mList.get(position).getIcon())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(zhuanshuViewHolder.idzhuanshurenwuImg);
 
-        Glide.with(context)
-                .load(mList.get(position).getPic())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(zhuanshuViewHolder.idzhuanshurenwuPics);
-
         zhuanshuViewHolder.idzhuanshurenwuTitle.setText(mList.get(position).getTitle());
-        zhuanshuViewHolder.idzhuanshurenwuMsg.setText(mList.get(position).getMsg());
-
         setUpItemEvent(zhuanshuViewHolder);
+
+
+        this.setOnItemClickListener(new Zhuanshu_RenwuAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(View view, int position)
+            {
+                // TODO: 2016/7/15 专属点击
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position)
+            {
+            }
+        });
     }
 
     @Override
@@ -84,11 +96,15 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
         return mList.size();
     }
 
-    protected void setUpItemEvent(final ZhuanshuViewHolder holder) {
-        if (mOnItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+    protected void setUpItemEvent(final ZhuanshuViewHolder holder)
+    {
+        if (mOnItemClickListener != null)
+        {
+            holder.itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemClick(holder.itemView, layoutpostion);
@@ -97,9 +113,11 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
 
             //longclick
 
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(View v)
+                {
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);

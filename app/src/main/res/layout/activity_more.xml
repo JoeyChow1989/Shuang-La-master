@@ -79,17 +79,18 @@
                 >
 
                 <TextView
+                    android:id="@+id/id_more_ziliao_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="right|center"
-                    android:text="哈哈哈"
+                    android:paddingRight="5dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:paddingRight="5dp"
                     />
 
                 <com.qx.www.shuang_la_master.ui.RoundImageView
+                    android:id="@+id/id_more_ziliao_headpic"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
@@ -173,9 +174,13 @@
                 />
 
             <TextView
+                android:id="@+id/id_more_ziliao_shouji"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="right|center"
+                android:paddingRight="5dp"
+                android:textSize="16sp"
                 />
 
             <ImageView

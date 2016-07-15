@@ -48,7 +48,7 @@ import java.util.Map;
 /**
  * Created by pc on 2016/6/29.
  */
-public class CustemDialog extends AlertDialog.Builder
+public class CustemDialog_ZS extends AlertDialog.Builder
 {
     ImageView mDialogIcon;
     TextView mDialogTitle;
@@ -76,13 +76,11 @@ public class CustemDialog extends AlertDialog.Builder
 
     private CountDownTimerService countDownTimerService;
     private long timer_unit = 1000;
-    private long service_distination_total = timer_unit * 350;
+    private long service_distination_total = timer_unit * 200;
     private PackageManager pm;
     AlertDialog alertDialog;
 
-    boolean isFinish = false;
-
-    public CustemDialog(Context context, String title, String pic, String size, String reward, String url, String semi, String uid, String tid, String packet)
+    public CustemDialog_ZS(Context context, String title, String pic, String size, String reward, String url, String semi, String uid, String tid, String packet)
     {
 
         super(context);
@@ -115,7 +113,18 @@ public class CustemDialog extends AlertDialog.Builder
             {
                 case 2:
 
+                    ArrayList<HashMap<String, Object>> list = AppUtils.LoadList(context, pm);
+                    for (int i = 0; i < list.size(); i++)
+                    {
+                        System.out.println("list----------------" + list.get(i).get("name"));
+                    }
 
+
+                    System.out.println(countDownTimerService.getCountingTime());
+                    if (countDownTimerService.getCountingTime() == 200000)
+                    {
+                        System.out.println("sssssssssssssssssssssssssss");
+                    }
                     break;
             }
         }
@@ -127,18 +136,9 @@ public class CustemDialog extends AlertDialog.Builder
         @Override
         public void onChange()
         {
-            ArrayList<HashMap<String, Object>> list = AppUtils.LoadList(context, pm);
-            for (int i = 0; i < list.size(); i++)
-            {
-                if (list.get(i).get("name").equals(title))
-                {
-                    isFinish = true;
-                }
-            }
-            System.out.println(countDownTimerService.getCountingTime());
+            mHandler1.sendEmptyMessage(2);
         }
     }
-
 
     public void showDialog()
     {
@@ -212,17 +212,9 @@ public class CustemDialog extends AlertDialog.Builder
             @Override
             public void onClick(View v)
             {
-                System.out.println("----countDownTimerService.getCountingTime()---" + countDownTimerService.getCountingTime());
-                if (countDownTimerService.getCountingTime() == service_distination_total)
-                {
-                    SendFinishTask();
-                } else
-                {
-                    Toast.makeText(context, "任务还未完成...", Toast.LENGTH_SHORT).show();
-                }
+                Send_ZSFinishTask();
             }
         });
-
         mBtCancel.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -272,7 +264,7 @@ public class CustemDialog extends AlertDialog.Builder
                     {
                         alertDialog.dismiss();
                         countDownTimerService.stopCountDown();
-                        Toast.makeText(context, "任务已经放弃!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"任务已经放弃!",Toast.LENGTH_SHORT).show();
                     }
 
                     System.out.println("status----------------------:" + status);
@@ -292,27 +284,26 @@ public class CustemDialog extends AlertDialog.Builder
 
     }
 
-    private void SendFinishTask()
+    private void Send_ZSFinishTask()
     {
-        String url = Constants.BaseUrl + "/site/finishTask";
-        String tokenBefroeMD5_FinishTask = semi + Constants.KEY + "/" + Constants.FINISHTASK_Url;
-        String token_FinishTask = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBefroeMD5_FinishTask).substring(AppUtils.getMd5Value(tokenBefroeMD5_FinishTask).length() - 4) +
-                AppUtils.getMd5Value(tokenBefroeMD5_FinishTask).replace(AppUtils.getMd5Value(tokenBefroeMD5_FinishTask).substring(AppUtils.getMd5Value(tokenBefroeMD5_FinishTask).length() - 4), ""));
+        String url = Constants.BaseUrl + "/site/finishZSTask";
+        String tokenBefroeMD5_ZS_FinishTask = semi + Constants.KEY + "/" + Constants.FINISHZSTASKLIST_Url;
+        String token_ZS_FinishTask = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBefroeMD5_ZS_FinishTask).substring(AppUtils.getMd5Value(tokenBefroeMD5_ZS_FinishTask).length() - 4) +
+                AppUtils.getMd5Value(tokenBefroeMD5_ZS_FinishTask).replace(AppUtils.getMd5Value(tokenBefroeMD5_ZS_FinishTask).substring(AppUtils.getMd5Value(tokenBefroeMD5_ZS_FinishTask).length() - 4), ""));
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid", uid);
         params.put("tid", tid);
         params.put("packet", mPackageName);
-        params.put("token", token_FinishTask);
+        params.put("token", token_ZS_FinishTask);
 
-        VolleyRequest.RequestPost(context, url, "finishtask", params, new VolleyInterface(context,
+        VolleyRequest.RequestPost(context, url, "finishzstask", params, new VolleyInterface(context,
                 VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
         {
             @Override
             public void onMySuccess(String result)
             {
-                System.out.println("finish--------------------:" + result);
-                alertDialog.dismiss();
+                System.out.println("ZS_finish--------------------:" + result);
             }
 
             @Override
@@ -413,7 +404,6 @@ public class CustemDialog extends AlertDialog.Builder
                         intent.setDataAndType(uri, "application/vnd.android.package-archive");
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
-                        countDownTimerService.startCountDown();
                         break;
                     case DOWN_ERROR:
                         break;
@@ -559,6 +549,4 @@ public class CustemDialog extends AlertDialog.Builder
     {
         return String.format("%02d", time);
     }
-
-
 }

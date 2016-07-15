@@ -6,15 +6,15 @@ package com.qx.www.shuang_la_master.domain;
 public class FuLiCallBack
 {
     private String status;
-    private float money;
-    private int msg;
+    private String money;
+    private String msg;
 
-    public float getMoney()
+    public String getMoney()
     {
         return money;
     }
 
-    public void setMoney(float money)
+    public void setMoney(String money)
     {
         this.money = money;
     }
@@ -29,12 +29,12 @@ public class FuLiCallBack
         this.status = status;
     }
 
-    public int getMsg()
+    public String getMsg()
     {
         return msg;
     }
 
-    public void setMsg(int msg)
+    public void setMsg(String msg)
     {
         this.msg = msg;
     }

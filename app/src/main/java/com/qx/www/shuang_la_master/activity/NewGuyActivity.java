@@ -72,6 +72,16 @@ public class NewGuyActivity extends BaseActivity
                 AppUtils.getMd5Value(tokenBeforeMD5_NewGuy).replace(AppUtils.getMd5Value(tokenBeforeMD5_NewGuy).substring(AppUtils.getMd5Value(tokenBeforeMD5_NewGuy).length() - 4), ""));
 
         System.out.println("token_NewGuy---------:" + token_NewGuy);
+
+        idToolbarMenu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                GetNewGuyInfo();
+            }
+        });
+
     }
 
     public String GetThePhoneInfo()
@@ -100,6 +110,9 @@ public class NewGuyActivity extends BaseActivity
             @Override
             public void onMySuccess(String result)
             {
+                System.out.println("result------------------------" + result);
+
+
                 Gson gson = new Gson();
                 NewGuyCallBack newGuyCallBack = gson.fromJson(result, NewGuyCallBack.class);
                 if (newGuyCallBack.getStatus().equals("ok"))

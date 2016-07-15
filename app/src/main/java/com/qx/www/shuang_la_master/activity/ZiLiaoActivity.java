@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.baoyz.actionsheet.ActionSheet;
 import com.bigkoo.pickerview.TimePickerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
@@ -116,6 +118,7 @@ public class ZiLiaoActivity extends BaseActivity
     String img;
     String token_ziliao;
     String token_ziliaoBeforeMd5;
+    private SharedPreferences info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -155,10 +158,58 @@ public class ZiLiaoActivity extends BaseActivity
         token_ziliao = AppUtils.getMd5Value(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4) + AppUtils.getMd5Value(token_ziliaoBeforeMd5).
                 replace(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4), ""));
 
+        info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+
+        idZiliaoEdit.setText(info.getString("nickname", ""));
+        Glide.with(ZiLiaoActivity.this)
+                .load(info.getString("avatar", ""))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(idZiliaoImgs);
+
+        if (info.getString("sex", "").equals("1"))
+        {
+            idZiliaoSexup.setText("男");
+        } else
+        {
+            idZiliaoSexup.setText("女");
+        }
+
+        idZiliaoBrithup.setText(info.getString("birthday", ""));
+
+        if (info.getString("work", "").equals("1"))
+        {
+            idZiliaoJobup.setText("学生");
+        } else if (info.getString("work", "").equals("2"))
+        {
+            idZiliaoJobup.setText("教师");
+        }
+        if (info.getString("work", "").equals("3"))
+        {
+            idZiliaoJobup.setText("上班族");
+        }
+        if (info.getString("work", "").equals("4"))
+        {
+            idZiliaoJobup.setText("老板");
+        }
+        if (info.getString("work", "").equals("5"))
+        {
+            idZiliaoJobup.setText("公务员");
+        }
+        if (info.getString("work", "").equals("6"))
+        {
+            idZiliaoJobup.setText("自由");
+        }
+        if (info.getString("work", "").equals("7"))
+        {
+            idZiliaoJobup.setText("退休");
+        }
+        if (info.getString("work", "").equals("8"))
+        {
+            idZiliaoJobup.setText("其他");
+        }
 
         System.out.println("token_ziliaoMD5Before--------------:" + token_ziliaoBeforeMd5);
         System.out.println("token_ziliao--------------:" + token_ziliao);
-
     }
 
     @Override
@@ -216,6 +267,32 @@ public class ZiLiaoActivity extends BaseActivity
     {
         name = AppUtils.StringFilter(idZiliaoEdit.getText().toString().trim());
         birth = idZiliaoBrithup.getText().toString().trim();
+        if (idZiliaoSexup.getText().toString().trim().equals("男"))
+        {
+            sex = "1";
+        } else
+        {
+            sex = "2";
+        }
+
+        if (idZiliaoJobup.getText().toString().trim().equals("学生")){
+            work = "1";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("教师")){
+            work = "2";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("上班族")){
+            work = "3";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("老板")){
+            work = "4";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("公务员")){
+            work = "5";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("自由")){
+            work = "6";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("退休")){
+            work = "7";
+        }else if (idZiliaoJobup.getText().toString().trim().equals("其他")){
+            work = "8";
+        }
+
         String url = Constants.BaseUrl + "/user/index";
         System.out.println("uid" + uid + "name" + name + "sex" + sex + "birth" + birth + "token" + token_ziliao);
 
@@ -325,7 +402,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("学生");
-                    work = "1";
                     alertDialog.dismiss();
                 }
             }
@@ -339,7 +415,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("教师");
-                    work = "2";
                     alertDialog.dismiss();
                 }
             }
@@ -353,7 +428,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("上班族");
-                    work = "3";
                     alertDialog.dismiss();
                 }
             }
@@ -367,7 +441,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("老板");
-                    work = "4";
                     alertDialog.dismiss();
                 }
             }
@@ -382,7 +455,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("公务员");
-                    work = "5";
                     alertDialog.dismiss();
                 }
             }
@@ -396,7 +468,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("自由");
-                    work = "6";
                     alertDialog.dismiss();
                 }
             }
@@ -410,7 +481,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("退休");
-                    work = "7";
                     alertDialog.dismiss();
                 }
             }
@@ -424,7 +494,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoJobup.setText("其他");
-                    work = "8";
                     alertDialog.dismiss();
                 }
             }
@@ -460,7 +529,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoSexup.setText("男");
-                    sex = "1";
                     alertDialog.dismiss();
                 }
             }
@@ -474,7 +542,6 @@ public class ZiLiaoActivity extends BaseActivity
                 if (isChecked)
                 {
                     idZiliaoSexup.setText("女");
-                    sex = "2";
                     alertDialog.dismiss();
                 }
             }

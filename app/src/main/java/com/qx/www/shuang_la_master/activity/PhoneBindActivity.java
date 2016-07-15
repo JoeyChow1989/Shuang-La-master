@@ -1,13 +1,36 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.application.BaseApp;
+import com.qx.www.shuang_la_master.domain.FuLiCallBack;
+import com.qx.www.shuang_la_master.domain.RegCallBack;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
+import com.qx.www.shuang_la_master.utils.VolleyInterface;
+import com.qx.www.shuang_la_master.utils.VolleyRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +50,14 @@ public class PhoneBindActivity extends BaseActivity
     @Bind(R.id.id_phone_edit_yanzheng)
     AppCompatEditText idPhoneEditYanzheng;
 
+    SharedPreferences sp;
+    private String uid;
+    private String tokenBeforeMD5_AuthCode;
+    private String token_AuthCode;
+    private String tokenBeforeMD5_Vaild;
+    private String token_Vaild;
+    String phone;
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,12 +83,29 @@ public class PhoneBindActivity extends BaseActivity
                 onBackPressed();
             }
         });
+        sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
+        uid = String.valueOf(sp.getInt("uid", 0));
+    }
+
+    public String GetThePhoneInfo()
+    {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
     }
 
     @Override
     public void initData()
     {
+        tokenBeforeMD5_AuthCode = GetThePhoneInfo() + Constants.KEY + "/" + Constants.AUTHCODE_Url;
+        tokenBeforeMD5_Vaild = GetThePhoneInfo() + Constants.KEY + "/" + Constants.VALID_Url;
+        token_AuthCode = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_AuthCode).substring(AppUtils.getMd5Value(tokenBeforeMD5_AuthCode).length() - 4) +
+                AppUtils.getMd5Value(tokenBeforeMD5_AuthCode).replace(AppUtils.getMd5Value(tokenBeforeMD5_AuthCode).substring(AppUtils.getMd5Value(tokenBeforeMD5_AuthCode).length() - 4), ""));
 
+        token_Vaild = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_Vaild).substring(AppUtils.getMd5Value(tokenBeforeMD5_Vaild).length() - 4) +
+                AppUtils.getMd5Value(tokenBeforeMD5_Vaild).replace(AppUtils.getMd5Value(tokenBeforeMD5_Vaild).substring(AppUtils.getMd5Value(tokenBeforeMD5_Vaild).length() - 4), ""));
+        System.out.println("token_Vaild------------------:" + token_Vaild);
+        System.out.println("token_AuthCode-----------------:" + token_AuthCode);
     }
 
     @OnClick({R.id.id_phone_bt_getyanzheng, R.id.id_phone_sendup})
@@ -66,9 +114,105 @@ public class PhoneBindActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.id_phone_bt_getyanzheng:
+                GetAuthCodeNum();
                 break;
             case R.id.id_phone_sendup:
+                BindPhoneNum();
                 break;
         }
+    }
+
+    private void BindPhoneNum()
+    {
+        if (!"".equals(idPhoneEditPhone.getText().toString().trim()))
+        {
+            phone = idPhoneEditPhone.getText().toString().trim();
+        }
+
+        if (!"".equals(idPhoneEditYanzheng.getText().toString().trim()))
+        {
+            code = idPhoneEditYanzheng.getText().toString().trim();
+        }
+
+        System.out.println("uid-----------:" + uid + "phone------------:" + phone + "token_AuthCode---------:" + token_AuthCode);
+
+        String url = Constants.BaseUrl + "/user/validAuthCode";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("phone", phone);
+        params.put("code", code);
+        params.put("token", token_AuthCode);
+
+        VolleyRequest.RequestPost(this, url, "vaild", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                Gson gson = new Gson();
+                RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
+
+                if (regCallBack.getStatus() == "ok")
+                {
+                    Toast.makeText(PhoneBindActivity.this, "绑定成功!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(PhoneBindActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void GetAuthCodeNum()
+    {
+        if (!"".equals(idPhoneEditPhone.getText().toString().trim()))
+        {
+            phone = idPhoneEditPhone.getText().toString().trim();
+        }
+
+        System.out.println("uid-----------:" + uid + "phone------------:" + phone + "token_AuthCode---------:" + token_AuthCode);
+
+        String url = Constants.BaseUrl + "/user/getAuthCode";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("phone", phone);
+        params.put("token", token_AuthCode);
+
+        VolleyRequest.RequestPost(this, url, "getAuthCode", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                Gson gson = new Gson();
+                RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
+
+                if (regCallBack.getStatus() == "ok")
+                {
+                    System.out.println("sssssssssssssssssssss:" + regCallBack.getStatus());
+                    Toast.makeText(PhoneBindActivity.this, "正在获取验证码", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(PhoneBindActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        BaseApp.getHttpQueues().cancelAll("getAuthCode");
+        BaseApp.getHttpQueues().cancelAll("vaild");
     }
 }

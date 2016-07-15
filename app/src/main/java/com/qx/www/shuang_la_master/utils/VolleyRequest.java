@@ -41,7 +41,7 @@ public class VolleyRequest
             }
         };
         BaseApp.getHttpQueues().add(mRequest);
-        BaseApp.getHttpQueues().start();
+       // BaseApp.getHttpQueues().start();
     }
 
 }

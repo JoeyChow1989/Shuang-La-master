@@ -36,18 +36,16 @@ public class Dialog_NewGuyFuli extends Dialog
     Button idXinrenfuliNoinvent;
     TextView idXinrenfuliUserdeil;
     private Context context;
-    private String semi;
-    private String token_fuli;
     Dialog alertDialog = null;
+    private String uid;
+    private String token_remmend;
 
-
-    public Dialog_NewGuyFuli(Context context, String semi, String token_fuli)
+    public Dialog_NewGuyFuli(Context context,String uid,String token_remmend)
     {
         super(context);
         this.context = context;
-        this.semi = semi;
-        this.token_fuli = token_fuli;
-        System.out.println("token_fuli=====:" + token_fuli);
+        this.uid = uid;
+        this.token_remmend = token_remmend;
     }
 
     public void showDialog()
@@ -81,19 +79,33 @@ public class Dialog_NewGuyFuli extends Dialog
             @Override
             public void onClick(View v)
             {
-                GetFuLi();
+                alertDialog.dismiss();
+            }
+        });
+
+        idXinrenfuliLinerSure.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (!"".equals(idXinrenfuliLinerEdittext.getText().toString().trim()))
+                {
+                    String inventID = idXinrenfuliLinerEdittext.getText().toString().trim();
+                    SendInventID(inventID);
+                }
             }
         });
     }
 
-    private void GetFuLi()
+    private void SendInventID(String recommend_id)
     {
-        String url = Constants.BaseUrl + "/user/xrfl";
+        String url = Constants.BaseUrl + "/user/recommend";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("semi", semi);
-        params.put("token", token_fuli);
+        params.put("uid", uid);
+        params.put("recommend_id",recommend_id);
+        params.put("token", token_remmend);
 
-        VolleyRequest.RequestPost(context, url, "fuli", params, new VolleyInterface(context,
+        VolleyRequest.RequestPost(context, url, "recommend", params, new VolleyInterface(context,
                 VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
         {
             @Override
@@ -107,6 +119,7 @@ public class Dialog_NewGuyFuli extends Dialog
                 if ("ok".equals(fuLiCallBack.getStatus()))
                 {
                     Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+
                 }
                 alertDialog.dismiss();
             }

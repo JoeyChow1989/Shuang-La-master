@@ -1,8 +1,10 @@
 package com.qx.www.shuang_la_master.fragment;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.telephony.TelephonyManager;
@@ -15,13 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.adapter.DetailAdatper;
+import com.qx.www.shuang_la_master.adapter.Detail_TixianAdatper;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
 import com.qx.www.shuang_la_master.domain.Detail;
+import com.qx.www.shuang_la_master.domain.Detail_tixian;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
@@ -35,12 +38,13 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,AutoLoadRecylerView.loadMoreListener
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,AutoLoadRecylerView.loadMoreListener
 {
-
-
-    @Bind(R.id.id_xuetu_autorecy)
-    AutoLoadRecylerView idXuetuAutorecy;
+    @Bind(R.id.id_duihuan_autorecy)
+    AutoLoadRecylerView idDuihuanAutorecy;
     @Bind(R.id.common_error_txt)
     TextView commonErrorTxt;
     @Bind(R.id.retry_btn)
@@ -48,8 +52,8 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Bind(R.id.common_error)
     RelativeLayout commonError;
 
-    private List<Detail> mList;
-    private DetailAdatper adapter;
+    private List<Detail_tixian> mList;
+    private Detail_TixianAdatper adapter;
     private LinearLayoutManager layoutManager;
 
     SharedPreferences sp;
@@ -61,16 +65,15 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     protected int getLayoutResource()
     {
-        return R.layout.fragment_xue_tu;
+        return R.layout.fragment_dui_huan;
     }
 
     @Override
     protected void initData()
     {
-        GetXueTuData();
 
-
-//        adapter.setOnItemClickListener(new DetailAdatper.OnItemClickListener()
+        GetTiXianData();
+//        adapter.setOnItemClickListener(new Detail_TixianAdatper.OnItemClickListener()
 //        {
 //            @Override
 //            public void onItemClick(View view, int position)
@@ -88,13 +91,13 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
 //        });
     }
 
-    private void GetXueTuData()
+    private void GetTiXianData()
     {
         String url = Constants.BaseUrl + "user/mingxi";
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid", uid);
         params.put("page", page);
-        params.put("type", "2");
+        params.put("type", "3");
         params.put("token", token);
 
         VolleyRequest.RequestPost(context, url, "ZStask", params, new VolleyInterface(context,
@@ -104,7 +107,7 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
             public void onMySuccess(String result)
             {
                 //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-                System.out.println("result--------XueTu----------------:" + result);
+                System.out.println("result--------TiXian----------------:" + result);
 
 //                Gson gson = new Gson();
 //                Detail detail = gson.fromJson(result, Detail.class);
@@ -127,11 +130,11 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     protected void initView()
     {
-        mList = new ArrayList<Detail>();
+        mList = new ArrayList<Detail_tixian>();
         layoutManager = new LinearLayoutManager(context);
-        idXuetuAutorecy.setLayoutManager(layoutManager);
-        idXuetuAutorecy.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
-        idXuetuAutorecy.setLoadMoreListener(this);
+        idDuihuanAutorecy.setLayoutManager(layoutManager);
+        idDuihuanAutorecy.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+        idDuihuanAutorecy.setLoadMoreListener(this);
 
         sp = context.getSharedPreferences("LoginInfo", Context.MODE_PRIVATE);
         uid = String.valueOf(sp.getInt("uid", 0));
@@ -142,8 +145,9 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
         System.out.println("tokenBeforeMd5-------明细---------------" + tokenBeforeMd5);
         System.out.println("token-----------明细-----------" + token);
         System.out.println("uid-------------" + uid);
-      //  adapter = new DetailAdatper(mList, context);
-        //idXuetuAutorecy.setAdapter(adapter);
+
+//        adapter = new Detail_TixianAdatper(mList, context);
+//        idDuihuanAutorecy.setAdapter(adapter);
     }
 
     @Override

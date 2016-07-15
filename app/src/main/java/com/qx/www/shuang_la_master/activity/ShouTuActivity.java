@@ -1,17 +1,31 @@
 package com.qx.www.shuang_la_master.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.application.BaseApp;
+import com.qx.www.shuang_la_master.domain.UserInfo;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
+import com.qx.www.shuang_la_master.utils.VolleyInterface;
+import com.qx.www.shuang_la_master.utils.VolleyRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,6 +54,7 @@ public class ShouTuActivity extends BaseActivity
         setContentView(R.layout.activity_shou_tu);
         ButterKnife.bind(this);
         initView();
+        initData();
     }
 
     @Override
@@ -92,4 +107,11 @@ public class ShouTuActivity extends BaseActivity
             return true;
         }
     };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        BaseApp.getHttpQueues().cancelAll("info");
+    }
 }

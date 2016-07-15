@@ -56,12 +56,12 @@
                             >
 
                             <TextView
+                                android:id="@+id/id_main_yue_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="left|bottom"
                                 android:paddingLeft="10dp"
-                                android:text="9.20"
                                 android:textColor="@android:color/white"
                                 android:textSize="55sp"
                                 />
@@ -129,11 +129,11 @@
                         >
 
                         <TextView
+                            android:id="@+id/id_main_todaymoney"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|bottom"
-                            android:text="00.50"
                             android:textColor="@android:color/black"
                             android:textSize="20sp"
                             />
@@ -163,11 +163,11 @@
                         >
 
                         <TextView
+                            android:id="@+id/id_main_totalmoney"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|bottom"
-                            android:text="70.50"
                             android:textColor="@android:color/black"
                             android:textSize="20sp"
                             />
@@ -206,7 +206,10 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.2"/>
+                        android:layout_weight="1.2"
+                        android:src="@drawable/zhuanqian"
+                        android:padding="3dp"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -253,7 +256,10 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.2"/>
+                        android:layout_weight="1.2"
+                        android:src="@drawable/gaoe"
+                        android:padding="3dp"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -300,7 +306,10 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.2"/>
+                        android:layout_weight="1.2"
+                        android:src="@drawable/lianmengrenwu"
+                        android:padding="3dp"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -347,7 +356,9 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.2"/>
+                        android:layout_weight="1.2"
+                        android:src="@drawable/newguy"
+                        android:padding="3dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -392,7 +403,9 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.2"/>
+                        android:layout_weight="1.2"
+                        android:src="@drawable/shoutu"
+                        android:padding="3dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
