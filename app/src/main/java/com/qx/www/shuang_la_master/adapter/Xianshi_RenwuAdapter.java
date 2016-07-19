@@ -1,11 +1,7 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +13,7 @@ import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
-import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.activity.MakeMoneyCenterActivity;
-import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.domain.BeginTask;
 import com.qx.www.shuang_la_master.domain.XianshiRenwu;
 import com.qx.www.shuang_la_master.ui.CustemDialog;
@@ -30,9 +23,7 @@ import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +42,8 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
     String tokenBeforeMd5_begintask;
     String token_begintask;
     CustemDialog dialog;
+
+    XianshiViewHolder xianshiViewHolder;
 
     //Onclik接口
     public interface OnItemClickListener
@@ -120,7 +113,7 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-        XianshiViewHolder xianshiViewHolder = (XianshiViewHolder) holder;
+        xianshiViewHolder = (XianshiViewHolder) holder;
 
         // TODO: 2016/7/1 adapter
         Glide.with(context)
@@ -138,8 +131,20 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
             xianshiViewHolder.idXianshirenwuZhuanshu.setVisibility(View.INVISIBLE);
         }
 
+        xianshiViewHolder.idXianshiShouyi.setText("+" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getReward()) + "元");
+        xianshiViewHolder.idXianshiZhuanshushouyi.setText("含专属收益" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getZs_reward()) + "元");
+
+        if (xianshiRenwu.getInfos().get(position).getIsfinish().equals("1"))
+        {
+
+            xianshiViewHolder.idXianshiShouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
+            xianshiViewHolder.idXianshiZhuanshushouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
+            xianshiViewHolder.idXianshirenwuZhuanshu.setBackgroundColor(context.getResources().getColor(R.color.item_left));
+        }
+
+
         //点击抢夺任务;
-        this.setOnItemClickListener(new Xianshi_RenwuAdapter.OnItemClickListener()
+        this.setOnItemClickListener(new OnItemClickListener()
         {
             @Override
             public void onItemClick(View view, int position)
@@ -189,11 +194,16 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
                 {
                     dialog = new CustemDialog(context, begintask.getInfos().getTitle(), Constants.BACKGROUDUrl + begintask.getInfos().getFengmian(), begintask.getInfos().getSize(), begintask.getInfos().getReward(), begintask.getInfos().getUrl(), semi, uid, tid, begintask.getInfos().getProcessName());
                     dialog.showDialog();
-                } else
+                } else if (begintask.getCode().equals("4"))
                 {
-                    AlertDialog alertdialog = new AlertDialog.Builder(context).create();
-                    alertdialog.setMessage("对不起,任务没抢到..");
-                    alertdialog.show();
+                    Toast.makeText(context, "任务已经做完了！", Toast.LENGTH_SHORT).show();
+
+                } else if (begintask.getCode().equals("6"))
+                {
+                    Toast.makeText(context, "未绑定手机号!", Toast.LENGTH_SHORT).show();
+                } else if (begintask.getCode().equals("5"))
+                {
+                    Toast.makeText(context, "任务还没开始抢！", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -222,10 +232,12 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
         TextView idXianshirenwuCount;
         @Bind(R.id.id_xianshirenwu_msg)
         TextView idXianshirenwuMsg;
-        @Bind(R.id.id_xianshirenwu_pics)
-        ImageView idXianshirenwuPics;
         @Bind(R.id.id_xianshirenwu_zhuanshu)
         TextView idXianshirenwuZhuanshu;
+        @Bind(R.id.id_xianshi_shouyi)
+        TextView idXianshiShouyi;
+        @Bind(R.id.id_xianshi_zhuanshushouyi)
+        TextView idXianshiZhuanshushouyi;
 
         public XianshiViewHolder(View view)
         {

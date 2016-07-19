@@ -14,7 +14,7 @@
             android:id="@+id/id_all_item_img"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_weight="1.6"
+            android:layout_weight="2.3"
             />
 
         <LinearLayout
@@ -50,24 +50,47 @@
                     />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/id_all_item_msg"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:text="完成任务限时推荐《你的英雄》,赚了1.5元"
-                />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="13sp"
+                    android:text="完成任务限时推荐《你的英雄》,赚了"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/id_all_item_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4.8"
+                    android:textSize="13sp"
+                    android:textColor="@color/xinrenfuli"
+                    android:text="2.2"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="元"
+                    android:textSize="13sp"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
             android:id="@+id/id_all_item_time"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_weight="1.6"
+            android:layout_weight="2.3"
             android:text="03月17 15：52"
-            android:gravity="center"
+            android:gravity="top|center"
             android:textSize="12sp"
+            android:paddingTop="30dp"
             />
 
     </LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:gravity="center">
+
+    <ImageView
+        android:id="@+id/id_xinrenfuli_toppic_finish"
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/img_037"
+        />
+
+    <TextView
+        android:id="@+id/id_xinrenfuli_text_finish"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/id_xinrenfuli_toppic_finish"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="恭喜你，获得现金1.2元"
+        android:textColor="@color/xinrenfuli"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:id="@+id/id_xinrenfuli_text_finish2"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/id_xinrenfuli_text_finish"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="这仅仅是个开始"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        />
+
+    <Button
+        android:id="@+id/id_xinrenfuli_begin"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/id_xinrenfuli_text_finish2"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/mingxi_tab_bg"
+        android:text="开始赚钱吧"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

@@ -10,6 +10,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/id_newpop_relat"
         android:layout_width="match_parent"
         android:layout_height="141dp"
         android:layout_below="@id/id_newpople_toolbar"
@@ -26,13 +27,13 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="3"
+                android:layout_weight="1.7"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:orientation="vertical"
                 >
 
@@ -41,10 +42,10 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:gravity="left|center"
-                    android:text="完善个人资料"
                     android:paddingLeft="5dp"
-                    android:textSize="18sp"
+                    android:text="完善个人资料"
                     android:textColor="@android:color/black"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     />
 
@@ -52,17 +53,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:paddingLeft="5dp"
                     android:gravity="left|center"
+                    android:paddingLeft="5dp"
                     android:text="创建你的个人资料"
                     />
             </LinearLayout>
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="3"
-                />
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1.8"
+                    android:gravity="right|center"
+                    android:text="+"
+                    android:textColor="@color/xinrenfuli"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0.10"
+                    android:textColor="@color/xinrenfuli"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1.8"
+                    android:gravity="left|center"
+                    android:text="元"
+                    android:textColor="@color/xinrenfuli"/>
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -72,20 +101,20 @@
             android:layout_height="60dp"
             android:layout_below="@id/id_newpop_wanshan"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal"
             android:background="@android:color/white"
+            android:orientation="horizontal"
             >
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="3"
+                android:layout_weight="1.7"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:orientation="vertical"
                 >
 
@@ -94,10 +123,10 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:gravity="left|center"
-                    android:text="绑定手机"
                     android:paddingLeft="5dp"
-                    android:textSize="18sp"
+                    android:text="绑定手机"
                     android:textColor="@android:color/black"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     />
 
@@ -105,19 +134,66 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:paddingLeft="5dp"
                     android:gravity="left|center"
+                    android:paddingLeft="5dp"
                     android:text="再也不担心丢失账号"
                     />
 
             </LinearLayout>
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="3"
-                />
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1.8"
+                    android:gravity="right|center"
+                    android:text="+"
+                    android:textColor="@color/xinrenfuli"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0.10"
+                    android:textColor="@color/xinrenfuli"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="1.8"
+                    android:gravity="left|center"
+                    android:text="元"
+                    android:textColor="@color/xinrenfuli"/>
+            </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/idNewpopRelat_finish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_newpople_toolbar"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="新手任务已经做完了"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            />
+
     </RelativeLayout>
 
 </RelativeLayout>

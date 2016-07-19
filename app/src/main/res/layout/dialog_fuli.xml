@@ -3,15 +3,17 @@
                 android:layout_width="300dp"
                 android:layout_height="320dp"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:gravity="center">
 
     <ImageView
         android:id="@+id/id_xinrenfuli_toppic"
         android:layout_width="300dp"
         android:layout_height="130dp"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/img_036"
         />
 
     <TextView
@@ -19,8 +21,8 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_below="@id/id_xinrenfuli_toppic"
-        android:gravity="center"
         android:layout_centerInParent="true"
+        android:gravity="center"
         android:text="新人福利，领取现金!"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -31,9 +33,9 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/id_xinrenfuli_text"
+        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:layout_centerInParent="true"
         android:background="@drawable/mingxi_tab_bg"
         android:text="有邀请ID"
         android:textColor="@android:color/white"
@@ -44,9 +46,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/id_xinrenfuli_haveinvent"
-        android:layout_gravity="center"
         android:layout_centerInParent="true"
-        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal"
         android:visibility="gone"
         >
@@ -55,13 +59,13 @@
             android:id="@+id/id_xinrenfuli_liner_edittext"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_centerInParent="true"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/mingxi_tab_bg"
             android:gravity="left|center"
             android:hint="请输入邀请ID"
             android:paddingLeft="10dp"
-            android:layout_centerInParent="true"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             android:textSize="18sp"/>
@@ -70,16 +74,15 @@
             android:id="@+id/id_xinrenfuli_liner_sure"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_weight="2"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="5dp"
+            android:layout_weight="2"
             android:background="@drawable/mingxi_tab_bg"
             android:gravity="center"
             android:text="确认"
-            android:layout_centerInParent="true"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             />
-
     </LinearLayout>
 
     <Button
@@ -87,12 +90,12 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_below="@id/id_xinrenfuli_liner"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/mingxi_tab_bg"
         android:text="无邀请ID"
-        android:layout_centerInParent="true"
         android:textColor="@android:color/white"
         android:textSize="18sp"/>
 
@@ -101,9 +104,10 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_below="@id/id_xinrenfuli_noinvent"
-        android:gravity="top|center"
-        android:text="用户协议"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="用户协议"
         android:textSize="16sp"
         />
 

@@ -28,6 +28,7 @@ import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.application.BaseApp;
 import com.qx.www.shuang_la_master.domain.RegCallBack;
+import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.galleryfinal.listener.GlidePauseOnScrollListener;
 import com.qx.www.shuang_la_master.galleryfinal.loader.GlideImageLoader;
 import com.qx.www.shuang_la_master.utils.AppUtils;
@@ -118,7 +119,11 @@ public class ZiLiaoActivity extends BaseActivity
     String img;
     String token_ziliao;
     String token_ziliaoBeforeMd5;
-    private SharedPreferences info;
+
+    String url_userinfo;
+    String tokenBeforeMD5_info, token_info;
+    SharedPreferences info;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -158,11 +163,19 @@ public class ZiLiaoActivity extends BaseActivity
         token_ziliao = AppUtils.getMd5Value(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4) + AppUtils.getMd5Value(token_ziliaoBeforeMd5).
                 replace(AppUtils.getMd5Value(token_ziliaoBeforeMd5).substring(AppUtils.getMd5Value(token_ziliaoBeforeMd5).length() - 4), ""));
 
+        tokenBeforeMD5_info = GetThePhoneInfo() + Constants.KEY + "/" + Constants.USERINFO_Url;
+        token_info = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_info).replace(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4), ""));
+
+        System.out.println("---tokenBeforeMD5_info---:" + tokenBeforeMD5_info);
+        System.out.println("---token_info---:" + token_info);
+
         info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        editor = info.edit();
 
         idZiliaoEdit.setText(info.getString("nickname", ""));
+
         Glide.with(ZiLiaoActivity.this)
-                .load(info.getString("avatar", ""))
+                .load(Constants.BACKGROUDUrl + info.getString("avatar", ""))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(idZiliaoImgs);
 
@@ -238,6 +251,9 @@ public class ZiLiaoActivity extends BaseActivity
                 //Toast.makeText(ZiLiaoActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
             }
         });
+
+        url_userinfo = Constants.BaseUrl + "/site/getInfo";
+        GetUserInfo(url_userinfo, token_info);
     }
 
     @OnClick({R.id.id_ziliao_headimg, R.id.id_ziliao_sex, R.id.id_ziliao_brith, R.id.id_ziliao_job, R.id.id_ziliao_sendup})
@@ -275,21 +291,29 @@ public class ZiLiaoActivity extends BaseActivity
             sex = "2";
         }
 
-        if (idZiliaoJobup.getText().toString().trim().equals("学生")){
+        if (idZiliaoJobup.getText().toString().trim().equals("学生"))
+        {
             work = "1";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("教师")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("教师"))
+        {
             work = "2";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("上班族")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("上班族"))
+        {
             work = "3";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("老板")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("老板"))
+        {
             work = "4";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("公务员")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("公务员"))
+        {
             work = "5";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("自由")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("自由"))
+        {
             work = "6";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("退休")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("退休"))
+        {
             work = "7";
-        }else if (idZiliaoJobup.getText().toString().trim().equals("其他")){
+        } else if (idZiliaoJobup.getText().toString().trim().equals("其他"))
+        {
             work = "8";
         }
 
@@ -634,10 +658,13 @@ public class ZiLiaoActivity extends BaseActivity
             }
 
             // TODO: 2016/6/30  图片上传
-            Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
-            idZiliaoImgs.setImageBitmap(bitmap); //设置Bitmap
-            img = AppUtils.bitmaptoString(bitmap);
+            Glide.with(ZiLiaoActivity.this)
+                    .load(mPhotoList.get(0).getPhotoPath())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(idZiliaoImgs);
 
+            Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
+            img = AppUtils.bitmaptoString(bitmap);
 
             System.out.println("-------------img-------------" + img);
 
@@ -655,6 +682,51 @@ public class ZiLiaoActivity extends BaseActivity
     {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
+    }
+
+    private void GetUserInfo(String url, String token_info)
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("token", token_info);
+
+        VolleyRequest.RequestPost(this, url, "info", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                System.out.println("sssssssssssssssssss" + result);
+
+                Gson gson = new Gson();
+                UserInfo userinfo = gson.fromJson(result, UserInfo.class);
+
+                editor.putString("avatar", userinfo.getInfos().getAvatar());
+                editor.putString("mobile", userinfo.getInfos().getMobile());
+                editor.putString("status", userinfo.getInfos().getStatus());
+                editor.putString("work", userinfo.getInfos().getWork());
+                editor.putString("weixin", userinfo.getInfos().getWeixin());
+                editor.putString("nickname", userinfo.getInfos().getNickname());
+                editor.putString("sex", userinfo.getInfos().getSex());
+                editor.putString("birthday", userinfo.getInfos().getBirthday());
+                editor.putString("uid", userinfo.getInfos().getUid());
+                editor.putString("semi", userinfo.getInfos().getSemi());
+                editor.putString("tnum", userinfo.getInfos().getTnum());
+                editor.putString("tsy", userinfo.getInfos().getTsy());
+                editor.putString("num", userinfo.getInfos().getNum());
+                editor.putString("sy", userinfo.getInfos().getSy());
+                editor.putString("total", userinfo.getInfos().getTotal());
+
+                editor.commit();
+                System.out.println("mobile-----------------:" + userinfo.getInfos().getMobile());
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(ZiLiaoActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

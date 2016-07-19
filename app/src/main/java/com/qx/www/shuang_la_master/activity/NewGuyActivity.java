@@ -7,6 +7,7 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,10 @@ public class NewGuyActivity extends BaseActivity
     String tokenBeforeMD5_NewGuy = null;
     String token_NewGuy;
     String uid;
+    @Bind(R.id.id_newpop_relat)
+    RelativeLayout idNewpopRelat;
+    @Bind(R.id.idNewpopRelat_finish)
+    RelativeLayout idNewpopRelatFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,7 +86,6 @@ public class NewGuyActivity extends BaseActivity
                 GetNewGuyInfo();
             }
         });
-
     }
 
     public String GetThePhoneInfo()
@@ -132,6 +136,12 @@ public class NewGuyActivity extends BaseActivity
                     {
                         idNewpopBindphone.setVisibility(View.GONE);
                     }
+
+                    if (newGuyCallBack.getMsg().getTask1() == 1 && newGuyCallBack.getMsg().getTask2() == 1)
+                    {
+                        idNewpopRelat.setVisibility(View.GONE);
+                        idNewpopRelatFinish.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -152,6 +162,7 @@ public class NewGuyActivity extends BaseActivity
                 finish();
                 break;
             case R.id.id_toolbar_menu:
+                GetNewGuyInfo();
                 break;
             case R.id.id_newpop_wanshan:
                 Intent intent = new Intent();

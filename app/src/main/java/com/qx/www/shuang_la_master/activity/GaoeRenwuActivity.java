@@ -69,33 +69,22 @@ public class GaoeRenwuActivity extends BaseActivity implements AutoLoadRecylerVi
     @Override
     public void initData()
     {
-//        for (int i = 0; i < 10; i++)
+//        adapter.setOnItemClickListener(new Xianshi_RenwuAdapter.OnItemClickListener()
 //        {
-//            XianshiRenwu xianshiRenwu = new XianshiRenwu();
-//            xianshiRenwu.setImg(R.mipmap.ic_launcher);
-//            xianshiRenwu.setTitle("澎湃新闻");
-//            xianshiRenwu.setCount("剩余10223");
-//            xianshiRenwu.setMsg("是时候有一个随心理财顾问");
-//            xianshiRenwu.setPic(R.mipmap.ic_launcher);
-//            mList.add(xianshiRenwu);
-//        }
-
-        adapter.setOnItemClickListener(new Xianshi_RenwuAdapter.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(View view, int position)
-            {
-                Intent intent = new Intent();
-                intent.setClass(GaoeRenwuActivity.this,RenwuDetailActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position)
-            {
-
-            }
-        });
+//            @Override
+//            public void onItemClick(View view, int position)
+//            {
+//                Intent intent = new Intent();
+//                intent.setClass(GaoeRenwuActivity.this,RenwuDetailActivity.class);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onItemLongClick(View view, int position)
+//            {
+//
+//            }
+//        });
 
     }
 

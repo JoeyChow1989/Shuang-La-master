@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.domain.Detail;
+import com.qx.www.shuang_la_master.utils.AppUtils;
 
 import java.util.List;
 
@@ -99,8 +100,12 @@ public class DetailAdatper extends RecyclerView.Adapter
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(allitemViewHolder.idAllItemImg);
 
-        allitemViewHolder.idAllItemMsg.setText("完成任务赚了" + detail.getInfos().get(position).getMoney() + "元");
-        allitemViewHolder.idAllItemTime.setText(detail.getInfos().get(position).getTime());
+        allitemViewHolder.idAllItemMsg.setText(AppUtils.numZhuanHuan(detail.getInfos().get(position).getMoney()));
+        String date_month = detail.getInfos().get(position).getTime().substring(5, 7);
+        String date_day = detail.getInfos().get(position).getTime().substring(8, 10);
+        String date_time = detail.getInfos().get(position).getTime().substring(11, 16);
+        allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
+
         setUpItemEvent(allitemViewHolder);
     }
 

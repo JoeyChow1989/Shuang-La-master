@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,5 +143,11 @@ public class AppUtils
         byte[] bytes = bStream.toByteArray();
         string = Base64.encodeToString(bytes, Base64.DEFAULT);
         return string;
+    }
+
+    public static String numZhuanHuan(String s)
+    {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        return decimalFormat.format(Float.parseFloat(s) / 100);
     }
 }

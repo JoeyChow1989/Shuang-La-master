@@ -97,16 +97,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     String uid;
     SharedPreferences sp;
-    SharedPreferences info;
-    SharedPreferences.Editor editor;
-    String tokenBeforeMD5_info;
-    String token_info;
 
     //得到的钱
     float money;
-    DecimalFormat decimalFormat;
     String url;
-    String url_userinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -124,10 +118,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         idToolbarMenu.setImageResource(R.drawable.ic_more_vert);
         sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         uid = String.valueOf(sp.getInt("uid", 0));
-        info = getSharedPreferences("UserInfo", MODE_PRIVATE);
-        editor = info.edit();
 
-        decimalFormat = new DecimalFormat(".00");
         idToolbarMenu.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -145,12 +136,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         tokenBeforMD5_moneyinfo = GetThePhoneInfo() + Constants.KEY + "/" + Constants.MONEYINFO_Url;
         token_moneyinfo = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).substring(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).length() - 4) + AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).replace(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).substring(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).length() - 4), ""));
 
-        tokenBeforeMD5_info = GetThePhoneInfo() + Constants.KEY + "/" + Constants.USERINFO_Url;
-        token_info = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_info).replace(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4), ""));
-
-
-        System.out.println("---tokenBeforeMD5_info---:" + tokenBeforeMD5_info);
-        System.out.println("---token_info---:" + token_info);
         System.out.println("---tokenBeforeMD5_Fuli---:" + tokenBeforeMD5_Fuli);
         System.out.println("---token_Fuli---:" + token_fuli);
         System.out.println("---tokenBeforeMD5_remmond---:" + tokenBeforeMD5_remmond);
@@ -159,58 +144,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         System.out.println("---token_moneyinfo---:" + token_moneyinfo);
 
         dialog = new Dialog_NewGuyFuli(this, uid, token_remmond);
-    }
-
-    private void GetUserInfo(String url, String token_info)
-    {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("uid", uid);
-        params.put("token", token_info);
-
-        VolleyRequest.RequestPost(this, url, "info", params, new VolleyInterface(this,
-                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
-        {
-            @Override
-            public void onMySuccess(String result)
-            {
-                System.out.println("sssssssssssssssssss" + result);
-
-                Gson gson = new Gson();
-                UserInfo userinfo = gson.fromJson(result, UserInfo.class);
-
-                editor.putString("avatar", userinfo.getInfos().getAvatar());
-                editor.putString("mobile", userinfo.getInfos().getMobile());
-                editor.putString("status", userinfo.getInfos().getStatus());
-                editor.putString("work", userinfo.getInfos().getWork());
-                editor.putString("weixin", userinfo.getInfos().getWeixin());
-                editor.putString("nickname", userinfo.getInfos().getNickname());
-                editor.putString("sex", userinfo.getInfos().getSex());
-                editor.putString("birthday", userinfo.getInfos().getBirthday());
-                editor.putString("uid", userinfo.getInfos().getUid());
-                editor.putString("semi", userinfo.getInfos().getSemi());
-                editor.putString("tnum", userinfo.getInfos().getTnum());
-                editor.putString("tsy", userinfo.getInfos().getTsy());
-                editor.putString("num", userinfo.getInfos().getNum());
-                editor.putString("sy", userinfo.getInfos().getSy());
-                editor.putString("total", userinfo.getInfos().getTotal());
-
-                editor.commit();
-                System.out.println("mobile-----------------:" + userinfo.getInfos().getMobile());
-
-
-                Glide.with(MainActivity.this)
-                        .load(info.getString("avatar", ""))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(idToolbarImg);
-
-            }
-
-            @Override
-            public void onMyError(VolleyError error)
-            {
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -222,13 +155,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             String url = Constants.BaseUrl + "/user/xrfl";
             GetFuLi(url, token_fuli);
         }
-
-        url = Constants.BaseUrl + "/user/getInfos";
-        GetMoneyInfo(url, token_moneyinfo);
-        url_userinfo = Constants.BaseUrl + "/site/getInfo";
-        GetUserInfo(url_userinfo, token_info);
     }
 
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        url = Constants.BaseUrl + "/user/getInfos";
+        GetMoneyInfo(url, token_moneyinfo);
+    }
 
     public void GetMoneyInfo(String url, String token)
     {
@@ -256,7 +192,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                         idMainYueTextview.setText("0");
                     } else
                     {
-                        idMainYueTextview.setText(decimalFormat.format(Float.parseFloat(moneyinfo.getInfos().getMoney()) / 100));
+                        idMainYueTextview.setText(AppUtils.numZhuanHuan(moneyinfo.getInfos().getMoney()));
 
                     }
                     if (moneyinfo.getInfos().getTodaymoney().equals("0"))
@@ -264,14 +200,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                         idMainTodaymoney.setText("0");
                     } else
                     {
-                        idMainTodaymoney.setText(decimalFormat.format(Float.parseFloat(moneyinfo.getInfos().getTodaymoney()) / 100));
+                        idMainTodaymoney.setText(AppUtils.numZhuanHuan(moneyinfo.getInfos().getTodaymoney()));
                     }
                     if (moneyinfo.getInfos().getTotalmoney().equals("0"))
                     {
                         idMainTotalmoney.setText("0");
                     } else
                     {
-                        idMainTotalmoney.setText(decimalFormat.format(Float.parseFloat(moneyinfo.getInfos().getTotalmoney()) / 100));
+                        idMainTotalmoney.setText(AppUtils.numZhuanHuan(moneyinfo.getInfos().getTotalmoney()));
                     }
                 }
             }
@@ -302,7 +238,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                     case R.id.action_main:
                         // TODO: 2016/7/15 刷新
                         GetMoneyInfo(url, token_moneyinfo);
-                        GetUserInfo(url_userinfo, token_info);
                         break;
                     case R.id.action_more:
                         Intent intent = new Intent();
@@ -345,10 +280,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 if ("ok".equals(fuLiCallBack.getStatus()))
                 {
                     Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
-                    money = (Float.parseFloat(fuLiCallBack.getMoney()) / 100);
-                    System.out.println("money-----------------------------" + money + "sssssssssssssssss" + decimalFormat.format(money));
-
-                    idMainYueTextview.setText(decimalFormat.format(money));
+                    idMainYueTextview.setText(AppUtils.numZhuanHuan(fuLiCallBack.getMoney()));
                     dialog.showDialog();
                 }
             }

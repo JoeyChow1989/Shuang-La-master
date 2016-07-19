@@ -4,15 +4,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.ui.RoundImageView;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
+import com.qx.www.shuang_la_master.utils.VolleyInterface;
+import com.qx.www.shuang_la_master.utils.VolleyRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,13 +55,29 @@ public class MoreActivity extends BaseActivity
     LinearLayout idMoreCheck;
     @Bind(R.id.id_more_changeid)
     LinearLayout idMoreChangeid;
+    @Bind(R.id.id_more_text_id)
+    TextView idMoreTextId;
     @Bind(R.id.id_more_ziliao_nickname)
     TextView idMoreZiliaoNickname;
     @Bind(R.id.id_more_ziliao_headpic)
     RoundImageView idMoreZiliaoHeadpic;
     @Bind(R.id.id_more_ziliao_shouji)
     TextView idMoreZiliaoShouji;
-    private SharedPreferences info;
+
+    SharedPreferences sp;
+    String uid;
+    String url_userinfo;
+    String tokenBeforeMD5_info, token_info;
+    SharedPreferences info;
+    SharedPreferences.Editor editor;
+    UserInfo userinfo;
+
+    @Override
+    public void initData()
+    {
+        url_userinfo = Constants.BaseUrl + "/site/getInfo";
+        GetUserInfo(url_userinfo, token_info);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,6 +86,7 @@ public class MoreActivity extends BaseActivity
         setContentView(R.layout.activity_more);
         ButterKnife.bind(this);
         initView();
+        initData();
     }
 
     @Override
@@ -75,16 +104,16 @@ public class MoreActivity extends BaseActivity
             }
         });
 
+        sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
+        uid = String.valueOf(sp.getInt("uid", 0));
         info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        editor = info.edit();
 
-        idMoreZiliaoNickname.setText(info.getString("nickname", ""));
-        Glide.with(MoreActivity.this)
-                .load(info.getString("avatar", ""))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(idMoreZiliaoHeadpic);
+        tokenBeforeMD5_info = GetThePhoneInfo() + Constants.KEY + "/" + Constants.USERINFO_Url;
+        token_info = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_info).replace(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4), ""));
 
-        idMoreZiliaoShouji.setText(info.getString("mobile", ""));
-
+        System.out.println("---tokenBeforeMD5_info---:" + tokenBeforeMD5_info);
+        System.out.println("---token_info---:" + token_info);
     }
 
     @OnClick({R.id.id_more_ziliao, R.id.id_more_weixin, R.id.id_more_shouji, R.id.id_more_chenjidan, R.id.id_more_kefu, R.id.id_more_xinwen, R.id.id_more_shangwu, R.id.id_more_check, R.id.id_more_changeid})
@@ -122,5 +151,68 @@ public class MoreActivity extends BaseActivity
                 break;
         }
         startActivity(intent);
+    }
+
+    public String GetThePhoneInfo()
+    {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
+    }
+
+    private void GetUserInfo(String url, String token_info)
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("token", token_info);
+
+        VolleyRequest.RequestPost(this, url, "info", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                System.out.println("sssssssssssssssssss" + result);
+
+                Gson gson = new Gson();
+                userinfo = gson.fromJson(result, UserInfo.class);
+
+                editor.putString("avatar", userinfo.getInfos().getAvatar());
+                editor.putString("mobile", userinfo.getInfos().getMobile());
+                editor.putString("status", userinfo.getInfos().getStatus());
+                editor.putString("work", userinfo.getInfos().getWork());
+                editor.putString("weixin", userinfo.getInfos().getWeixin());
+                editor.putString("nickname", userinfo.getInfos().getNickname());
+                editor.putString("sex", userinfo.getInfos().getSex());
+                editor.putString("birthday", userinfo.getInfos().getBirthday());
+                editor.putString("uid", userinfo.getInfos().getUid());
+                editor.putString("semi", userinfo.getInfos().getSemi());
+                editor.putString("tnum", userinfo.getInfos().getTnum());
+                editor.putString("tsy", userinfo.getInfos().getTsy());
+                editor.putString("num", userinfo.getInfos().getNum());
+                editor.putString("sy", userinfo.getInfos().getSy());
+                editor.putString("total", userinfo.getInfos().getTotal());
+
+                editor.commit();
+                System.out.println("mobile-----------------:" + userinfo.getInfos().getMobile());
+
+
+                idMoreZiliaoNickname.setText(userinfo.getInfos().getNickname());
+                Glide.with(MoreActivity.this)
+                        .load(Constants.BACKGROUDUrl + userinfo.getInfos().getAvatar())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(idMoreZiliaoHeadpic);
+
+                idMoreZiliaoShouji.setText(userinfo.getInfos().getMobile());
+                idMoreTextId.setText(userinfo.getInfos().getUid());
+
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(MoreActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

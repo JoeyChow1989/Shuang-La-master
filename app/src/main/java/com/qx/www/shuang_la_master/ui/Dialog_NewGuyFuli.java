@@ -40,6 +40,9 @@ public class Dialog_NewGuyFuli extends Dialog
     private String uid;
     private String token_remmend;
 
+    Dialog_NewGuyFuli_Finish dialog;
+
+
     public Dialog_NewGuyFuli(Context context,String uid,String token_remmend)
     {
         super(context);
@@ -80,6 +83,8 @@ public class Dialog_NewGuyFuli extends Dialog
             public void onClick(View v)
             {
                 alertDialog.dismiss();
+                dialog = new Dialog_NewGuyFuli_Finish(context);
+                dialog.showDialog();
             }
         });
 
@@ -119,9 +124,9 @@ public class Dialog_NewGuyFuli extends Dialog
                 if ("ok".equals(fuLiCallBack.getStatus()))
                 {
                     Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
-
+                    alertDialog.dismiss();
+                    dialog = new Dialog_NewGuyFuli_Finish(context);
                 }
-                alertDialog.dismiss();
             }
 
             @Override

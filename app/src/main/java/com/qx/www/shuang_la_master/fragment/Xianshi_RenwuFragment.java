@@ -46,7 +46,6 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
     AutoLoadRecylerView idAutorecyxiashishurenwu;
     private LinearLayoutManager layoutManager;
     private Xianshi_RenwuAdapter adapter;
-    public CustemDialog mDialog;
 
     SharedPreferences sp;
     String uid;
@@ -145,4 +144,9 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
         return szImei;
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+    }
 }

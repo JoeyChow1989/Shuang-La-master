@@ -34,8 +34,8 @@
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="平安通天下"
-                android:textStyle="bold"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 />
 
             <LinearLayout
@@ -51,22 +51,22 @@
                     android:id="@+id/id_xianshirenwu_zhuanshu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.8"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3"
                     android:background="@color/zhuanshu"
                     android:gravity="center"
                     android:text="专属"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
                     android:textColor="@android:color/white"/>
 
                 <TextView
                     android:id="@+id/id_xianshirenwu_count"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="2.2"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="2.5"
                     android:background="@color/item_left"
                     android:gravity="center"
                     android:text="剩余1295"
@@ -88,18 +88,47 @@
                 android:layout_weight="1"
                 android:gravity="left|center|top"
                 android:paddingLeft="10dp"
-
                 android:text="是时候有一个随身的理财顾问了！"
                 android:textColor="@color/friend_shane_shoutu"/>
-
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/id_xianshirenwu_pics"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_weight="2"
-            />
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/id_xianshi_shouyi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/friend_shane_shoutu"
+                android:text="+1.10元"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                />
+
+            <TextView
+                android:id="@+id/id_xianshi_zhuanshushouyi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="18dp"
+                android:layout_weight="1"
+                android:background="@color/zhuanshu"
+                android:text="含专属0.1元"
+                android:textStyle="bold"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

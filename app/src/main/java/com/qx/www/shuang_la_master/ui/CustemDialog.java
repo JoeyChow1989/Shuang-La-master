@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -54,11 +55,9 @@ public class CustemDialog extends AlertDialog.Builder
     TextView mDialogTitle;
     TextView mDialogSize;
     TextView mDialogMsg1, mDialogMsg2, mDialogMsg3;
-    LinearLayout mDialogLinear;
-    TextView mDialogContent;
 
-    Button mBtStart, mBtShenhe, mBtCancel;
-    ProgressView mProgressView;
+    Button mBtShenhe, mBtCancel;
+    MyProgressBar myProgressBar;
 
     private boolean mSdCardIsExist = false;
     private String mPackageName;
@@ -73,13 +72,14 @@ public class CustemDialog extends AlertDialog.Builder
     private String semi;
     private String uid;
     private String tid;
+    private boolean isShenHe = false;
 
     private CountDownTimerService countDownTimerService;
     private long timer_unit = 1000;
     private long service_distination_total = timer_unit * 350;
     private PackageManager pm;
-    AlertDialog alertDialog;
-
+    AlertDialog.Builder alertDialog;
+    Dialog mDialog;
     boolean isFinish = false;
 
     public CustemDialog(Context context, String title, String pic, String size, String reward, String url, String semi, String uid, String tid, String packet)
@@ -105,23 +105,6 @@ public class CustemDialog extends AlertDialog.Builder
         initServiceCountDownTimerStatus();
     }
 
-    private Handler mHandler1 = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg)
-        {
-            super.handleMessage(msg);
-            switch (msg.what)
-            {
-                case 2:
-
-
-                    break;
-            }
-        }
-    };
-
-
     private class MyCountDownLisener implements CountDownTimerListener
     {
         @Override
@@ -135,6 +118,12 @@ public class CustemDialog extends AlertDialog.Builder
                     isFinish = true;
                 }
             }
+
+            if ((isFinish == true && countDownTimerService.getCountingTime() == 0) || countDownTimerService.getCountingTime() == 0)
+            {
+                isShenHe = true;
+                SendFinishTask();
+            }
             System.out.println(countDownTimerService.getCountingTime());
         }
     }
@@ -142,11 +131,12 @@ public class CustemDialog extends AlertDialog.Builder
 
     public void showDialog()
     {
-        alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog = new AlertDialog.Builder(context, R.style.selectorDialog);
         alertDialog.setCancelable(false);
-        alertDialog.show();
-        Window window = alertDialog.getWindow();
-        window.setContentView(R.layout.dialog_info);
+        mDialog = alertDialog.create();
+        mDialog.show();
+        Window window = mDialog.getWindow();
+        window.setContentView(R.layout.dialog_renwu);
 
         mDialogIcon = (ImageView) window.findViewById(R.id.id_dialog_icon);
         mDialogTitle = (TextView) window.findViewById(R.id.id_dialog_title);
@@ -154,23 +144,19 @@ public class CustemDialog extends AlertDialog.Builder
         mDialogMsg1 = (TextView) window.findViewById(R.id.id_dialog_msg_1);
         mDialogMsg2 = (TextView) window.findViewById(R.id.id_dialog_msg_2);
         mDialogMsg3 = (TextView) window.findViewById(R.id.id_dialog_msg_3);
-        mBtStart = (Button) window.findViewById(R.id.id_dialog_start);
         mBtShenhe = (Button) window.findViewById(R.id.id_dialog_shenhe);
         mBtCancel = (Button) window.findViewById(R.id.id_dialog_cancel);
-        mDialogLinear = (LinearLayout) window.findViewById(R.id.id_dialog_linear);
-        mDialogContent = (TextView) window.findViewById(R.id.id_dialog_centent);
-        mProgressView = (ProgressView) window.findViewById(R.id.id_dialog_prog);
+        myProgressBar = (MyProgressBar) window.findViewById(R.id.id_renwu_progressbar);
 
         if (!getSDPath().equals(""))
         {
             if (fileIsExists(mPackageName) == true)
             {
-                mBtStart.setText("安装");
-                mBtStart.setBackgroundColor(context.getResources().getColor(R.color.instll_color));
+                myProgressBar.setProgress(100);
             }
         }
 
-        mBtStart.setOnClickListener(new View.OnClickListener()
+        myProgressBar.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -184,8 +170,6 @@ public class CustemDialog extends AlertDialog.Builder
                         intent.setDataAndType(uri, "application/vnd.android.package-archive");
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         context.startActivity(intent);
-
-                        //开启计时器服务
                         countDownTimerService.startCountDown();
 
                     } else if (AppUtils.isAvilible(context, mPackageName))
@@ -198,8 +182,6 @@ public class CustemDialog extends AlertDialog.Builder
 
                     } else
                     {
-                        mBtStart.setVisibility(View.GONE);
-                        mDialogLinear.setVisibility(View.VISIBLE);
                         DownLoadApk();
                     }
                 }
@@ -213,7 +195,7 @@ public class CustemDialog extends AlertDialog.Builder
             public void onClick(View v)
             {
                 System.out.println("----countDownTimerService.getCountingTime()---" + countDownTimerService.getCountingTime());
-                if (countDownTimerService.getCountingTime() == service_distination_total)
+                if (countDownTimerService.getCountingTime() == service_distination_total && isShenHe == true)
                 {
                     SendFinishTask();
                 } else
@@ -270,7 +252,7 @@ public class CustemDialog extends AlertDialog.Builder
 
                     if (status.equals("ok"))
                     {
-                        alertDialog.dismiss();
+                        mDialog.dismiss();
                         countDownTimerService.stopCountDown();
                         Toast.makeText(context, "任务已经放弃!", Toast.LENGTH_SHORT).show();
                     }
@@ -312,7 +294,23 @@ public class CustemDialog extends AlertDialog.Builder
             public void onMySuccess(String result)
             {
                 System.out.println("finish--------------------:" + result);
-                alertDialog.dismiss();
+                try
+                {
+                    JSONObject js = new JSONObject(result);
+                    String s = js.getString("status");
+
+                    if (s.equals("ok"))
+                    {
+                        Toast.makeText(context,"任务已经完成!",Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                mDialog.dismiss();
             }
 
             @Override
@@ -339,20 +337,11 @@ public class CustemDialog extends AlertDialog.Builder
         @Override
         public void handleMessage(Message msg)
         {
-            float temp = msg.getData().getInt("size")
-                    / (float) totalSize;
-            mProgressView.setProgress(temp);
-            System.out.println("ssssssssssssssssssssssss" + temp);
-            mDialogContent.setText(String.valueOf(temp * 100).substring(0, 4) + "%");
-            // int progress = (int) (temp * 100);
-            if (temp == 1.0)
-            {
-                Toast.makeText(context, "下载完成！", Toast.LENGTH_LONG).show();
-                mDialogLinear.setVisibility(View.GONE);
-                mBtStart.setVisibility(View.VISIBLE);
-                mBtStart.setText("安装");
-                mBtStart.setBackgroundColor(context.getResources().getColor(R.color.instll_color));
-            }
+            float num = msg.getData().getFloat("size") / totalSize * 100;
+            String temp = String.valueOf(num).substring(0, String.valueOf(num).indexOf("."));
+
+            System.out.println("temp---------------------:" + temp);
+            myProgressBar.setProgress(Integer.parseInt(temp));
         }
     };
 

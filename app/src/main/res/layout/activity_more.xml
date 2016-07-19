@@ -37,6 +37,7 @@
                 />
 
             <TextView
+                android:id="@+id/id_more_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="2"
@@ -94,7 +95,6 @@
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:src="@drawable/aa"
                     />
 
             </LinearLayout>

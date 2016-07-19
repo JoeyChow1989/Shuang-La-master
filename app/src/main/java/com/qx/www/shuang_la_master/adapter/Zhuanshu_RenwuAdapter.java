@@ -1,7 +1,6 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.domain.ZhanshuRenwu;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
 
 import java.util.List;
 
@@ -67,27 +67,13 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
 
         // TODO: 2016/7/1 adapter
         Glide.with(context)
-                .load(mList.get(position).getIcon())
+                .load(Constants.BACKGROUDUrl + mList.get(position).getIcon())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(zhuanshuViewHolder.idzhuanshurenwuImg);
 
         zhuanshuViewHolder.idzhuanshurenwuTitle.setText(mList.get(position).getTitle());
+        zhuanshuViewHolder.idZhuanshuShouyi.setText("+" + AppUtils.numZhuanHuan(mList.get(position).getZs_reward()) + "元");
         setUpItemEvent(zhuanshuViewHolder);
-
-
-        this.setOnItemClickListener(new Zhuanshu_RenwuAdapter.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(View view, int position)
-            {
-                // TODO: 2016/7/15 专属点击
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position)
-            {
-            }
-        });
     }
 
     @Override
@@ -138,8 +124,8 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
         TextView idzhuanshurenwuTitle;
         @Bind(R.id.id_zhuanshurenwu_msg)
         TextView idzhuanshurenwuMsg;
-        @Bind(R.id.id_zhuanshurenwu_pics)
-        ImageView idzhuanshurenwuPics;
+        @Bind(R.id.id_zhuanshu_shouyi)
+        TextView idZhuanshuShouyi;
 
         public ZhuanshuViewHolder(View view)
         {

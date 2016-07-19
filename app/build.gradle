@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.qx.www.shuang_la_master"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -34,4 +34,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile files('libs/Volley.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/umeng_social_sdk.jar')
 }
