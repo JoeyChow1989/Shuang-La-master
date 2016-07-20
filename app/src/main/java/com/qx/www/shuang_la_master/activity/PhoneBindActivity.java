@@ -114,7 +114,16 @@ public class PhoneBindActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.id_phone_bt_getyanzheng:
-                GetAuthCodeNum();
+                if ("".equals(idPhoneEditPhone.getText().toString().trim()))
+                {
+                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
+                } else if (idPhoneEditPhone.getText().toString().trim().length() != 11)
+                {
+                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                } else
+                {
+                    GetAuthCodeNum();
+                }
                 break;
             case R.id.id_phone_sendup:
                 BindPhoneNum();
@@ -155,6 +164,9 @@ public class PhoneBindActivity extends BaseActivity
                 if (regCallBack.getStatus() == "ok")
                 {
                     Toast.makeText(PhoneBindActivity.this, "绑定成功!", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    Toast.makeText(PhoneBindActivity.this, "绑定失败！", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -170,11 +182,6 @@ public class PhoneBindActivity extends BaseActivity
 
     private void GetAuthCodeNum()
     {
-        if (!"".equals(idPhoneEditPhone.getText().toString().trim()))
-        {
-            phone = idPhoneEditPhone.getText().toString().trim();
-        }
-
         System.out.println("uid-----------:" + uid + "phone------------:" + phone + "token_AuthCode---------:" + token_AuthCode);
 
         String url = Constants.BaseUrl + "/user/getAuthCode";

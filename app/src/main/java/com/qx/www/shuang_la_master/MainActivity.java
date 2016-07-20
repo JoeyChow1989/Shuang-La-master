@@ -29,6 +29,7 @@ import com.qx.www.shuang_la_master.activity.TixianActivity;
 import com.qx.www.shuang_la_master.application.BaseApp;
 import com.qx.www.shuang_la_master.domain.FuLiCallBack;
 import com.qx.www.shuang_la_master.domain.MoneyInfo;
+import com.qx.www.shuang_la_master.domain.Tixian;
 import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.ui.Dialog_NewGuyFuli;
 import com.qx.www.shuang_la_master.utils.AppUtils;
@@ -87,8 +88,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     private int status;
 
     Dialog_NewGuyFuli dialog;
-    String token_fuli;
-    String tokenBeforeMD5_Fuli;
     String tokenBeforeMD5_remmond;
     String token_remmond;
 
@@ -96,7 +95,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     String token_moneyinfo;
 
     String uid;
-    SharedPreferences sp;
+    SharedPreferences sp, info;
 
     //得到的钱
     float money;
@@ -117,6 +116,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     {
         idToolbarMenu.setImageResource(R.drawable.ic_more_vert);
         sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
+        info = getSharedPreferences("UserInfo", MODE_PRIVATE);
         uid = String.valueOf(sp.getInt("uid", 0));
 
         idToolbarMenu.setOnClickListener(new View.OnClickListener()
@@ -124,36 +124,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onClick(View v)
             {
-                showPopupMenu(idToolbarMenu);
+                //showPopupMenu(idToolbarMenu);
+                Intent intent = new Intent(MainActivity.this,MoreActivity.class);
+                startActivity(intent);
             }
         });
-        tokenBeforeMD5_Fuli = GetThePhoneInfo() + Constants.KEY + "/" + Constants.FULI_Url;
-        token_fuli = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_Fuli).replace(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4), ""));
-
         tokenBeforeMD5_remmond = GetThePhoneInfo() + Constants.KEY + "/" + Constants.RECOMMEND_Url;
         token_remmond = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_remmond).substring(AppUtils.getMd5Value(tokenBeforeMD5_remmond).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_remmond).replace(AppUtils.getMd5Value(tokenBeforeMD5_remmond).substring(AppUtils.getMd5Value(tokenBeforeMD5_remmond).length() - 4), ""));
 
         tokenBeforMD5_moneyinfo = GetThePhoneInfo() + Constants.KEY + "/" + Constants.MONEYINFO_Url;
         token_moneyinfo = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).substring(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).length() - 4) + AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).replace(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).substring(AppUtils.getMd5Value(tokenBeforMD5_moneyinfo).length() - 4), ""));
 
-        System.out.println("---tokenBeforeMD5_Fuli---:" + tokenBeforeMD5_Fuli);
-        System.out.println("---token_Fuli---:" + token_fuli);
         System.out.println("---tokenBeforeMD5_remmond---:" + tokenBeforeMD5_remmond);
         System.out.println("---token_remmond---:" + token_remmond);
         System.out.println("---tokenBeforMD5_moneyinfo---:" + tokenBeforMD5_moneyinfo);
         System.out.println("---token_moneyinfo---:" + token_moneyinfo);
-
-        dialog = new Dialog_NewGuyFuli(this, uid, token_remmond);
     }
 
     @Override
     public void initData()
     {
         status = getIntent().getIntExtra("status", 2);
-        if (status == AppUtils.LOGIN_SUSSES)
+        if (status == AppUtils.REG_SUSSES)
         {
-            String url = Constants.BaseUrl + "/user/xrfl";
-            GetFuLi(url, token_fuli);
+            dialog = new Dialog_NewGuyFuli(this, GetThePhoneInfo(), uid, token_remmond);
+            dialog.showDialog();
         }
     }
 
@@ -164,6 +159,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         super.onStart();
         url = Constants.BaseUrl + "/user/getInfos";
         GetMoneyInfo(url, token_moneyinfo);
+
+        Glide.with(this)
+                .load(Constants.BACKGROUDUrl+info.getString("avatar",""))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.mipmap.ic_launcher)
+                .into(idToolbarImg);
     }
 
     public void GetMoneyInfo(String url, String token)
@@ -220,78 +221,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
-    private void showPopupMenu(View view)
-    {
-        // View当前PopupMenu显示的相对View的位置
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        // menu布局
-        popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
-        // menu的item点击事件
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
-        {
-            @Override
-            public boolean onMenuItemClick(MenuItem item)
-            {
-
-                switch (item.getItemId())
-                {
-                    case R.id.action_main:
-                        // TODO: 2016/7/15 刷新
-                        GetMoneyInfo(url, token_moneyinfo);
-                        break;
-                    case R.id.action_more:
-                        Intent intent = new Intent();
-                        intent.setClass(MainActivity.this, MoreActivity.class);
-                        startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        });
-        // PopupMenu关闭事件
-        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener()
-        {
-            @Override
-            public void onDismiss(PopupMenu menu)
-            {
-                // Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
-            }
-        });
-        popupMenu.show();
-    }
-
-    private void GetFuLi(String url, String token)
-    {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("uid", uid);
-        params.put("token", token);
-
-        VolleyRequest.RequestPost(this, url, "fuli", params, new VolleyInterface(this,
-                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
-        {
-            @Override
-            public void onMySuccess(String result)
-            {
-                Gson gson = new Gson();
-                FuLiCallBack fuLiCallBack = gson.fromJson(result, FuLiCallBack.class);
-
-                System.out.println("stuts----:" + fuLiCallBack.getStatus() + "msg-----:" + fuLiCallBack.getMsg());
-
-                if ("ok".equals(fuLiCallBack.getStatus()))
-                {
-                    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
-                    idMainYueTextview.setText(AppUtils.numZhuanHuan(fuLiCallBack.getMoney()));
-                    dialog.showDialog();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error)
-            {
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void showPopupMenu(View view)
+//    {
+//        // View当前PopupMenu显示的相对View的位置
+//        PopupMenu popupMenu = new PopupMenu(this, view);
+//        // menu布局
+//        popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+//        // menu的item点击事件
+//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+//        {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item)
+//            {
+//
+//                switch (item.getItemId())
+//                {
+//                    case R.id.action_main:
+//                        // TODO: 2016/7/15 刷新
+//                        GetMoneyInfo(url, token_moneyinfo);
+//                        break;
+//                    case R.id.action_more:
+//                        Intent intent = new Intent();
+//                        intent.setClass(MainActivity.this, MoreActivity.class);
+//                        startActivity(intent);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//        // PopupMenu关闭事件
+//        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener()
+//        {
+//            @Override
+//            public void onDismiss(PopupMenu menu)
+//            {
+//                // Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        popupMenu.show();
+//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)

@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/id_ziliao_nickname"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -49,12 +49,13 @@
             android:layout_height="1dp"
             android:layout_below="@id/id_ziliao_nickname"
             android:background="@color/line_color"
+            android:layout_marginLeft="10dp"
             />
 
         <LinearLayout
             android:id="@+id/id_ziliao_headimg"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/id_ziliao_line1"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -74,9 +75,9 @@
                 android:layout_width="87dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginRight="28dp"/>
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="3dp"/>
 
         </LinearLayout>
 
@@ -86,12 +87,13 @@
             android:layout_height="1dp"
             android:layout_below="@id/id_ziliao_headimg"
             android:background="@color/line_color"
+            android:layout_marginLeft="10dp"
             />
 
         <LinearLayout
             android:id="@+id/id_ziliao_sex"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/id_ziliao_line2"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -124,12 +126,13 @@
             android:layout_height="1dp"
             android:layout_below="@id/id_ziliao_sex"
             android:background="@color/line_color"
+            android:layout_marginLeft="10dp"
             />
 
         <LinearLayout
             android:id="@+id/id_ziliao_brith"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/id_ziliao_line3"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -161,12 +164,13 @@
             android:layout_height="1dp"
             android:layout_below="@id/id_ziliao_brith"
             android:background="@color/line_color"
+            android:layout_marginLeft="10dp"
             />
 
         <LinearLayout
             android:id="@+id/id_ziliao_job"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/id_ziliao_line4"
             android:background="@android:color/white"
             android:orientation="horizontal"
@@ -198,9 +202,13 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/id_ziliao_job"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@android:color/white"
-            android:text="提交"
+            android:background="@drawable/normal_bt_bg"
+            android:text="提  交"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
             />
 
     </RelativeLayout>

@@ -1,13 +1,17 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.Manifest;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,11 +22,10 @@ import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMVideo;
-import com.umeng.socialize.media.UMusic;
 import com.umeng.socialize.utils.Log;
 
 import butterknife.Bind;
@@ -51,12 +54,16 @@ public class ShouTuActivity extends BaseActivity
     TextView idShoutuJiangliTudi;
     @Bind(R.id.id_shoutu_share)
     Button idShoutuShare;
+    @Bind(R.id.id_shoutu_total)
+    TextView idShoutuTotal;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoutu);
         ButterKnife.bind(this);
+        String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS};
+        ActivityCompat.requestPermissions(ShouTuActivity.this, mPermissionList, 100);
         initView();
         initData();
     }
@@ -75,7 +82,6 @@ public class ShouTuActivity extends BaseActivity
                 onBackPressed();
             }
         });
-
         sp = getSharedPreferences("UserInfo", MODE_PRIVATE);
 
     }
@@ -109,6 +115,14 @@ public class ShouTuActivity extends BaseActivity
         {
             idShoutuJiangliTudi.setText(AppUtils.numZhuanHuan(sy));
         }
+
+        if (total.equals("0"))
+        {
+            idShoutuTotal.setText("0");
+        } else
+        {
+            idShoutuTotal.setText(AppUtils.numZhuanHuan(total));
+        }
     }
 
     @Override
@@ -138,32 +152,32 @@ public class ShouTuActivity extends BaseActivity
                 Toast.makeText(this, "复制成功，可以发给朋友们了。", Toast.LENGTH_LONG).show();
                 break;
             case R.id.id_shoutu_share:
-                //ShareUmeng();
+                ShareUmeng();
                 break;
         }
     }
 
     private void ShareUmeng()
     {
-        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.info_icon_1);
-        UMImage image = new UMImage(ShouTuActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-        //UMImage image = new UMImage(ShareActivity.this,bitmap);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        UMImage image = new UMImage(ShouTuActivity.this, bitmap);
+        //UMImage image = new UMImage(ShouTuActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
         //UMImage image = new UMImage(ShareActivity.this,new File("/SDCARD/image_jpg.jpg"));
 
-        UMusic music = new UMusic("http://music.huoxing.com/upload/20130330/1364651263157_1085.mp3");
+        //UMusic music = new UMusic("http://music.huoxing.com/upload/20130330/1364651263157_1085.mp3");
         //UMusic music = new UMusic("http://y.qq.com/#type=song&mid=002I7CmS01UAIH&tpl=yqq_song_detail");
-        music.setTitle("This is music title");
-        music.setThumb("http://www.umeng.com/images/pic/social/chart_1.png");
-        music.setDescription("my description");
+//        music.setTitle("This is music title");
+//        music.setThumb("http://www.umeng.com/images/pic/social/chart_1.png");
+//        music.setDescription("my description");
         // share video
-        UMVideo video = new UMVideo("http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html");
-        video.setThumb("http://www.adiumxtras.com/images/thumbs/dango_menu_bar_icon_set_11_19047_6240_thumb.png");
+//        UMVideo video = new UMVideo("http://video.sina.com.cn/p/sports/cba/v/2013-10-22/144463050817.html");
+//        video.setThumb("http://www.adiumxtras.com/images/thumbs/dango_menu_bar_icon_set_11_19047_6240_thumb.png");
         // share URL
-        String url = "http://www.umeng.com";
+        String url = AppUtils.SHUANGLA_URL;
 
         new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE)
-                .withTitle("友盟分享")
-                .withText("来自友盟分享面板")
+                .withTitle("爽啦分享")
+                .withText("分享你的邀请码，邀请更多人吧")
                 .withMedia(image)
                 .withTargetUrl(url)
                 .setCallback(umShareListener)
@@ -202,4 +216,11 @@ public class ShouTuActivity extends BaseActivity
             Toast.makeText(ShouTuActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 }

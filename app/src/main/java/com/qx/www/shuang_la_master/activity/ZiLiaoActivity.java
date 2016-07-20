@@ -177,6 +177,7 @@ public class ZiLiaoActivity extends BaseActivity
         Glide.with(ZiLiaoActivity.this)
                 .load(Constants.BACKGROUDUrl + info.getString("avatar", ""))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.mipmap.ic_launcher)
                 .into(idZiliaoImgs);
 
         if (info.getString("sex", "").equals("1"))

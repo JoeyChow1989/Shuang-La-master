@@ -48,8 +48,6 @@ public class TixianActivity extends BaseActivity
     @Bind(R.id.id_tixian_zhifubao)
     LinearLayout idTixianZhifubao;
 
-    SharedPreferences sp, tixian;
-    SharedPreferences.Editor editor;
     String uid;
     String money;
 
@@ -77,58 +75,11 @@ public class TixianActivity extends BaseActivity
                 onBackPressed();
             }
         });
-
-        sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
-        uid = String.valueOf(sp.getInt("uid", 0));
     }
 
     @Override
     public void initData()
     {
-        GetTixianData();
-    }
-
-    private void GetTixianData()
-    {
-        String url = Constants.BaseUrl + "/site/txzx";
-        String tokenBefroeMD5_TiXian = GetThePhoneInfo() + Constants.KEY + "/" + Constants.TIXIANZHONGXI_Url;
-        String token_TiXian = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBefroeMD5_TiXian).substring(AppUtils.getMd5Value(tokenBefroeMD5_TiXian).length() - 4) +
-                AppUtils.getMd5Value(tokenBefroeMD5_TiXian).replace(AppUtils.getMd5Value(tokenBefroeMD5_TiXian).substring(AppUtils.getMd5Value(tokenBefroeMD5_TiXian).length() - 4), ""));
-
-        System.out.println("token_TiXian------------------------" + token_TiXian);
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("uid", uid);
-        params.put("token", token_TiXian);
-
-        VolleyRequest.RequestPost(this, url, "TiXian", params, new VolleyInterface(this,
-                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
-        {
-            @Override
-            public void onMySuccess(String result)
-            {
-                System.out.println("TiXian--------------------:" + result);
-                Gson gson = new Gson();
-
-                Tixian tixian = gson.fromJson(result, Tixian.class);
-
-                System.out.println("-----------money------------:" + tixian.getInfos().getMoney());
-                money = AppUtils.numZhuanHuan(tixian.getInfos().getMoney());
-            }
-
-            @Override
-            public void onMyError(VolleyError error)
-            {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public String GetThePhoneInfo()
-    {
-        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        String szImei = TelephonyMgr.getDeviceId();
-        return szImei;
     }
 
 //    private void showMonneyPopupWindow()

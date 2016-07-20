@@ -4,9 +4,10 @@
     <color name="colorPrimaryDark">#3354a3</color>
     <color name="colorAccent">#47a8ef</color>
     <color name="buleDark">#034aae</color>
+    <color name="buleDark_ed">#012b68</color>
 
-    <color name="top_bg">#fef8f8f8</color>
-    <color name="line_color">#fecccccc</color>
+    <color name="top_bg">#fef5f5f5</color>
+    <color name="line_color">#fedcdcdc</color>
     <color name="tab_text_color">#fefc6c44</color>
     <color name="color_text_yellow">#FEEAE302</color>
     <color name="color_bt_shoutu_share">#FFF2D823</color>
@@ -17,10 +18,11 @@
     <color name="friend_shane_shoutu">#FFF45D34</color>
     <color name="instll_color">#98d379</color>
     <color name="weinxin_tijiao">#FF8BB8C4</color>
-    <color name="item_left">#FFC2C2C2</color>
+    <color name="item_left">#a9a9a9</color>
     <color name="cancel_renwu_bg">#FFE7E7E7</color>
     <color name="shenhe_renwu_bg">#FFE4D059</color>
 
     <color name="zhuanshu">#FFF3C62B</color>
     <color name="xinrenfuli">#FFED4040</color>
+    <color name="cyan_500">#00bcd4</color>
 </resources>

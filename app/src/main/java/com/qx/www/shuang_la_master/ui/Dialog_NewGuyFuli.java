@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.domain.FuLiCallBack;
+import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
@@ -35,6 +37,7 @@ public class Dialog_NewGuyFuli extends Dialog
     LinearLayout idXinrenfuliLiner;
     Button idXinrenfuliNoinvent;
     TextView idXinrenfuliUserdeil;
+    ImageView iD_Xinrenfuli_Cancel;
     private Context context;
     Dialog alertDialog = null;
     private String uid;
@@ -42,13 +45,21 @@ public class Dialog_NewGuyFuli extends Dialog
 
     Dialog_NewGuyFuli_Finish dialog;
 
+    String token_fuli;
+    String tokenBeforeMD5_Fuli;
 
-    public Dialog_NewGuyFuli(Context context,String uid,String token_remmend)
+    public Dialog_NewGuyFuli(Context context, String semi,String uid, String token_remmend)
     {
         super(context);
         this.context = context;
         this.uid = uid;
         this.token_remmend = token_remmend;
+
+        tokenBeforeMD5_Fuli = semi + Constants.KEY + "/" + Constants.FULI_Url;
+        token_fuli = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_Fuli).replace(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).substring(AppUtils.getMd5Value(tokenBeforeMD5_Fuli).length() - 4), ""));
+
+        System.out.println("---tokenBeforeMD5_Fuli---:" + tokenBeforeMD5_Fuli);
+        System.out.println("---token_Fuli---:" + token_fuli);
     }
 
     public void showDialog()
@@ -66,6 +77,7 @@ public class Dialog_NewGuyFuli extends Dialog
         idXinrenfuliLiner = (LinearLayout) view.findViewById(R.id.id_xinrenfuli_liner);
         idXinrenfuliNoinvent = (Button) view.findViewById(R.id.id_xinrenfuli_noinvent);
         idXinrenfuliUserdeil = (TextView) view.findViewById(R.id.id_xinrenfuli_userdeil);
+        iD_Xinrenfuli_Cancel = (ImageView) view.findViewById(R.id.id_xinrenfuli_cancel);
 
         idXinrenfuliHaveinvent.setOnClickListener(new View.OnClickListener()
         {
@@ -83,8 +95,8 @@ public class Dialog_NewGuyFuli extends Dialog
             public void onClick(View v)
             {
                 alertDialog.dismiss();
-                dialog = new Dialog_NewGuyFuli_Finish(context);
-                dialog.showDialog();
+                String url = Constants.BaseUrl + "/user/xrfl";
+                GetFuLi(url, token_fuli);
             }
         });
 
@@ -100,6 +112,15 @@ public class Dialog_NewGuyFuli extends Dialog
                 }
             }
         });
+
+        iD_Xinrenfuli_Cancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                alertDialog.dismiss();
+            }
+        });
     }
 
     private void SendInventID(String recommend_id)
@@ -107,7 +128,7 @@ public class Dialog_NewGuyFuli extends Dialog
         String url = Constants.BaseUrl + "/user/recommend";
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid", uid);
-        params.put("recommend_id",recommend_id);
+        params.put("recommend_id", recommend_id);
         params.put("token", token_remmend);
 
         VolleyRequest.RequestPost(context, url, "recommend", params, new VolleyInterface(context,
@@ -126,6 +147,42 @@ public class Dialog_NewGuyFuli extends Dialog
                     Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                     dialog = new Dialog_NewGuyFuli_Finish(context);
+                    dialog.showDialog();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void GetFuLi(String url, String token)
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("token", token);
+
+        VolleyRequest.RequestPost(context, url, "fuli", params, new VolleyInterface(context,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                Gson gson = new Gson();
+                FuLiCallBack fuLiCallBack = gson.fromJson(result, FuLiCallBack.class);
+
+                System.out.println("stuts----:" + fuLiCallBack.getStatus() + "msg-----:" + fuLiCallBack.getMsg());
+
+                if ("ok".equals(fuLiCallBack.getStatus()))
+                {
+                    Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    //idMainYueTextview.setText(AppUtils.numZhuanHuan(fuLiCallBack.getMoney()));
+                    alertDialog.dismiss();
+                    dialog = new Dialog_NewGuyFuli_Finish(context);
+                    dialog.showDialog();
                 }
             }
 

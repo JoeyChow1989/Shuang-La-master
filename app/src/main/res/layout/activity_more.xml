@@ -13,22 +13,22 @@
 
     <com.rey.material.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="490dp"
         android:layout_below="@id/id_more_toolbar"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         >
 
         <LinearLayout
             android:id="@+id/id_more_id"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="45dp"
             android:background="@android:color/white"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
@@ -39,10 +39,11 @@
             <TextView
                 android:id="@+id/id_more_text_id"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_weight="2"
                 android:gravity="left|center"
                 android:text="35661122"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"/>
 
         </LinearLayout>
@@ -52,13 +53,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_id"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_ziliao"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line1"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -99,10 +101,12 @@
 
             </LinearLayout>
 
-            <TextView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3.3"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
 
         </LinearLayout>
@@ -112,13 +116,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_ziliao"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_weixin"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line2"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -143,6 +148,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3.3"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
 
         </LinearLayout>
@@ -152,13 +159,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_weixin"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_shouji"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line3"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -180,6 +188,7 @@
                 android:layout_weight="1"
                 android:gravity="right|center"
                 android:paddingRight="5dp"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
                 />
 
@@ -187,6 +196,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3.3"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
 
         </LinearLayout>
@@ -196,13 +207,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_shouji"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_chenjidan"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line4"
             android:layout_marginTop="10dp"
             android:background="@android:color/white"
@@ -221,7 +233,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3.3"
+                android:layout_weight="9"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
         </LinearLayout>
 
@@ -230,13 +244,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_chenjidan"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_kefu"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line5"
             android:layout_marginTop="10dp"
             android:background="@android:color/white"
@@ -255,7 +270,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3.3"
+                android:layout_weight="9"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
 
         </LinearLayout>
@@ -265,48 +282,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_kefu"
-            android:background="@color/line_color"
-            />
-
-        <LinearLayout
-            android:id="@+id/id_more_xinwen"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/more_line6"
-            android:background="@android:color/white"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:paddingLeft="10dp"
-                android:text="新闻公告"
-                android:textSize="20sp"
-                />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3.3"
-                />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/more_line7"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/id_more_xinwen"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_shangwu"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/more_line7"
+            android:layout_height="45dp"
+            android:layout_below="@id/more_line6"
             android:background="@android:color/white"
             android:orientation="horizontal">
 
@@ -323,7 +307,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3.3"
+                android:layout_weight="9"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
 
         </LinearLayout>
@@ -333,13 +319,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_shangwu"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_check"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line8"
             android:layout_marginTop="10dp"
             android:background="@android:color/white"
@@ -348,7 +335,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
                 android:text="检查升级"
@@ -356,15 +343,21 @@
                 />
 
             <TextView
+                android:id="@+id/id_more_vname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
+                android:layout_weight="2"
+                android:gravity="right|center"
+                android:paddingRight="10dp"
+                android:text="版本v1.0.1"
+                android:textSize="16sp"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.7"
+                android:layout_weight="3.3"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
         </LinearLayout>
 
@@ -373,13 +366,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/id_more_check"
+            android:layout_marginLeft="10dp"
             android:background="@color/line_color"
             />
 
         <LinearLayout
             android:id="@+id/id_more_changeid"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_below="@id/more_line9"
             android:background="@android:color/white"
             android:orientation="horizontal">
@@ -397,7 +391,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="9"
+                android:padding="14dp"
+                android:src="@drawable/toright"
                 />
         </LinearLayout>
     </com.rey.material.widget.RelativeLayout>

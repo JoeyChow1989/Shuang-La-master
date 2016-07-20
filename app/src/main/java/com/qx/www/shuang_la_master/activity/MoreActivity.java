@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.application.BaseApp;
 import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.ui.RoundImageView;
 import com.qx.www.shuang_la_master.utils.AppUtils;
@@ -47,8 +48,6 @@ public class MoreActivity extends BaseActivity
     LinearLayout idMoreChenjidan;
     @Bind(R.id.id_more_kefu)
     LinearLayout idMoreKefu;
-    @Bind(R.id.id_more_xinwen)
-    LinearLayout idMoreXinwen;
     @Bind(R.id.id_more_shangwu)
     LinearLayout idMoreShangwu;
     @Bind(R.id.id_more_check)
@@ -63,6 +62,8 @@ public class MoreActivity extends BaseActivity
     RoundImageView idMoreZiliaoHeadpic;
     @Bind(R.id.id_more_ziliao_shouji)
     TextView idMoreZiliaoShouji;
+    @Bind(R.id.id_more_vname)
+    TextView idMoreVname;
 
     SharedPreferences sp;
     String uid;
@@ -71,6 +72,7 @@ public class MoreActivity extends BaseActivity
     SharedPreferences info;
     SharedPreferences.Editor editor;
     UserInfo userinfo;
+
 
     @Override
     public void initData()
@@ -114,9 +116,11 @@ public class MoreActivity extends BaseActivity
 
         System.out.println("---tokenBeforeMD5_info---:" + tokenBeforeMD5_info);
         System.out.println("---token_info---:" + token_info);
+
+        idMoreVname.setText("版本:v" + BaseApp.instance.vsername);
     }
 
-    @OnClick({R.id.id_more_ziliao, R.id.id_more_weixin, R.id.id_more_shouji, R.id.id_more_chenjidan, R.id.id_more_kefu, R.id.id_more_xinwen, R.id.id_more_shangwu, R.id.id_more_check, R.id.id_more_changeid})
+    @OnClick({R.id.id_more_ziliao, R.id.id_more_weixin, R.id.id_more_shouji, R.id.id_more_chenjidan, R.id.id_more_kefu, R.id.id_more_shangwu, R.id.id_more_check, R.id.id_more_changeid})
     public void onClick(View view)
     {
         Intent intent = new Intent();
@@ -124,33 +128,56 @@ public class MoreActivity extends BaseActivity
         {
             case R.id.id_more_ziliao:
                 intent.setClass(this, ZiLiaoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_weixin:
                 intent.setClass(this, WeiXinActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_shouji:
                 intent.setClass(this, PhoneBindActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_chenjidan:
                 intent.setClass(this, ZiLiaoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_kefu:
                 intent.setClass(this, KeFuCenterActivity.class);
-                break;
-            case R.id.id_more_xinwen:
-                intent.setClass(this, NewsNoticeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_shangwu:
                 intent.setClass(this, ShangwuActivity.class);
+                startActivity(intent);
                 break;
             case R.id.id_more_check:
-                intent.setClass(this, ZiLiaoActivity.class);
+                CheckUpdata();
                 break;
             case R.id.id_more_changeid:
                 intent.setClass(this, ZiLiaoActivity.class);
+                startActivity(intent);
                 break;
         }
-        startActivity(intent);
+    }
+
+    private void CheckUpdata()
+    {
+        String url = Constants.UP_URL;
+        VolleyRequest.RequestGet(this, url, "checkupdata", new VolleyInterface(this, VolleyInterface.mSuccessListener,
+                VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                Gson gson = new Gson();
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(MoreActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public String GetThePhoneInfo()
@@ -201,6 +228,7 @@ public class MoreActivity extends BaseActivity
                 Glide.with(MoreActivity.this)
                         .load(Constants.BACKGROUDUrl + userinfo.getInfos().getAvatar())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .error(R.mipmap.ic_launcher)
                         .into(idMoreZiliaoHeadpic);
 
                 idMoreZiliaoShouji.setText(userinfo.getInfos().getMobile());
@@ -215,4 +243,5 @@ public class MoreActivity extends BaseActivity
             }
         });
     }
+
 }

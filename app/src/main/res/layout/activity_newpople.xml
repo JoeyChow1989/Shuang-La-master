@@ -27,7 +27,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="1.7"
+                android:layout_weight="1.8"
+                android:src="@drawable/newguy_ziliao"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 />
 
             <LinearLayout
@@ -108,7 +111,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="1.7"
+                android:layout_weight="1.8"
+                android:src="@drawable/newguy_bind"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 />
 
             <LinearLayout
