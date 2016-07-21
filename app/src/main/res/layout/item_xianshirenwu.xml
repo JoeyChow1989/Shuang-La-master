@@ -13,10 +13,10 @@
             android:id="@+id/id_xianshirenwu_img"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
             android:background="@drawable/renwu_ing_bg"
             android:src="@mipmap/ic_launcher"
             />
@@ -95,8 +95,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_weight="2"
             android:layout_marginRight="2dp"
+            android:layout_weight="2"
             android:orientation="vertical"
             >
 
@@ -108,11 +108,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@color/friend_shane_shoutu"
-                android:text="+1.10元"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:gravity="center"
+                android:text="+1.10元"
                 android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -122,11 +122,11 @@
                 android:layout_marginBottom="18dp"
                 android:layout_weight="1"
                 android:background="@color/zhuanshu"
-                android:text="含专属0.1元"
-                android:textStyle="bold"
-                android:textSize="9sp"
                 android:gravity="center"
+                android:text="含专属0.1元"
                 android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
                 />
         </LinearLayout>
     </LinearLayout>
