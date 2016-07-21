@@ -14,7 +14,7 @@
             android:id="@+id/id_all_item_img"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_weight="2.3"
+            android:layout_weight="1.8"
             />
 
         <LinearLayout
@@ -38,6 +38,7 @@
                     android:layout_weight="1"
                     android:gravity="left|center|bottom"
                     android:text="你的益达"
+                    android:paddingLeft="10dp"
                     android:layout_marginBottom="5dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
@@ -60,17 +61,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="13sp"
-                    android:text="完成任务限时推荐《你的英雄》,赚了"
-                    android:layout_weight="1"/>
+                    android:paddingLeft="10dp"
+                    android:text="完成任务限时推荐,赚了"
+                    android:layout_weight="1.9"/>
 
                 <TextView
                     android:id="@+id/id_all_item_msg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.8"
+                    android:layout_weight="5.2"
                     android:textSize="13sp"
                     android:textColor="@color/xinrenfuli"
-                    android:text="2.2"
+                    android:text="2.5"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -86,7 +88,7 @@
             android:id="@+id/id_all_item_time"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_weight="2.3"
+            android:layout_weight="1.8"
             android:text="03月17 15：52"
             android:gravity="top|center"
             android:textSize="12sp"

@@ -27,6 +27,9 @@ import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,14 +109,28 @@ public class XueTuFragment extends BaseFragment implements SwipeRefreshLayout.On
                 //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                 System.out.println("result--------XueTu----------------:" + result);
 
-//                Gson gson = new Gson();
-//                Detail detail = gson.fromJson(result, Detail.class);
-//                if (detail.getStatus().equals("ok"))
-//                {
-//                    System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
-//                    adapter = new DetailAdatper(mList, context);
-//                    idXuetuAutorecy.setAdapter(adapter);
-//                }
+                try
+                {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String infos = jsonObject.getString("infos");
+
+                    if (!infos.equals("1")){
+                        Gson gson = new Gson();
+                        Detail detail = gson.fromJson(result, Detail.class);
+                        if (detail.getStatus().equals("ok") )
+                        {
+
+                            System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
+                            adapter = new DetailAdatper(detail, context);
+                            idXuetuAutorecy.setAdapter(adapter);
+                        }
+                    }
+
+
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
             @Override

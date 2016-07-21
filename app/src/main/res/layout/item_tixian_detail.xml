@@ -14,7 +14,7 @@
             android:id="@+id/id_itemtixian_img"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_weight="1.6"
+            android:layout_weight="1.8"
             />
 
         <LinearLayout
@@ -35,10 +35,11 @@
                     android:id="@+id/id_itemtixian_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:gravity="left|center|bottom"
                     android:text="你的益达"
-                    android:layout_marginBottom="5dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     />
@@ -50,20 +51,50 @@
                     />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/id_itemtixian_msg"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="12sp"
-                android:text="完成任务限时推荐《你的英雄》,赚了1.5元"
-                />
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="left|center|top"
+                    android:text="兑换："
+                    android:paddingLeft="10dp"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_itemtixian_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.7"
+                    android:gravity="left|center|top"
+                    android:text="支付宝提现"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/id_itemtixian_moeny"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="left|center|top"
+                    android:text="10.00"
+                    android:textColor="@color/xinrenfuli"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.6"
+            android:layout_weight="1.8"
             android:orientation="vertical"
             >
 
@@ -72,18 +103,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_weight="1"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="03月17 15：52"
                 android:textSize="12sp"
                 />
 
-            <ImageView
+            <TextView
                 android:id="@+id/id_itemtixian_stay"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_gf_done"
+                android:layout_marginBottom="27dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:text="已到账"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/normal_bt_bg"
                 />
         </LinearLayout>
     </LinearLayout>

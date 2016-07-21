@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.adapter.DetailAdatper;
+import com.qx.www.shuang_la_master.adapter.Detail_TixianAdatper;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
 import com.qx.www.shuang_la_master.domain.Detail;
@@ -27,6 +28,9 @@ import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,13 +108,24 @@ public class RenwuFragment extends BaseFragment implements SwipeRefreshLayout.On
                 //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                 System.out.println("result------------------------:" + result);
 
-                Gson gson = new Gson();
-                Detail detail = gson.fromJson(result, Detail.class);
-                if (detail.getStatus().equals("ok"))
+                try
                 {
-                    System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
-                    adapter = new DetailAdatper(detail, context);
-                    idRenwuAutorecy.setAdapter(adapter);
+                    JSONObject jsonObject = new JSONObject(result);
+                    String infos = jsonObject.getString("infos");
+
+                    if (!infos.equals("1")){
+                        Gson gson = new Gson();
+                        Detail detail = gson.fromJson(result, Detail.class);
+                        if (detail.getStatus().equals("ok"))
+                        {
+                            System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
+                            adapter = new DetailAdatper(detail, context);
+                            idRenwuAutorecy.setAdapter(adapter);
+                        }
+                    }
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
                 }
             }
 

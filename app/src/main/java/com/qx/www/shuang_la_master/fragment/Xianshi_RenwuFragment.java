@@ -2,11 +2,8 @@ package com.qx.www.shuang_la_master.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -18,21 +15,16 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.activity.RenwuDetailActivity;
 import com.qx.www.shuang_la_master.adapter.Xianshi_RenwuAdapter;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
-import com.qx.www.shuang_la_master.domain.FuLiCallBack;
 import com.qx.www.shuang_la_master.domain.XianshiRenwu;
-import com.qx.www.shuang_la_master.ui.CustemDialog;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -77,14 +69,12 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
             @Override
             public void onMySuccess(String result)
             {
-                //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                 Gson gson = new Gson();
                 XianshiRenwu xianshiRenwu = gson.fromJson(result, XianshiRenwu.class);
 
                 if (xianshiRenwu.getStatus().equals("ok"))
                 {
                     System.out.println("result------------------------------:" + result);
-
                     adapter = new Xianshi_RenwuAdapter(xianshiRenwu, context, uid, GetThePhoneInfo());
                     idAutorecyxiashishurenwu.setAdapter(adapter);
                 }

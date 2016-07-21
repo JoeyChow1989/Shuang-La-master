@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,14 @@ public class DetailAdatper extends RecyclerView.Adapter
 
     private Detail detail;
     private Context context;
+    SharedPreferences sp;
 
     public DetailAdatper(Detail detail, Context context)
     {
         this.detail = detail;
         this.context = context;
+
+        sp = context.getSharedPreferences("UserInfo", context.MODE_PRIVATE);
     }
 
     //Onclik接口
@@ -105,6 +109,7 @@ public class DetailAdatper extends RecyclerView.Adapter
         String date_day = detail.getInfos().get(position).getTime().substring(8, 10);
         String date_time = detail.getInfos().get(position).getTime().substring(11, 16);
         allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
+        allitemViewHolder.idAllItemNickname.setText(sp.getString("nickname", ""));
 
         setUpItemEvent(allitemViewHolder);
     }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.adapter.DetailAdatper;
@@ -29,6 +30,9 @@ import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +56,6 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
     @Bind(R.id.common_error)
     RelativeLayout commonError;
 
-    private List<Detail_tixian> mList;
     private Detail_TixianAdatper adapter;
     private LinearLayoutManager layoutManager;
 
@@ -109,14 +112,25 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
                 //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                 System.out.println("result--------TiXian----------------:" + result);
 
-//                Gson gson = new Gson();
-//                Detail detail = gson.fromJson(result, Detail.class);
-//                if (detail.getStatus().equals("ok"))
-//                {
-//                    System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
-//                    adapter = new DetailAdatper(mList, context);
-//                    idXuetuAutorecy.setAdapter(adapter);
-//                }
+                try
+                {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String infos = jsonObject.getString("infos");
+
+                    if (!infos.equals("1")){
+                        Gson gson = new Gson();
+                        Detail detail = gson.fromJson(result, Detail.class);
+                        if (detail.getStatus().equals("ok"))
+                        {
+                            System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
+                            adapter = new Detail_TixianAdatper(detail, context);
+                            idDuihuanAutorecy.setAdapter(adapter);
+                        }
+                    }
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -130,7 +144,6 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
     @Override
     protected void initView()
     {
-        mList = new ArrayList<Detail_tixian>();
         layoutManager = new LinearLayoutManager(context);
         idDuihuanAutorecy.setLayoutManager(layoutManager);
         idDuihuanAutorecy.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));

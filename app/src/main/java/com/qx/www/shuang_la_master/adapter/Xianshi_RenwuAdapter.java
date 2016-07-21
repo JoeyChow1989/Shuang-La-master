@@ -27,6 +27,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * Created by pc on 2016/7/1.
@@ -44,6 +45,8 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
     CustemDialog dialog;
 
     XianshiViewHolder xianshiViewHolder;
+
+    MaterialDialog mMaterialDialog;
 
     //Onclik接口
     public interface OnItemClickListener
@@ -103,7 +106,6 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
 
                     int layoutpostion = holder.getLayoutPosition();
                     mOnItemClickListener.onItemLongClick(holder.itemView, layoutpostion);
-
                     return false;
                 }
             });
@@ -196,14 +198,38 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
                     dialog.showDialog();
                 } else if (begintask.getCode().equals("4"))
                 {
-                    Toast.makeText(context, "任务已经做完了！", Toast.LENGTH_SHORT).show();
+                    mMaterialDialog = new MaterialDialog(context);
+                    mMaterialDialog.setMessage("任务已经做完了！").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
 
                 } else if (begintask.getCode().equals("6"))
                 {
-                    Toast.makeText(context, "未绑定手机号!", Toast.LENGTH_SHORT).show();
+                    mMaterialDialog = new MaterialDialog(context);
+                    mMaterialDialog.setMessage("未绑定手机号！").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else if (begintask.getCode().equals("5"))
                 {
-                    Toast.makeText(context, "任务还没开始抢！", Toast.LENGTH_SHORT).show();
+                    mMaterialDialog = new MaterialDialog(context);
+                    mMaterialDialog.setMessage("任务还没有开抢！").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 }
             }
 

@@ -1,6 +1,7 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.domain.Detail;
-import com.qx.www.shuang_la_master.domain.Detail_tixian;
-
-import java.util.List;
+import com.qx.www.shuang_la_master.utils.AppUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,13 +24,16 @@ import butterknife.ButterKnife;
 public class Detail_TixianAdatper extends RecyclerView.Adapter
 {
 
-    private List<Detail_tixian> mList;
+    private Detail detail;
     private Context context;
+    SharedPreferences sp;
 
-    public Detail_TixianAdatper(List<Detail_tixian> mList, Context context)
+    public Detail_TixianAdatper(Detail detail, Context context)
     {
-        this.mList = mList;
+        this.detail = detail;
         this.context = context;
+
+        sp = context.getSharedPreferences("UserInfo", context.MODE_PRIVATE);
     }
 
     //Onclik接口
@@ -96,26 +98,36 @@ public class Detail_TixianAdatper extends RecyclerView.Adapter
     {
         TixianitemViewHolder allitemViewHolder = (TixianitemViewHolder) holder;
         Glide.with(context)
-                .load(mList.get(position).getImg())
+                .load(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(allitemViewHolder.idAllItemImg);
 
-        Glide.with(context)
-                .load(mList.get(position).getPics())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(allitemViewHolder.idItemtixianStay);
+        if (detail.getInfos().get(position).getTaskid().equals("3"))
+        {
+            allitemViewHolder.idAllItemMsg.setText("支付宝提现");
+        } else if (detail.getInfos().get(position).getTaskid().equals("1"))
+        {
+            allitemViewHolder.idAllItemMsg.setText("手机充值");
+        } else
+        {
+            allitemViewHolder.idAllItemMsg.setText("微信提现");
+        }
+        String date_month = detail.getInfos().get(position).getTime().substring(5, 7);
+        String date_day = detail.getInfos().get(position).getTime().substring(8, 10);
+        String date_time = detail.getInfos().get(position).getTime().substring(11, 16);
+        allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
+        allitemViewHolder.idItemtixianMoeny.setText(AppUtils.numZhuanHuan(detail.getInfos().get(position).getPacket().substring(0, 4)));
 
-        allitemViewHolder.idAllItemNickname.setText(mList.get(position).getTitle());
-        allitemViewHolder.idAllItemMsg.setText(mList.get(position).getMsgs());
-        allitemViewHolder.idAllItemTime.setText(mList.get(position).getTime());
 
+        allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
+        allitemViewHolder.idAllItemNickname.setText(sp.getString("nickname", ""));
         setUpItemEvent(allitemViewHolder);
     }
 
     @Override
     public int getItemCount()
     {
-        return mList.size();
+        return detail.getInfos().size();
     }
 
     static class TixianitemViewHolder extends RecyclerView.ViewHolder
@@ -128,8 +140,10 @@ public class Detail_TixianAdatper extends RecyclerView.Adapter
         TextView idAllItemTime;
         @Bind(R.id.id_itemtixian_msg)
         TextView idAllItemMsg;
+        @Bind(R.id.id_itemtixian_moeny)
+        TextView idItemtixianMoeny;
         @Bind(R.id.id_itemtixian_stay)
-        ImageView idItemtixianStay;
+        TextView idItemtixianStay;
 
         public TixianitemViewHolder(View view)
         {
