@@ -116,12 +116,12 @@ public class ShouTuActivity extends BaseActivity
             idShoutuJiangliTudi.setText(AppUtils.numZhuanHuan(sy));
         }
 
-        if (total.equals("0"))
+        if (tsy.equals("0"))
         {
-            idShoutuTotal.setText("0");
+            idShoutuTotal.setText("00.00");
         } else
         {
-            idShoutuTotal.setText(AppUtils.numZhuanHuan(total));
+            idShoutuTotal.setText(AppUtils.numZhuanHuan(tsy));
         }
     }
 

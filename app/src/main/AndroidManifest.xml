@@ -68,9 +68,7 @@
         </activity>
         <activity android:name=".activity.TixianActivity">
         </activity>
-        <activity
-            android:name=".activity.WeiXinActivity"
-            android:windowSoftInputMode="adjustUnspecified">
+        <activity android:name=".activity.WeiXinActivity">
         </activity>
         <activity android:name=".activity.KeFuCenterActivity">
         </activity>
@@ -128,6 +126,10 @@
         <activity android:name=".activity.ChenjidanActivity">
         </activity>
         <activity android:name=".activity.QieHuanActivity">
+        </activity>
+        <activity android:name=".activity.PhoneTiXianActivity">
+        </activity>
+        <activity android:name=".activity.ZhiFuBaoTiXianActivity">
         </activity>
     </application>
 

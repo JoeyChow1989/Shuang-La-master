@@ -1,17 +1,23 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.utils.SaveImageUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class WeiXinActivity extends BaseActivity
 {
@@ -22,6 +28,9 @@ public class WeiXinActivity extends BaseActivity
     TextInputEditText idWeinxinEdit;
     @Bind(R.id.id_weinxin_button)
     Button idWeinxinButton;
+    @Bind(R.id.id_weinxin_img)
+    ImageView idWeinxinImg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +50,7 @@ public class WeiXinActivity extends BaseActivity
             case R.id.id_weinxin_edit:
                 break;
             case R.id.id_weinxin_button:
+                BindWeiXinAccount();
                 break;
         }
     }
@@ -64,5 +74,30 @@ public class WeiXinActivity extends BaseActivity
     @Override
     public void initData()
     {
+        idWeinxinImg.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(WeiXinActivity.this);
+                builder.setItems(new String[]{getResources().getString(R.string.save_picture)}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        idWeinxinImg.setDrawingCacheEnabled(true);
+                        Bitmap imageBitmap = idWeinxinImg.getDrawingCache();
+                        if (imageBitmap != null) {
+                            new SaveImageUtils(WeiXinActivity.this, idWeinxinImg).execute(imageBitmap);
+                        }
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
+    }
+
+    private void BindWeiXinAccount()
+    {
+
     }
 }

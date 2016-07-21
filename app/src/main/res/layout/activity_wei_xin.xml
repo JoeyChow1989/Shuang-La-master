@@ -37,8 +37,9 @@
 
         <ImageView
             android:id="@+id/id_weinxin_img"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_centerInParent="true"
             android:layout_below="@id/id_weinxin_txt2"
             android:src="@mipmap/ic_launcher"
             />

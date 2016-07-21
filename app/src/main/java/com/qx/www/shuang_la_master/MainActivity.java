@@ -7,10 +7,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +25,7 @@ import com.qx.www.shuang_la_master.activity.NewGuyActivity;
 import com.qx.www.shuang_la_master.activity.ShouTuActivity;
 import com.qx.www.shuang_la_master.activity.TixianActivity;
 import com.qx.www.shuang_la_master.application.BaseApp;
-import com.qx.www.shuang_la_master.domain.FuLiCallBack;
 import com.qx.www.shuang_la_master.domain.MoneyInfo;
-import com.qx.www.shuang_la_master.domain.Tixian;
-import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.ui.Dialog_NewGuyFuli;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
@@ -39,7 +34,6 @@ import com.qx.www.shuang_la_master.utils.VolleyRequest;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.LinearLayout;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,6 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     String uid;
     SharedPreferences sp, info;
+    SharedPreferences.Editor editor;
 
     //得到的钱
     float money;
@@ -117,6 +112,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         idToolbarMenu.setImageResource(R.drawable.ic_more_vert);
         sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        editor = info.edit();
         uid = String.valueOf(sp.getInt("uid", 0));
 
         idToolbarMenu.setOnClickListener(new View.OnClickListener()
@@ -125,7 +121,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             public void onClick(View v)
             {
                 //showPopupMenu(idToolbarMenu);
-                Intent intent = new Intent(MainActivity.this,MoreActivity.class);
+                Intent intent = new Intent(MainActivity.this, MoreActivity.class);
                 startActivity(intent);
             }
         });
@@ -160,8 +156,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         url = Constants.BaseUrl + "/user/getInfos";
         GetMoneyInfo(url, token_moneyinfo);
 
+        System.out.println("--------------headimg--------------" + info.getString("avatar", ""));
+
         Glide.with(this)
-                .load(info.getString("avatar",""))
+                .load(info.getString("avatar", ""))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.ic_launcher)
                 .into(idToolbarImg);
@@ -194,7 +192,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                     } else
                     {
                         idMainYueTextview.setText(AppUtils.numZhuanHuan(moneyinfo.getInfos().getMoney()));
-
+                        editor.putString("money", moneyinfo.getInfos().getMoney());
+                        editor.commit();
                     }
                     if (moneyinfo.getInfos().getTodaymoney().equals("0"))
                     {

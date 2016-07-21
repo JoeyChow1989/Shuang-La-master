@@ -8,6 +8,11 @@ import android.widget.TextView;
 
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.utils.AppUtils;
+
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,12 +30,11 @@ public class ChenjidanActivity extends BaseActivity
     TextView idChengjidanJiangli;
     @Bind(R.id.id_chengjidan_tudinum)
     TextView idChengjidanTudinum;
-    @Bind(R.id.id_chengjidan_tudijiangli)
-    TextView idChengjidanTudijiangli;
     @Bind(R.id.id_chengjidan_allmoney)
     TextView idChengjidanAllmoney;
 
     SharedPreferences sp;
+    long timecurrentTimeMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,11 +67,45 @@ public class ChenjidanActivity extends BaseActivity
     @Override
     public void initData()
     {
-        idChengjidanShouru.setText(sp.getString("total", ""));
-        idChengjidanJiangli.setText(sp.getString("sy", ""));
-        idChengjidanTudinum.setText(sp.getString("num", ""));
-        idChengjidanTudijiangli.setText(sp.getString("tnum", ""));
-        idChengjidanAllmoney.setText(sp.getString("total", ""));
+
+        idChengjidanDays.setText(UseDaysNum() + "天");
+
+        if ("0".equals(sp.getString("total", "")))
+        {
+            idChengjidanShouru.setText("0元");
+        } else
+        {
+            idChengjidanShouru.setText(AppUtils.numZhuanHuan(sp.getString("total", "")) + "元");
+        }
+
+        if ("0".equals(sp.getString("sy", "")))
+        {
+            idChengjidanJiangli.setText("0元");
+        } else
+        {
+            idChengjidanJiangli.setText(AppUtils.numZhuanHuan(sp.getString("sy", "")) + "元");
+        }
+
+        idChengjidanTudinum.setText(sp.getString("num", "") + "人");
+
+        if ("0".equals(sp.getString("total", "")))
+        {
+            idChengjidanAllmoney.setText("0元");
+        } else
+        {
+            idChengjidanAllmoney.setText(AppUtils.numZhuanHuan(sp.getString("total", "")) + "元");
+        }
+    }
+
+    public String UseDaysNum()
+    {
+
+        String userDays = "";
+        timecurrentTimeMillis = Long.decode(String.valueOf(new Date().getTime()).substring(0, 10));
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa:" + (timecurrentTimeMillis - Long.decode(sp.getString("logintime", ""))) / (3 * 24 * 60 * 60000));
+
+        userDays = String.valueOf((timecurrentTimeMillis - Long.decode(sp.getString("logintime", ""))) / (3 * 24 * 60 * 60000));
+        return userDays;
     }
 
 }

@@ -12,5 +12,8 @@
     <string name="common_error">糟糕，加载失败</string>
     <string name="click_retry">点击重试</string>
 
+    <string name="save_picture">保存图片</string>
+    <string name="save_picture_failed">保存失败</string>
+    <string name="save_picture_success">图片成功保存至%s目录</string>
 
 </resources>

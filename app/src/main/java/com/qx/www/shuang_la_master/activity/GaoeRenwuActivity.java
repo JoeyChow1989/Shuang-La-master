@@ -1,13 +1,11 @@
 package com.qx.www.shuang_la_master.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.qx.www.shuang_la_master.BaseActivity;
-import com.qx.www.shuang_la_master.BaseWebView;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.adapter.Xianshi_RenwuAdapter;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;

@@ -1,36 +1,14 @@
 package com.qx.www.shuang_la_master.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.domain.Tixian;
-import com.qx.www.shuang_la_master.utils.AppUtils;
-import com.qx.www.shuang_la_master.utils.Constants;
-import com.qx.www.shuang_la_master.utils.VolleyInterface;
-import com.qx.www.shuang_la_master.utils.VolleyRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,7 +16,6 @@ import butterknife.OnClick;
 
 public class TixianActivity extends BaseActivity
 {
-
     @Bind(R.id.toolbar1)
     Toolbar toolbar;
     @Bind(R.id.id_tixian_shoujichongji)
@@ -48,8 +25,9 @@ public class TixianActivity extends BaseActivity
     @Bind(R.id.id_tixian_zhifubao)
     LinearLayout idTixianZhifubao;
 
-    String uid;
     String money;
+
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,11 +53,13 @@ public class TixianActivity extends BaseActivity
                 onBackPressed();
             }
         });
+        sp = getSharedPreferences("UserInfo", MODE_PRIVATE);
     }
 
     @Override
     public void initData()
     {
+        money = sp.getString("money", "");
     }
 
 //    private void showMonneyPopupWindow()
@@ -157,14 +137,16 @@ public class TixianActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.id_tixian_shoujichongji:
-                intent.setClass(TixianActivity.this, WeiXinTiXianActivity.class);
+                intent.putExtra("money", money);
+                intent.setClass(TixianActivity.this, PhoneTiXianActivity.class);
                 break;
             case R.id.id_tixian_weixintixian:
                 intent.putExtra("money", money);
                 intent.setClass(TixianActivity.this, WeiXinTiXianActivity.class);
                 break;
             case R.id.id_tixian_zhifubao:
-                intent.setClass(TixianActivity.this, WeiXinTiXianActivity.class);
+                intent.putExtra("money", money);
+                intent.setClass(TixianActivity.this, ZhiFuBaoTiXianActivity.class);
                 break;
         }
         startActivity(intent);

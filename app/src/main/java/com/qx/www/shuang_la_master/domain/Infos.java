@@ -15,6 +15,18 @@ public class Infos
     String birthday;
     String uid;
     String semi;
+    String logintime;
+
+    public String getLogintime()
+    {
+        return logintime;
+    }
+
+    public void setLogintime(String logintime)
+    {
+        this.logintime = logintime;
+    }
+
     String tnum;
     String tsy;
     String num;

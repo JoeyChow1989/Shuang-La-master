@@ -7,34 +7,64 @@
     >
 
     <include
-        android:id="@+id/id_weixintixian_toolbar"
+        android:id="@+id/id_zhifubaotixian_toolbar"
         layout="@layout/toolbar1"
         />
 
     <RelativeLayout
-        android:id="@+id/id_weixintixian_rela"
+        android:id="@+id/id_zhifubaotixian_rela"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/id_weixintixian_toolbar">
+        android:layout_below="@id/id_zhifubaotixian_toolbar">
+
 
         <TextView
-            android:id="@+id/id_weixintixian_texttop"
+            android:id="@+id/id_zhifubaotixian_texttop"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/textview_dotted"
-            android:gravity="left|center"
-            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
             android:paddingRight="10dp"
-            android:text="友情提示：提现微信号必须进行实名认证，否则无法成功提现"
+            android:text="支付宝提现有手续费,建议使用微信提现"
             android:textSize="16sp"
             />
 
         <LinearLayout
-            android:id="@+id/id_weixintixian_name"
+            android:id="@+id/id_zhifubaotixian_account"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/id_weixintixian_texttop"
+            android:layout_below="@id/id_zhifubaotixian_texttop"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="3"
+                android:gravity="left|center"
+                android:paddingLeft="20dp"
+                android:text="账号"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                />
+
+            <EditText
+                android:id="@+id/id_zhifubaotixian_edittext_account"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:hint="您的支付宝账号"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_zhifubaotixian_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/id_zhifubaotixian_account"
             android:background="@android:color/white"
             android:orientation="horizontal">
 
@@ -50,19 +80,19 @@
                 />
 
             <EditText
-                android:id="@+id/id_weixintixian_edittext"
+                android:id="@+id/id_zhifubaotixian_edittext_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
-                android:hint="微信号所绑定银行卡的真实姓名"/>
+                android:hint="真实姓名"/>
         </LinearLayout>
 
         <RadioGroup
-            android:id="@+id/id_weixintixian_radiogroup"
+            android:id="@+id/id_zhifubaotixian_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="203dp"
-            android:layout_below="@id/id_weixintixian_name"
+            android:layout_below="@id/id_zhifubaotixian_name"
             android:layout_marginTop="10dp"
             >
 
@@ -74,7 +104,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_shiyuan"
+                    android:id="@+id/id_zhifubaotixian_shiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -91,13 +121,20 @@
                     android:layout_weight="1.2"
                     />
 
-                <ImageView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="需0.5元手续费"
+                    android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb1"
+                    android:id="@+id/id_zhifubaotixian_rb1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -116,7 +153,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_sanshiyuan"
+                    android:id="@+id/id_zhifubaotixian_sanshiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -141,14 +178,12 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/tixian_rb_bg"
                     android:gravity="center"
-                    android:text="省1元 钱咖币"
-                    android:textColor="@color/xinrenfuli"
+                    android:text="需0.5元手续费"
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb2"
+                    android:id="@+id/id_zhifubaotixian_rb2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -167,7 +202,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_wushiyuan"
+                    android:id="@+id/id_zhifubaotixian_wushiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -192,14 +227,12 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/tixian_rb_bg"
                     android:gravity="center"
-                    android:text="省2元 钱咖币"
-                    android:textColor="@color/xinrenfuli"
+                    android:text="需0.5元手续费"
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb3"
+                    android:id="@+id/id_zhifubaotixian_rb3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -218,7 +251,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_yibaiyuan"
+                    android:id="@+id/id_zhifubaotixian_yibaiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -243,14 +276,12 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/tixian_rb_bg"
                     android:gravity="center"
-                    android:text="省5元 钱咖币"
-                    android:textColor="@color/xinrenfuli"
+                    android:text="需0.5元手续费"
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb4"
+                    android:id="@+id/id_zhifubaotixian_rb4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -259,10 +290,10 @@
         </RadioGroup>
 
         <LinearLayout
-            android:id="@+id/id_weixintixian_numlinear"
+            android:id="@+id/id_zhifubaotixian_numlinear"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_below="@id/id_weixintixian_radiogroup"
+            android:layout_below="@id/id_zhifubaotixian_radiogroup"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -276,10 +307,10 @@
                 />
 
             <TextView
-                android:id="@+id/id_weixintixian_zhichu"
+                android:id="@+id/id_zhifubaotixian_zhichu"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="2.6"
+                android:layout_weight="2.5"
                 android:gravity="left|center"
                 android:text="10"
                 android:textColor="@color/xinrenfuli"/>
@@ -293,7 +324,7 @@
                 />
 
             <TextView
-                android:id="@+id/id_weixintixian_yue"
+                android:id="@+id/id_zhifubaotixian_yue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="2.5"
@@ -311,10 +342,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/id_weixintixian_bt"
+            android:id="@+id/id_zhifubaotixian_bt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/id_weixintixian_numlinear"
+            android:layout_below="@id/id_zhifubaotixian_numlinear"
             android:layout_margin="20dp"
             android:background="@drawable/tixian_bt_bg"
             android:text="提交"

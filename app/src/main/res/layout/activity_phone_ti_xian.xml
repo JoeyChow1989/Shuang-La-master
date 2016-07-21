@@ -7,34 +7,21 @@
     >
 
     <include
-        android:id="@+id/id_weixintixian_toolbar"
+        android:id="@+id/id_phonetixian_toolbar"
         layout="@layout/toolbar1"
         />
 
     <RelativeLayout
-        android:id="@+id/id_weixintixian_rela"
+        android:layout_marginTop="20dp"
+        android:id="@+id/id_phonetixian_rela"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/id_weixintixian_toolbar">
-
-        <TextView
-            android:id="@+id/id_weixintixian_texttop"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/textview_dotted"
-            android:gravity="left|center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="友情提示：提现微信号必须进行实名认证，否则无法成功提现"
-            android:textSize="16sp"
-            />
+        android:layout_below="@id/id_phonetixian_toolbar">
 
         <LinearLayout
-            android:id="@+id/id_weixintixian_name"
+            android:id="@+id/id_phonetixian_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/id_weixintixian_texttop"
             android:background="@android:color/white"
             android:orientation="horizontal">
 
@@ -44,25 +31,25 @@
                 android:layout_weight="3"
                 android:gravity="left|center"
                 android:paddingLeft="20dp"
-                android:text="姓名"
+                android:text="手机号"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 />
 
             <EditText
-                android:id="@+id/id_weixintixian_edittext"
+                android:id="@+id/id_phonetixian_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@android:color/white"
-                android:hint="微信号所绑定银行卡的真实姓名"/>
+                />
         </LinearLayout>
 
         <RadioGroup
-            android:id="@+id/id_weixintixian_radiogroup"
+            android:id="@+id/id_phonetixian_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="203dp"
-            android:layout_below="@id/id_weixintixian_name"
+            android:layout_below="@id/id_phonetixian_name"
             android:layout_marginTop="10dp"
             >
 
@@ -74,7 +61,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_shiyuan"
+                    android:id="@+id/id_phonetixian_shiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -97,7 +84,7 @@
                     android:layout_weight="1"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb1"
+                    android:id="@+id/id_phonetixian_rb1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -116,7 +103,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_sanshiyuan"
+                    android:id="@+id/id_phonetixian_sanshiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -148,7 +135,7 @@
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb2"
+                    android:id="@+id/id_phonetixian_rb2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -167,7 +154,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_wushiyuan"
+                    android:id="@+id/id_phonetixian_wushiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -199,7 +186,7 @@
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb3"
+                    android:id="@+id/id_phonetixian_rb3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -218,7 +205,7 @@
                 android:background="@android:color/white">
 
                 <TextView
-                    android:id="@+id/id_weixintixian_yibaiyuan"
+                    android:id="@+id/id_phonetixian_yibaiyuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
@@ -250,7 +237,7 @@
                     android:textSize="15sp"/>
 
                 <RadioButton
-                    android:id="@+id/id_weixintixian_rb4"
+                    android:id="@+id/id_phonetixian_rb4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.4"/>
@@ -259,10 +246,10 @@
         </RadioGroup>
 
         <LinearLayout
-            android:id="@+id/id_weixintixian_numlinear"
+            android:id="@+id/id_phonetixian_numlinear"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_below="@id/id_weixintixian_radiogroup"
+            android:layout_below="@id/id_phonetixian_radiogroup"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -276,7 +263,7 @@
                 />
 
             <TextView
-                android:id="@+id/id_weixintixian_zhichu"
+                android:id="@+id/id_phonetixian_zhichu"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="2.6"
@@ -293,7 +280,7 @@
                 />
 
             <TextView
-                android:id="@+id/id_weixintixian_yue"
+                android:id="@+id/id_phonetixian_yue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="2.5"
@@ -311,10 +298,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/id_weixintixian_bt"
+            android:id="@+id/id_phonetixian_bt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/id_weixintixian_numlinear"
+            android:layout_below="@id/id_phonetixian_numlinear"
             android:layout_margin="20dp"
             android:background="@drawable/tixian_bt_bg"
             android:text="提交"

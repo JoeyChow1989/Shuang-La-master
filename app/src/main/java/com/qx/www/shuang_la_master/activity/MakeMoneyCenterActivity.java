@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,7 +15,6 @@ import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.fragment.Xianshi_RenwuFragment;
 import com.qx.www.shuang_la_master.fragment.Zhuanshu_RenwuFragment;
-import com.qx.www.shuang_la_master.ui.BadgeView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

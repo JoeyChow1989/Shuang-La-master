@@ -1,7 +1,5 @@
 package com.qx.www.shuang_la_master.activity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +9,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,27 +31,27 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.drakeet.materialdialog.MaterialDialog;
 
-public class WeiXinTiXianActivity extends BaseActivity
+public class PhoneTiXianActivity extends BaseActivity
 {
 
     @Bind(R.id.toolbar1)
     Toolbar toolbar1;
-    @Bind(R.id.id_weixintixian_edittext)
-    EditText idWeixintixianEdittext;
-    @Bind(R.id.id_weixintixian_zhichu)
-    TextView idWeixintixianZhichu;
-    @Bind(R.id.id_weixintixian_yue)
-    TextView idWeixintixianYue;
-    @Bind(R.id.id_weixintixian_bt)
-    Button idWeixintixianBt;
-    @Bind(R.id.id_weixintixian_rb1)
-    RadioButton idWeixintixianRb1;
-    @Bind(R.id.id_weixintixian_rb2)
-    RadioButton idWeixintixianRb2;
-    @Bind(R.id.id_weixintixian_rb3)
-    RadioButton idWeixintixianRb3;
-    @Bind(R.id.id_weixintixian_rb4)
-    RadioButton idWeixintixianRb4;
+    @Bind(R.id.id_phonetixian_edittext)
+    EditText idPhonetixianEdittext;
+    @Bind(R.id.id_phonetixian_zhichu)
+    TextView idPhonetixianZhichu;
+    @Bind(R.id.id_phonetixian_yue)
+    TextView idPhonetixianYue;
+    @Bind(R.id.id_phonetixian_bt)
+    Button idPhonetixianBt;
+    @Bind(R.id.id_phonetixian_rb1)
+    RadioButton idPhonetixianRb1;
+    @Bind(R.id.id_phonetixian_rb2)
+    RadioButton idPhonetixianRb2;
+    @Bind(R.id.id_phonetixian_rb3)
+    RadioButton idPhonetixianRb3;
+    @Bind(R.id.id_phonetixian_rb4)
+    RadioButton idPhonetixianRb4;
 
     String money;
     SharedPreferences sp;
@@ -69,7 +66,7 @@ public class WeiXinTiXianActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wei_xin_ti_xian);
+        setContentView(R.layout.activity_phone_ti_xian);
         ButterKnife.bind(this);
         initView();
         initData();
@@ -78,7 +75,7 @@ public class WeiXinTiXianActivity extends BaseActivity
     @Override
     public void initView()
     {
-        toolbar1.setTitle("微信提现");
+        toolbar1.setTitle("手机充值");
         setSupportActionBar(toolbar1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar1.setNavigationOnClickListener(new View.OnClickListener()
@@ -94,68 +91,68 @@ public class WeiXinTiXianActivity extends BaseActivity
         uid = String.valueOf(sp.getInt("uid", 0));
 
 
-        idWeixintixianRb1.setChecked(true);
+        idPhonetixianRb1.setChecked(true);
         pid = "1";
-        idWeixintixianRb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        idPhonetixianRb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 if (isChecked)
                 {
-                    idWeixintixianZhichu.setText("10");
+                    idPhonetixianZhichu.setText("10");
                     pid = "1";
-                    idWeixintixianRb2.setChecked(false);
-                    idWeixintixianRb3.setChecked(false);
-                    idWeixintixianRb4.setChecked(false);
+                    idPhonetixianRb2.setChecked(false);
+                    idPhonetixianRb3.setChecked(false);
+                    idPhonetixianRb4.setChecked(false);
                 }
             }
         });
 
-        idWeixintixianRb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        idPhonetixianRb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 if (isChecked)
                 {
-                    idWeixintixianZhichu.setText("29");
+                    idPhonetixianZhichu.setText("29");
                     pid = "2";
-                    idWeixintixianRb1.setChecked(false);
-                    idWeixintixianRb3.setChecked(false);
-                    idWeixintixianRb4.setChecked(false);
+                    idPhonetixianRb1.setChecked(false);
+                    idPhonetixianRb3.setChecked(false);
+                    idPhonetixianRb4.setChecked(false);
                 }
             }
         });
 
-        idWeixintixianRb3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        idPhonetixianRb3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 if (isChecked)
                 {
-                    idWeixintixianZhichu.setText("48");
+                    idPhonetixianZhichu.setText("48");
                     pid = "3";
-                    idWeixintixianRb2.setChecked(false);
-                    idWeixintixianRb1.setChecked(false);
-                    idWeixintixianRb4.setChecked(false);
+                    idPhonetixianRb2.setChecked(false);
+                    idPhonetixianRb1.setChecked(false);
+                    idPhonetixianRb4.setChecked(false);
                 }
             }
         });
 
-        idWeixintixianRb4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        idPhonetixianRb4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 if (isChecked)
                 {
-                    idWeixintixianZhichu.setText("95");
+                    idPhonetixianZhichu.setText("95");
                     pid = "4";
-                    idWeixintixianRb2.setChecked(false);
-                    idWeixintixianRb3.setChecked(false);
-                    idWeixintixianRb1.setChecked(false);
+                    idPhonetixianRb2.setChecked(false);
+                    idPhonetixianRb3.setChecked(false);
+                    idPhonetixianRb1.setChecked(false);
                 }
             }
         });
@@ -165,25 +162,43 @@ public class WeiXinTiXianActivity extends BaseActivity
     public void initData()
     {
         money = getIntent().getStringExtra("money");
-        idWeixintixianYue.setText(AppUtils.numZhuanHuan(money));
+        idPhonetixianYue.setText(AppUtils.numZhuanHuan(money));
     }
 
-    @OnClick(R.id.id_weixintixian_bt)
+    @OnClick(R.id.id_phonetixian_bt)
     public void onClick()
     {
-        if ("".equals(idWeixintixianEdittext.getText().toString().trim()))
+        if ("".equals(idPhonetixianEdittext.getText().toString().trim()))
         {
-            Toast.makeText(this, "用户姓名为空!", Toast.LENGTH_LONG).show();
+            mMaterialDialog = new MaterialDialog(this);
+            mMaterialDialog.setMessage("手机号码为空!").setPositiveButton("ok", new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mMaterialDialog.dismiss();
+                }
+            }).show();
+        } else if (AppUtils.isMobileNO(idPhonetixianEdittext.getText().toString().trim()))
+        {
+            mMaterialDialog = new MaterialDialog(this);
+            mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mMaterialDialog.dismiss();
+                }
+            }).show();
         } else
         {
-            name = idWeixintixianEdittext.getText().toString().trim();
+            name = idPhonetixianEdittext.getText().toString().trim();
             GetTixianData();
         }
     }
 
     private void GetTixianData()
     {
-
         String url = Constants.BaseUrl + "/tixian/index";
         // TODO: 2016/7/20 账号
         String tokenBefroeMD5_TiXian = GetThePhoneInfo() + Constants.KEY + "/" + Constants.TIXIANZHONGXI_Url;
@@ -195,7 +210,7 @@ public class WeiXinTiXianActivity extends BaseActivity
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid", uid);
         params.put("pid", pid);
-        params.put("type", "2");
+        params.put("type", "1");
         //params.put("zh", zh);
         params.put("name", name);
         params.put("token", token_TiXian);
@@ -206,29 +221,22 @@ public class WeiXinTiXianActivity extends BaseActivity
             @Override
             public void onMySuccess(String result)
             {
-                System.out.println("-------------TiXian---weixin-----------------:" + result);
+                System.out.println("-------------TiXian---shouji-----------------:" + result);
                 try
                 {
                     JSONObject js = new JSONObject(result);
                     String status = js.getString("status");
-                    String infos = js.getString("infos");
-
-                    if (infos.equals("2"))
-                    {
-                        // TODO: 2016/7/21 提示dialog
-                        mMaterialDialog = new MaterialDialog(WeiXinTiXianActivity.this);
-                        show();
-                    }
 
                     if ("ok".equals(status))
                     {
-                        mMaterialDialog = new MaterialDialog(WeiXinTiXianActivity.this);
+                        mMaterialDialog = new MaterialDialog(PhoneTiXianActivity.this);
                         mMaterialDialog.setMessage("提现成功！").setPositiveButton("确定", new View.OnClickListener()
                         {
                             @Override
                             public void onClick(View v)
                             {
                                 mMaterialDialog.dismiss();
+                                PhoneTiXianActivity.this.finish();
                             }
                         })
                                 .show();
@@ -254,54 +262,4 @@ public class WeiXinTiXianActivity extends BaseActivity
         String szImei = TelephonyMgr.getDeviceId();
         return szImei;
     }
-
-    public void show()
-    {
-        if (mMaterialDialog != null)
-        {
-            mMaterialDialog
-                    .setMessage(
-                            "对不起，你的微信账号尚未绑定!")
-                    //mMaterialDialog.setBackgroundResource(R.drawable.background);
-                    .setPositiveButton("现在去绑定", new View.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View v)
-                        {
-                            Intent intent = new Intent(WeiXinTiXianActivity.this, WeiXinActivity.class);
-                            startActivity(intent);
-                            mMaterialDialog.dismiss();
-                        }
-                    })
-                    .setNegativeButton("取消",
-                            new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View v)
-                                {
-                                    mMaterialDialog.dismiss();
-                                    WeiXinTiXianActivity.this.finish();
-                                }
-                            })
-                    .setCanceledOnTouchOutside(true)
-                    // You can change the message anytime.
-                    // mMaterialDialog.setTitle("提示");
-                    .setOnDismissListener(
-                            new DialogInterface.OnDismissListener()
-                            {
-                                @Override
-                                public void onDismiss(DialogInterface dialog)
-                                {
-                                }
-                            })
-                    .show();
-            // You can change the message anytime.
-            // mMaterialDialog.setMessage("嗨！这是一个 MaterialDialog. 它非常方便使用，你只需将它实例化，这个美观的对话框便会自动地显示出来。它简洁小巧，完全遵照 Google 2014 年发布的 Material Design 风格，希望你能喜欢它！^ ^");
-        } else
-        {
-            Toast.makeText(getApplicationContext(), "You should init firstly!",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
 }

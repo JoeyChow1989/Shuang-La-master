@@ -154,7 +154,7 @@ public class MoreActivity extends BaseActivity
                 CheckUpdata();
                 break;
             case R.id.id_more_changeid:
-                intent.setClass(this,QieHuanActivity.class);
+                intent.setClass(this, QieHuanActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -199,8 +199,7 @@ public class MoreActivity extends BaseActivity
             @Override
             public void onMySuccess(String result)
             {
-                System.out.println("sssssssssssssssssss" + result);
-
+                System.out.println("--------------getInfo-------------" + result);
                 Gson gson = new Gson();
                 userinfo = gson.fromJson(result, UserInfo.class);
 
@@ -214,6 +213,7 @@ public class MoreActivity extends BaseActivity
                 editor.putString("birthday", userinfo.getInfos().getBirthday());
                 editor.putString("uid", userinfo.getInfos().getUid());
                 editor.putString("semi", userinfo.getInfos().getSemi());
+                editor.putString("logintime", userinfo.getInfos().getLogintime());
                 editor.putString("tnum", userinfo.getInfos().getTnum());
                 editor.putString("tsy", userinfo.getInfos().getTsy());
                 editor.putString("num", userinfo.getInfos().getNum());
@@ -222,7 +222,6 @@ public class MoreActivity extends BaseActivity
 
                 editor.commit();
                 System.out.println("mobile-----------------:" + userinfo.getInfos().getMobile());
-
 
                 idMoreZiliaoNickname.setText(userinfo.getInfos().getNickname());
                 Glide.with(MoreActivity.this)

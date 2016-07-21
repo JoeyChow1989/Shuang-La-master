@@ -170,7 +170,6 @@
             android:layout_marginRight="25dp">
 
             <TextView
-                android:id="@+id/id_chengjidan_tudinum"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
@@ -182,6 +181,7 @@
                 />
 
             <TextView
+                android:id="@+id/id_chengjidan_tudinum"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
@@ -202,36 +202,6 @@
             android:layout_marginRight="30dp"
             android:background="@color/top_bg"
             />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:paddingLeft="5dp"
-                android:text="徒弟奖励"
-                android:textColor="@color/buleDark"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:id="@+id/id_chengjidan_tudijiangli"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:gravity="right|center"
-                android:paddingRight="5dp"
-                android:text="0人"
-                android:textColor="@color/buleDark"
-                android:textSize="16sp"
-                />
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -247,6 +217,7 @@
             android:gravity="bottom|center"
             android:text="所有收入"
             android:textColor="@color/buleDark"
+            android:layout_marginTop="20dp"
             android:textSize="12sp"
             />
 
@@ -265,6 +236,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/normal_bt_bg"
             android:text="晒一晒"
             android:textColor="@android:color/white"

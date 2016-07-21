@@ -2,6 +2,8 @@ package com.qx.www.shuang_la_master.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -23,10 +25,13 @@ import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class PhoneBindActivity extends BaseActivity
 {
@@ -48,6 +53,11 @@ public class PhoneBindActivity extends BaseActivity
     private String token_AuthCode;
     private String tokenBeforeMD5_Vaild;
     private String token_Vaild;
+
+    private int recLen = 60;
+    Timer timer = new Timer();
+
+    MaterialDialog mMaterialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -106,10 +116,26 @@ public class PhoneBindActivity extends BaseActivity
             case R.id.id_phone_bt_getyanzheng:
                 if ("".equals(idPhoneEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
-                } else if (idPhoneEditPhone.getText().toString().trim().length() != 11)
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
+                } else if (AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else
                 {
                     GetAuthCodeNum(idPhoneEditPhone.getText().toString().trim());
@@ -119,18 +145,50 @@ public class PhoneBindActivity extends BaseActivity
 
                 if ("".equals(idPhoneEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
-                } else if (idPhoneEditPhone.getText().toString().trim().length() != 11)
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
+                } else if (AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else if (!equals(idPhoneEditYanzheng.getText().toString().trim()))
                 {
 
-                    Toast.makeText(this, "验证码为空!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("验证码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else if (idPhoneEditYanzheng.getText().toString().trim().length() != 4)
                 {
 
-                    Toast.makeText(this, "验证码格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("验证码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else
                 {
                     BindPhoneNum(idPhoneEditPhone.getText().toString().trim(), idPhoneEditYanzheng.getText().toString().trim());
@@ -194,13 +252,16 @@ public class PhoneBindActivity extends BaseActivity
             @Override
             public void onMySuccess(String result)
             {
+                System.out.println("-------------result-getAuthCode-------------:" + result);
+
                 Gson gson = new Gson();
                 RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
 
-                if (regCallBack.getStatus() == "ok")
+                if (regCallBack.getStatus().equals("ok"))
                 {
-                    System.out.println("sssssssssssssssssssss:" + regCallBack.getStatus());
+                    System.out.println("-------------getAuthCode-------------:" + regCallBack.getStatus());
                     Toast.makeText(PhoneBindActivity.this, "正在获取验证码", Toast.LENGTH_SHORT).show();
+                    timer.schedule(task, 1000, 1000);
                 }
             }
 
@@ -211,6 +272,37 @@ public class PhoneBindActivity extends BaseActivity
             }
         });
     }
+
+    final Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+                    idPhoneBtGetyanzheng.setText(recLen + " s");
+                    if (recLen < 0)
+                    {
+                        timer.cancel();
+                        idPhoneBtGetyanzheng.setText("发送验证码");
+                    }
+            }
+        }
+    };
+
+    //倒计时
+    TimerTask task = new TimerTask()
+    {
+        @Override
+        public void run()
+        {
+            recLen--;
+            Message message = new Message();
+            message.what = 1;
+            handler.sendMessage(message);
+        }
+    };
 
 
     @Override

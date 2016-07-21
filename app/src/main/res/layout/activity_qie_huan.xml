@@ -40,7 +40,7 @@
             android:id="@+id/id_qiehuan_lin_yanzheng"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@id/id_phone_edit_phone">
+            android:layout_below="@id/id_qiehuan_edit_phone">
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/id_qiehuan_edit_yanzheng"
@@ -77,7 +77,7 @@
         android:id="@+id/id_qiehuan_sendup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/id_phone_relat"
+        android:layout_below="@id/id_qiehuan_relat"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"

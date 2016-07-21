@@ -56,6 +56,7 @@ import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.PauseOnScrollListener;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class ZiLiaoActivity extends BaseActivity
 {
@@ -124,6 +125,8 @@ public class ZiLiaoActivity extends BaseActivity
     String tokenBeforeMD5_info, token_info;
     SharedPreferences info;
     SharedPreferences.Editor editor;
+
+    MaterialDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -275,7 +278,21 @@ public class ZiLiaoActivity extends BaseActivity
                 showZhiyePopup();
                 break;
             case R.id.id_ziliao_sendup:
-                SendupZiliao();
+                if (img == null)
+                {
+                    dialog = new MaterialDialog(this);
+                    dialog.setMessage("图片为空！").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                } else
+                {
+                    SendupZiliao();
+                }
                 break;
         }
     }
@@ -342,7 +359,15 @@ public class ZiLiaoActivity extends BaseActivity
                 RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
                 if ("ok".equals(regCallBack.getStatus()))
                 {
-                    Toast.makeText(ZiLiaoActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                    dialog = new MaterialDialog(ZiLiaoActivity.this);
+                    dialog.setMessage("提交成功！").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            dialog.dismiss();
+                        }
+                    }).show();
                 }
             }
 

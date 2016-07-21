@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,6 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="2"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/renwu_ing_bg"
                 android:src="@mipmap/ic_launcher"
                 />
 
@@ -83,16 +86,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@color/friend_shane_shoutu"
-                    android:text="+1.10元"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:gravity="center"
+                    android:text="+1.10元"
                     android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     />
 
 

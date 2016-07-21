@@ -2,6 +2,8 @@ package com.qx.www.shuang_la_master.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -22,6 +24,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,6 +51,9 @@ public class QieHuanActivity extends BaseActivity
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
+    private int recLen = 60;
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -163,6 +170,7 @@ public class QieHuanActivity extends BaseActivity
                 {
                     System.out.println("sssssssssssssssssssss:" + regCallBack.getStatus());
                     Toast.makeText(QieHuanActivity.this, "正在获取验证码", Toast.LENGTH_LONG).show();
+                    timer.schedule(task, 1000, 1000);
                 }
             }
 
@@ -214,6 +222,37 @@ public class QieHuanActivity extends BaseActivity
                 Toast.makeText(QieHuanActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
+    final Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+                    idQiehuanBtGetyanzheng.setText(recLen + " s");
+                    if (recLen < 0)
+                    {
+                        timer.cancel();
+                        idQiehuanBtGetyanzheng.setText("发送验证码");
+                    }
+            }
+        }
+    };
+
+    //倒计时
+    TimerTask task = new TimerTask()
+    {
+        @Override
+        public void run()
+        {
+            recLen--;
+            Message message = new Message();
+            message.what = 1;
+            handler.sendMessage(message);
+        }
+    };
+
 }

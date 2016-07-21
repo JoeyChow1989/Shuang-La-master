@@ -15,6 +15,7 @@
         android:id="@+id/id_phone_relattop"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/id_phone_toolbar"
         android:background="@color/bindphonetop_bg">
 
@@ -22,11 +23,11 @@
             android:id="@+id/id_bindphone_top1"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="20dp"
             android:gravity="left|bottom"
             android:text="绑定手机后再也不担心ID丢失了，随时可以通过"
-            android:textSize="16sp"
+            android:textSize="15sp"
             />
 
         <LinearLayout
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_below="@id/id_bindphone_top1"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="30dp"
             android:orientation="horizontal"
             android:layout_marginRight="20dp"
             >
@@ -46,7 +47,7 @@
                 android:gravity="left|top"
                 android:text="我的主页--其他--切换账号"
                 android:textColor="@color/xinrenfuli"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 />
 
             <TextView
@@ -55,7 +56,7 @@
                 android:gravity="left|top"
                 android:layout_weight="1.1"
                 android:text="找回自己的爽啦账号"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 />
         </LinearLayout>
     </RelativeLayout>
