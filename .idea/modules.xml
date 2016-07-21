@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/galleryfinal/galleryfinal.iml" filepath="$PROJECT_DIR$/galleryfinal/galleryfinal.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_EditText/library_EditText.iml" filepath="$PROJECT_DIR$/library_EditText/library_EditText.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_dialog/library_dialog.iml" filepath="$PROJECT_DIR$/library_dialog/library_dialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tipsview/tipsview.iml" filepath="$PROJECT_DIR$/tipsview/tipsview.iml" />
     </modules>
   </component>
 </project>

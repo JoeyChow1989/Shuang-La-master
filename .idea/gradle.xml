@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/galleryfinal" />
             <option value="$PROJECT_DIR$/library_EditText" />
             <option value="$PROJECT_DIR$/library_dialog" />
-            <option value="$PROJECT_DIR$/tipsview" />
           </set>
         </option>
         <option name="myModules">
@@ -23,7 +22,6 @@
             <option value="$PROJECT_DIR$/galleryfinal" />
             <option value="$PROJECT_DIR$/library_EditText" />
             <option value="$PROJECT_DIR$/library_dialog" />
-            <option value="$PROJECT_DIR$/tipsview" />
           </set>
         </option>
       </GradleProjectSettings>
