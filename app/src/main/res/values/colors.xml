@@ -3,7 +3,7 @@
     <color name="colorPrimary">#4a78e9</color>
     <color name="colorPrimaryDark">#3354a3</color>
     <color name="colorAccent">#47a8ef</color>
-    <color name="buleDark">#034aae</color>
+    <color name="buleDark">#1d3570</color>
     <color name="buleDark_ed">#012b68</color>
 
     <color name="top_bg">#fef5f5f5</color>
@@ -25,4 +25,5 @@
     <color name="zhuanshu">#FFF3C62B</color>
     <color name="xinrenfuli">#FFED4040</color>
     <color name="cyan_500">#00bcd4</color>
+    <color name="bindphonetop_bg">#ebf3f9</color>
 </resources>

@@ -81,12 +81,12 @@
         <Button
             android:id="@+id/id_weinxin_button"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/id_weinxin_edit"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@color/weinxin_tijiao"
+            android:background="@drawable/normal_bt_bg"
             android:text="提交"
             android:textSize="18sp"/>
 

@@ -175,7 +175,7 @@ public class ZiLiaoActivity extends BaseActivity
         idZiliaoEdit.setText(info.getString("nickname", ""));
 
         Glide.with(ZiLiaoActivity.this)
-                .load(Constants.BACKGROUDUrl + info.getString("avatar", ""))
+                .load(info.getString("avatar", ""))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.ic_launcher)
                 .into(idZiliaoImgs);

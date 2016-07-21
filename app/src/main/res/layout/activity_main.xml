@@ -233,7 +233,7 @@
                         android:gravity="right|center"
                         android:text="100%实现返现"
                         android:textColor="@color/item_left"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -287,7 +287,7 @@
                         android:gravity="right|center"
                         android:text="任务单价1-200+元不等"
                         android:textColor="@color/item_left"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -340,7 +340,7 @@
                         android:gravity="right|center"
                         android:text="下载试用立得现金"
                         android:textColor="@color/item_left"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -392,7 +392,7 @@
                         android:gravity="right|center"
                         android:text="完成就赚0.3元"
                         android:textColor="@color/item_left"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -442,7 +442,7 @@
                         android:gravity="right|center"
                         android:text="超高奖励，上不封顶"
                         android:textColor="@color/item_left"
-                        android:textSize="13sp"/>
+                        android:textSize="12sp"/>
 
                     <ImageView
                         android:layout_width="match_parent"

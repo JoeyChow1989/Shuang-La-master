@@ -125,6 +125,10 @@
             android:value="Umeng">
         </meta-data>
 
+        <activity android:name=".activity.ChenjidanActivity">
+        </activity>
+        <activity android:name=".activity.QieHuanActivity">
+        </activity>
     </application>
 
 </manifest>

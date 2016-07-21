@@ -111,7 +111,7 @@
                 android:paddingLeft="20dp"
                 android:text="徒弟个数"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 />
 
             <TextView
@@ -140,7 +140,7 @@
                 android:paddingLeft="20dp"
                 android:text="累计徒弟奖励"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 />
 
             <ImageView

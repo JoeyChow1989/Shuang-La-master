@@ -24,6 +24,8 @@ public class Constants
     public static final String FINISHZSTASKLIST_Url = "SITE/FINISHZSTASK";
     public static final String DETATALI_Url = "USER/MINGXI";
     public static final String TIXIANZHONGXI_Url = "TIXIAN/INDEX";
+    public static final String QH_AUTHCODE_Url = "USER/GETQHAUTHCODE";
+    public static final String QH_Url = "USER/QIEHUAN";
 
 
     public static final String KEY = ">_<#!=。=》-(<ゝω·)#☆";

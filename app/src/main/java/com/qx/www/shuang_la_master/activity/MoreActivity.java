@@ -139,7 +139,7 @@ public class MoreActivity extends BaseActivity
                 startActivity(intent);
                 break;
             case R.id.id_more_chenjidan:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this, ChenjidanActivity.class);
                 startActivity(intent);
                 break;
             case R.id.id_more_kefu:
@@ -154,7 +154,7 @@ public class MoreActivity extends BaseActivity
                 CheckUpdata();
                 break;
             case R.id.id_more_changeid:
-                intent.setClass(this, ZiLiaoActivity.class);
+                intent.setClass(this,QieHuanActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -226,7 +226,7 @@ public class MoreActivity extends BaseActivity
 
                 idMoreZiliaoNickname.setText(userinfo.getInfos().getNickname());
                 Glide.with(MoreActivity.this)
-                        .load(Constants.BACKGROUDUrl + userinfo.getInfos().getAvatar())
+                        .load(userinfo.getInfos().getAvatar())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.mipmap.ic_launcher)
                         .into(idMoreZiliaoHeadpic);

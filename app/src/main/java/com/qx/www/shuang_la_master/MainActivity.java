@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         GetMoneyInfo(url, token_moneyinfo);
 
         Glide.with(this)
-                .load(Constants.BACKGROUDUrl+info.getString("avatar",""))
+                .load(info.getString("avatar",""))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.ic_launcher)
                 .into(idToolbarImg);

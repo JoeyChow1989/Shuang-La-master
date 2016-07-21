@@ -2,74 +2,26 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    tools:context="com.qx.www.shuang_la_master.activity.QieHuanActivity">
 
     <include
-        android:id="@+id/id_phone_toolbar"
+        android:id="@+id/id_qiehuan_toolbar"
         layout="@layout/toolbar1"
         />
 
     <RelativeLayout
-        android:id="@+id/id_phone_relattop"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@id/id_phone_toolbar"
-        android:background="@color/bindphonetop_bg">
-
-        <TextView
-            android:id="@+id/id_bindphone_top1"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="left|bottom"
-            android:text="绑定手机后再也不担心ID丢失了，随时可以通过"
-            android:textSize="16sp"
-            />
-
-        <LinearLayout
-            android:id="@+id/id_bindphone_top2"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@id/id_bindphone_top1"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal"
-            android:layout_marginRight="20dp"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:gravity="left|top"
-                android:text="我的主页--其他--切换账号"
-                android:textColor="@color/xinrenfuli"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:gravity="left|top"
-                android:layout_weight="1.1"
-                android:text="找回自己的爽啦账号"
-                android:textSize="16sp"
-                />
-        </LinearLayout>
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/id_phone_relat"
+        android:id="@+id/id_qiehuan_relat"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:layout_below="@id/id_phone_relattop"
+        android:layout_below="@id/id_qiehuan_toolbar"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/id_phone_edit_phone"
+            android:id="@+id/id_qiehuan_edit_phone"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="10dp"
@@ -85,13 +37,13 @@
 
 
         <LinearLayout
-            android:id="@+id/id_phone_lin_yanzheng"
+            android:id="@+id/id_qiehuan_lin_yanzheng"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@id/id_phone_edit_phone">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/id_phone_edit_yanzheng"
+                android:id="@+id/id_qiehuan_edit_yanzheng"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
@@ -108,7 +60,7 @@
                 />
 
             <Button
-                android:id="@+id/id_phone_bt_getyanzheng"
+                android:id="@+id/id_qiehuan_bt_getyanzheng"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
@@ -122,7 +74,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/id_phone_sendup"
+        android:id="@+id/id_qiehuan_sendup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/id_phone_relat"
@@ -133,12 +85,5 @@
         android:text="提  交"
         android:textColor="@android:color/white"
         />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_below="@id/id_phone_sendup"
-        android:background="@android:color/white"
-        ></LinearLayout>
 
 </RelativeLayout>

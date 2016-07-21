@@ -35,7 +35,7 @@
             android:layout_weight="1.3"
             android:gravity="left|center"
             android:paddingLeft="20dp"
-            android:text="商务合作请联系：biz@qianka.com"/>
+            android:text="商务合作请联系：bd@shuangla.com"/>
 
         <TextView
             android:layout_width="match_parent"

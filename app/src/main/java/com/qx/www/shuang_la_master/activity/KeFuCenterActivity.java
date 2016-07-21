@@ -19,8 +19,6 @@ public class KeFuCenterActivity extends BaseActivity
 
     @Bind(R.id.toolbar1)
     Toolbar toolbar;
-    @Bind(R.id.id_kefu_jifenwenti)
-    LinearLayout idKefuJifenwenti;
     @Bind(R.id.id_kefu_weixinkefu)
     LinearLayout idKefuWeixinkefu;
     @Bind(R.id.id_kefu_normalqu)
@@ -58,15 +56,12 @@ public class KeFuCenterActivity extends BaseActivity
 
     }
 
-    @OnClick({R.id.id_kefu_jifenwenti, R.id.id_kefu_weixinkefu, R.id.id_kefu_normalqu})
+    @OnClick({R.id.id_kefu_weixinkefu, R.id.id_kefu_normalqu})
     public void onClick(View view)
     {
         Intent intent = new Intent();
         switch (view.getId())
         {
-            case R.id.id_kefu_jifenwenti:
-                intent.setClass(KeFuCenterActivity.this,WeiXinKeFuActivity.class);
-                break;
             case R.id.id_kefu_weixinkefu:
                 intent.setClass(KeFuCenterActivity.this,WeiXinKeFuActivity.class);
                 break;

@@ -1,33 +1,25 @@
 package com.qx.www.shuang_la_master.activity;
 
-import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.application.BaseApp;
-import com.qx.www.shuang_la_master.domain.FuLiCallBack;
 import com.qx.www.shuang_la_master.domain.RegCallBack;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,14 +42,12 @@ public class PhoneBindActivity extends BaseActivity
     @Bind(R.id.id_phone_edit_yanzheng)
     AppCompatEditText idPhoneEditYanzheng;
 
-    SharedPreferences sp;
     private String uid;
+    SharedPreferences sp;
     private String tokenBeforeMD5_AuthCode;
     private String token_AuthCode;
     private String tokenBeforeMD5_Vaild;
     private String token_Vaild;
-    String phone;
-    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -122,27 +112,35 @@ public class PhoneBindActivity extends BaseActivity
                     Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
                 } else
                 {
-                    GetAuthCodeNum();
+                    GetAuthCodeNum(idPhoneEditPhone.getText().toString().trim());
                 }
                 break;
             case R.id.id_phone_sendup:
-                BindPhoneNum();
+
+                if ("".equals(idPhoneEditPhone.getText().toString().trim()))
+                {
+                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
+                } else if (idPhoneEditPhone.getText().toString().trim().length() != 11)
+                {
+                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                } else if (!equals(idPhoneEditYanzheng.getText().toString().trim()))
+                {
+
+                    Toast.makeText(this, "验证码为空!", Toast.LENGTH_LONG).show();
+                } else if (idPhoneEditYanzheng.getText().toString().trim().length() != 4)
+                {
+
+                    Toast.makeText(this, "验证码格式不正确!", Toast.LENGTH_LONG).show();
+                } else
+                {
+                    BindPhoneNum(idPhoneEditPhone.getText().toString().trim(), idPhoneEditYanzheng.getText().toString().trim());
+                }
                 break;
         }
     }
 
-    private void BindPhoneNum()
+    private void BindPhoneNum(String phone, String code)
     {
-        if (!"".equals(idPhoneEditPhone.getText().toString().trim()))
-        {
-            phone = idPhoneEditPhone.getText().toString().trim();
-        }
-
-        if (!"".equals(idPhoneEditYanzheng.getText().toString().trim()))
-        {
-            code = idPhoneEditYanzheng.getText().toString().trim();
-        }
-
         System.out.println("uid-----------:" + uid + "phone------------:" + phone + "token_AuthCode---------:" + token_AuthCode);
 
         String url = Constants.BaseUrl + "/user/validAuthCode";
@@ -150,7 +148,7 @@ public class PhoneBindActivity extends BaseActivity
         params.put("uid", uid);
         params.put("phone", phone);
         params.put("code", code);
-        params.put("token", token_AuthCode);
+        params.put("token", token_Vaild);
 
         VolleyRequest.RequestPost(this, url, "vaild", params, new VolleyInterface(this,
                 VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
@@ -180,7 +178,7 @@ public class PhoneBindActivity extends BaseActivity
 
     }
 
-    private void GetAuthCodeNum()
+    private void GetAuthCodeNum(String phone)
     {
         System.out.println("uid-----------:" + uid + "phone------------:" + phone + "token_AuthCode---------:" + token_AuthCode);
 
