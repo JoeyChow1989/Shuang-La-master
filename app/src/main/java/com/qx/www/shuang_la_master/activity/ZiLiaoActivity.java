@@ -1,5 +1,6 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -128,6 +129,8 @@ public class ZiLiaoActivity extends BaseActivity
 
     MaterialDialog dialog;
 
+    ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -174,7 +177,6 @@ public class ZiLiaoActivity extends BaseActivity
 
         info = getSharedPreferences("UserInfo", MODE_PRIVATE);
         editor = info.edit();
-
         idZiliaoEdit.setText(info.getString("nickname", ""));
 
         Glide.with(ZiLiaoActivity.this)
@@ -278,7 +280,7 @@ public class ZiLiaoActivity extends BaseActivity
                 showZhiyePopup();
                 break;
             case R.id.id_ziliao_sendup:
-                if (img == null)
+                if (mPhotoList.get(0).getPhotoPath() == null)
                 {
                     dialog = new MaterialDialog(this);
                     dialog.setMessage("图片为空！").setPositiveButton("ok", new View.OnClickListener()
@@ -291,7 +293,20 @@ public class ZiLiaoActivity extends BaseActivity
                     }).show();
                 } else
                 {
-                    SendupZiliao();
+                    mProgressDialog = new ProgressDialog(this);
+                    mProgressDialog.setMessage("请稍后,正在提交资料..");
+                    mProgressDialog.setCanceledOnTouchOutside(false);
+                    mProgressDialog.setCancelable(false);
+                    mProgressDialog.show();
+                    new Thread(new Runnable()
+                    {
+                        public void run()
+                        {
+                            Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
+                            img = AppUtils.bitmaptoString(bitmap);
+                            SendupZiliao();
+                        }
+                    }).start();
                 }
                 break;
         }
@@ -337,7 +352,7 @@ public class ZiLiaoActivity extends BaseActivity
 
         String url = Constants.BaseUrl + "/user/index";
         System.out.println("uid" + uid + "name" + name + "sex" + sex + "birth" + birth + "token" + token_ziliao);
-
+        System.out.println("------img--------:" + img);
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid", uid);
         params.put("name", name);
@@ -359,6 +374,7 @@ public class ZiLiaoActivity extends BaseActivity
                 RegCallBack regCallBack = gson.fromJson(result, RegCallBack.class);
                 if ("ok".equals(regCallBack.getStatus()))
                 {
+                    mProgressDialog.dismiss();
                     dialog = new MaterialDialog(ZiLiaoActivity.this);
                     dialog.setMessage("提交成功！").setPositiveButton("ok", new View.OnClickListener()
                     {
@@ -366,6 +382,7 @@ public class ZiLiaoActivity extends BaseActivity
                         public void onClick(View v)
                         {
                             dialog.dismiss();
+                            ZiLiaoActivity.this.finish();
                         }
                     }).show();
                 }
@@ -618,10 +635,10 @@ public class ZiLiaoActivity extends BaseActivity
         themeConfig = ThemeConfig.DEFAULT;
         final boolean mutiSelect = muti;
         functionConfigBuilder.setEnableEdit(true);
-        functionConfigBuilder.setRotateReplaceSource(true);
+        functionConfigBuilder.setRotateReplaceSource(false);
         functionConfigBuilder.setEnableCrop(true);
         functionConfigBuilder.setCropSquare(true);
-        functionConfigBuilder.setCropReplaceSource(true);
+        functionConfigBuilder.setCropReplaceSource(false);
         functionConfigBuilder.setForceCrop(true);
         functionConfigBuilder.setForceCropEdit(true);
         functionConfigBuilder.setEnableCamera(true);
@@ -650,6 +667,7 @@ public class ZiLiaoActivity extends BaseActivity
                                  public void onOtherButtonClick(ActionSheet actionSheet, int index)
                                  {
                                      String path = "/sdcard/pk1-2.jpg";
+
                                      switch (index)
                                      {
                                          case 0:
@@ -688,13 +706,6 @@ public class ZiLiaoActivity extends BaseActivity
                     .load(mPhotoList.get(0).getPhotoPath())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(idZiliaoImgs);
-
-            Bitmap bitmap = getLoacalBitmap(mPhotoList.get(0).getPhotoPath()); //从本地取图片(在cdcard中获取)  //
-            img = AppUtils.bitmaptoString(bitmap);
-
-            System.out.println("-------------img-------------" + img);
-
-            //System.out.println("----------base64_img--------:" + AppUtils.encode(ss.getBytes()));
         }
 
         @Override
@@ -754,7 +765,6 @@ public class ZiLiaoActivity extends BaseActivity
             }
         });
     }
-
 
     /**
      * 加载本地图片

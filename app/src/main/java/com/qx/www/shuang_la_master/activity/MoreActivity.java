@@ -160,6 +160,14 @@ public class MoreActivity extends BaseActivity
         }
     }
 
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        url_userinfo = Constants.BaseUrl + "/site/getInfo";
+        GetUserInfo(url_userinfo, token_info);
+    }
+
     private void CheckUpdata()
     {
         String url = Constants.UP_URL;
@@ -232,7 +240,6 @@ public class MoreActivity extends BaseActivity
 
                 idMoreZiliaoShouji.setText(userinfo.getInfos().getMobile());
                 idMoreTextId.setText(userinfo.getInfos().getUid());
-
             }
 
             @Override

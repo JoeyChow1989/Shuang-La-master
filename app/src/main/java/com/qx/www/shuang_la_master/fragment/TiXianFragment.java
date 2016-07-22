@@ -20,23 +20,20 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseFragment;
 import com.qx.www.shuang_la_master.R;
-import com.qx.www.shuang_la_master.adapter.DetailAdatper;
 import com.qx.www.shuang_la_master.adapter.Detail_TixianAdatper;
 import com.qx.www.shuang_la_master.common.AutoLoadRecylerView;
 import com.qx.www.shuang_la_master.common.DividerItemDecoration;
 import com.qx.www.shuang_la_master.domain.Detail;
-import com.qx.www.shuang_la_master.domain.Detail_tixian;
 import com.qx.www.shuang_la_master.utils.AppUtils;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -45,7 +42,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,AutoLoadRecylerView.loadMoreListener
+public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, AutoLoadRecylerView.loadMoreListener
 {
     @Bind(R.id.id_duihuan_autorecy)
     AutoLoadRecylerView idDuihuanAutorecy;
@@ -74,24 +71,7 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
     @Override
     protected void initData()
     {
-
         GetTiXianData();
-//        adapter.setOnItemClickListener(new Detail_TixianAdatper.OnItemClickListener()
-//        {
-//            @Override
-//            public void onItemClick(View view, int position)
-//            {
-////                Intent intent = new Intent();
-////                intent.setClass(context, RenwuDetailActivity.class);
-////                context.startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onItemLongClick(View view, int position)
-//            {
-//
-//            }
-//        });
     }
 
     private void GetTiXianData()
@@ -109,7 +89,6 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
             @Override
             public void onMySuccess(String result)
             {
-                //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
                 System.out.println("result--------TiXian----------------:" + result);
 
                 try
@@ -117,12 +96,23 @@ public class TiXianFragment extends BaseFragment implements SwipeRefreshLayout.O
                     JSONObject jsonObject = new JSONObject(result);
                     String infos = jsonObject.getString("infos");
 
-                    if (!infos.equals("1")){
+                    if (!infos.equals("1"))
+                    {
                         Gson gson = new Gson();
+                        JSONArray jsonArray = jsonObject.getJSONArray("ytx");
                         Detail detail = gson.fromJson(result, Detail.class);
+                        if (jsonArray.length() != 0)
+                        {
+                            for (int i = 0; i < jsonArray.length(); i++)
+                            {
+                                String[] ytx = new String[jsonArray.length()];
+                                ytx[i] = (String) jsonArray.opt(i);
+                                detail.setYtx(ytx);
+                            }
+                        }
                         if (detail.getStatus().equals("ok"))
                         {
-                            System.out.println("detail----RenWu----------------:"+detail.getInfos().get(0).getMoney());
+                            System.out.println("detail----RenWu----------------:" + detail.getInfos().get(0).getMoney());
                             adapter = new Detail_TixianAdatper(detail, context);
                             idDuihuanAutorecy.setAdapter(adapter);
                         }

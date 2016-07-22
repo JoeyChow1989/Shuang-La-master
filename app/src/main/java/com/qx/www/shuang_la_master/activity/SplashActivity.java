@@ -1,10 +1,13 @@
 package com.qx.www.shuang_la_master.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -22,6 +25,8 @@ import com.qx.www.shuang_la_master.utils.VolleyRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 /**
  * Created by pc on 2016/6/28.
  */
@@ -38,10 +43,46 @@ public class SplashActivity extends BaseActivity
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
+    MaterialDialog materialDialog;
+
     @Override
     public void initData()
     {
-        GetRegData();
+        if (NetWorkConnection())
+        {
+            GetRegData();
+        } else
+        {
+            materialDialog = new MaterialDialog(this);
+            materialDialog.setMessage("请您连接网络！").setPositiveButton("ok", new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    materialDialog.dismiss();
+                }
+            }).show();
+        }
+    }
+
+    private boolean NetWorkConnection()
+    {
+        boolean netw = false;
+        ConnectivityManager con = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+        boolean wifi = con.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+                .isConnectedOrConnecting();
+        boolean internet = con.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+                .isConnectedOrConnecting();
+        if (wifi | internet)
+        {
+            netw = true;
+
+        } else
+        {
+            Toast.makeText(getApplicationContext(), "请链接网络!!",
+                    Toast.LENGTH_LONG).show();
+        }
+        return netw;
     }
 
     @Override
@@ -150,8 +191,6 @@ public class SplashActivity extends BaseActivity
                 System.out.println(error.toString());
             }
         });
-
-
     }
 
 

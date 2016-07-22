@@ -1,72 +1,103 @@
-# Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in D:\ProgramFiles\androidsdk\android-sdk-windows/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-dontshrink
+-dontoptimize
+-optimizationpasses 5         # 指定代码的压缩级别
+-dontusemixedcaseclassnames   # 是否使用大小写混合
+-dontpreverify           # 混淆时是否做预校验
+-verbose               # 混淆时是否记录日志
+-dontskipnonpubliclibraryclasses
+-ignorewarnings
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/* # 混淆时所采用的算法
 
-# Add any project specific keep options here:
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-dontwarn android.support.**
+-dontwarn com.markupartist.**
+-dontwarn com.baidu.mobstat.**
+-dontwarn android.support.v4.**
+-dontwarn org.apache.**
+-dontwarn com.qq.e.**
+-dontwarn com.androidquery.**
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
--ignorewarnings                     # 忽略警告，避免打包时某些警告出现
--optimizationpasses 5               # 指定代码的压缩级别
--dontusemixedcaseclassnames         # 是否使用大小写混合
--dontskipnonpubliclibraryclasses    # 是否混淆第三方jar
--dontpreverify                      # 混淆时是否做预校验
--verbose                            # 混淆时是否记录日志
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*        # 混淆时所采用的算法
+#-libraryjars libs/SocialSDK_QQZone_2.jar   # 注意,这条会报重复混淆,要注释掉
 
--dontwarn android.support.v4.**     #缺省proguard 会检查每一个引用是否正确，但是第三方库里面往往有些不会用到的类，没有正确引用。如果不配置的话，系统就会报错。
--dontwarn android.os.**
--keep class android.support.v4.** { *; }        # 保持哪些类不被混淆
--keep class com.baidu.** { *; }
--keep class vi.com.gdi.bgl.android.**{*;}
--keep class android.os.**{*;}
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes *Annotation*A
+-keepattributes SourceFile,LineNumberTable
 
--keep interface android.support.v4.app.** { *; }
--keep public class * extends android.support.v4.**
--keep public class * extends android.app.Fragment
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
 
+
+#不混淆需要根据manifest来识别的类
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
--keep public class * extends android.support.v4.widget
--keep public class * extends com.sqlcrypt.database
--keep public class * extends com.sqlcrypt.database.sqlite
--keep public class * extends com.treecore.**
--keep public class * extends de.greenrobot.dao.**
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+-keep class com.qx.www.shuang_la_master.domain.** { *; }
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+-keep public class [your_pkg].R$*{
+    public static final int *;
+}
+
+# volley
+-keep class com.android.volley.** {*;}
+-keep class com.android.volley.toolbox.** {*;}
+-keep class com.android.volley.Response$* { *; }
+-keep class com.android.volley.Request$* { *; }
+-keep class com.android.volley.RequestQueue$* { *; }
+-keep class com.android.volley.toolbox.HurlStack$* { *; }
+-keep class com.android.volley.toolbox.ImageLoader$* { *; }
 
 
--keepclasseswithmembernames class * {       # 保持 native 方法不被混淆
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+# 保持 native 方法不被混淆
+-keepclasseswithmembernames class * {
     native <methods>;
 }
 
--keepclasseswithmembers class * {            # 保持自定义控件类不被混淆
+# 保持自定义控件类不被混淆
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
-
--keepclasseswithmembers class * {            # 保持自定义控件类不被混淆
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
-
--keepclassmembers class * extends android.app.Activity { #保持类成员
-   public void *(android.view.View);
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View);
 }
 
--keepclassmembers enum * {                  # 保持枚举 enum 类不被混淆
+# 保持枚举 enum 类不被混淆
+-keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
 
--keep class * implements android.os.Parcelable {    # 保持 Parcelable 不被混淆
-  public static final android.os.Parcelable$Creator *;
+# 保持 Parcelable 不被混淆
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
 }

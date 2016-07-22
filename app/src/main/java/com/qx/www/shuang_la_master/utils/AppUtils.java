@@ -27,7 +27,7 @@ public class AppUtils
 {
     public static final int REG_SUSSES = 1;
     public static final int LOGIN_SUSSES = 2;
-    public static final String SHUANGLA_URL = "http://m.shuangla.cc/";
+    public static final String SHUANGLA_URL = "http://shuangla.cc";
 
 
     //判断app是否正在运行

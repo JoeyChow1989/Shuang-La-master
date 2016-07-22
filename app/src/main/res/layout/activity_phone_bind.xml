@@ -99,7 +99,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:hint="验证码"
-                android:inputType="phone"
+                android:inputType="number"
                 android:textCursorDrawable="@color/buleDark"
                 app:met_baseColor="@android:color/background_dark"
                 app:met_floatingLabel="highlight"

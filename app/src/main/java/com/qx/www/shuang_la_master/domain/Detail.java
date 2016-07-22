@@ -12,6 +12,17 @@ public class Detail
     String type;
     List<Panems> pnameList;
     List<Txs> txt_list;
+    String[] ytx;
+
+    public String[] getYtx()
+    {
+        return ytx;
+    }
+
+    public void setYtx(String[] ytx)
+    {
+        this.ytx = ytx;
+    }
 
     public String getStatus()
     {

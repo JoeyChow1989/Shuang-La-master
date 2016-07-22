@@ -30,6 +30,7 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class QieHuanActivity extends BaseActivity
 {
@@ -51,6 +52,8 @@ public class QieHuanActivity extends BaseActivity
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
+    MaterialDialog mMaterialDialog;
 
     private int recLen = 60;
     Timer timer = new Timer();
@@ -113,32 +116,80 @@ public class QieHuanActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.id_qiehuan_bt_getyanzheng:
-                if (!idQiehuanEditPhone.getText().toString().trim().equals(""))
+                if ("".equals(idQiehuanEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
-                } else if (idQiehuanEditPhone.getText().toString().trim().length() != 11)
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
+                } else if (!AppUtils.isMobileNO(idQiehuanEditPhone.getText().toString().trim()) || idQiehuanEditPhone.getText().toString().trim().length() != 11)
                 {
-                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else
                 {
                     GetChangeAccontAuthCodeNum(idQiehuanEditPhone.getText().toString().trim());
                 }
                 break;
             case R.id.id_qiehuan_sendup:
-                if (!"".equals(idQiehuanEditPhone.getText().toString().trim()))
+                if ("".equals(idQiehuanEditPhone.getText().toString().trim()))
                 {
-                    Toast.makeText(this, "手机号为空!", Toast.LENGTH_LONG).show();
-                } else if (idQiehuanEditPhone.getText().toString().trim().length() != 11)
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
+                } else if (!AppUtils.isMobileNO(idQiehuanEditPhone.getText().toString().trim()) || idQiehuanEditPhone.getText().toString().trim().length() != 11)
                 {
-                    Toast.makeText(this, "手机号格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else if (!equals(idQiehuanEditYanzheng.getText().toString().trim()))
                 {
 
-                    Toast.makeText(this, "验证码为空!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("验证码为空!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else if (idQiehuanEditYanzheng.getText().toString().trim().length() != 4)
                 {
 
-                    Toast.makeText(this, "验证码格式不正确!", Toast.LENGTH_LONG).show();
+                    mMaterialDialog = new MaterialDialog(this);
+                    mMaterialDialog.setMessage("验证码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            mMaterialDialog.dismiss();
+                        }
+                    }).show();
                 } else
                 {
                     ChangeAccontPhoneNum(idQiehuanEditPhone.getText().toString().trim(), idQiehuanEditYanzheng.getText().toString().trim());

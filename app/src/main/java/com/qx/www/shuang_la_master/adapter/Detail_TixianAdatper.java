@@ -118,9 +118,19 @@ public class Detail_TixianAdatper extends RecyclerView.Adapter
         allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
         allitemViewHolder.idItemtixianMoeny.setText(AppUtils.numZhuanHuan(detail.getInfos().get(position).getPacket().substring(0, 4)));
 
-
-        allitemViewHolder.idAllItemTime.setText(date_month + "月" + date_day + "  " + date_time);
         allitemViewHolder.idAllItemNickname.setText(sp.getString("nickname", ""));
+
+        if (detail.getYtx().length != 0)
+        {
+            for (int i = 0; i < detail.getYtx().length; i++)
+            {
+                if (sp.getString("uid", "").equals(detail.getYtx()[i]))
+                {
+                    allitemViewHolder.idItemtixianStay.setText("提现中");
+                    allitemViewHolder.idItemtixianStay.setBackgroundColor(context.getResources().getColor(R.color.tixianzhong));
+                }
+            }
+        }
         setUpItemEvent(allitemViewHolder);
     }
 

@@ -26,6 +26,7 @@ public class Constants
     public static final String TIXIANZHONGXI_Url = "TIXIAN/INDEX";
     public static final String QH_AUTHCODE_Url = "USER/GETQHAUTHCODE";
     public static final String QH_Url = "USER/QIEHUAN";
+    public static final String WEIXINAUTHCODE = "USER/VALIDWXAUTHCODE";
 
 
     public static final String KEY = ">_<#!=。=》-(<ゝω·)#☆";

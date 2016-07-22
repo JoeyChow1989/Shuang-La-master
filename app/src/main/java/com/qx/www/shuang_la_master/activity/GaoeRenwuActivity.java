@@ -27,7 +27,7 @@ public class GaoeRenwuActivity extends BaseActivity implements AutoLoadRecylerVi
     AutoLoadRecylerView idGaoeRecyler;
 
     private LinearLayoutManager layoutManager;
-    private List<XianshiRenwu> mList;
+    private XianshiRenwu xianshiRenwu;
     private Xianshi_RenwuAdapter adapter;
 
     @Override
@@ -55,13 +55,12 @@ public class GaoeRenwuActivity extends BaseActivity implements AutoLoadRecylerVi
             }
         });
 
-        mList = new ArrayList<XianshiRenwu>();
         layoutManager = new LinearLayoutManager(this);
         idGaoeRecyler.setLayoutManager(layoutManager);
         idGaoeRecyler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         idGaoeRecyler.setLoadMoreListener(this);
-        //adapter = new Xianshi_RenwuAdapter(mList, this);
-        idGaoeRecyler.setAdapter(adapter);
+        //adapter = new Xianshi_RenwuAdapter(xianshiRenwu, this, "", "");
+        //idGaoeRecyler.setAdapter(adapter);
     }
 
     @Override

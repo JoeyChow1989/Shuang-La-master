@@ -13,26 +13,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="LightLinearProgressView">
-        <item name="pv_autostart">false</item>
-        <item name="pv_circular">false</item>
-        <item name="pv_progressStyle">@style/LightLinearProgressDrawable</item>
-        <item name="pv_progressMode">indeterminate</item>
+    <style name="to_up" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
 
-    <style name="LightLinearProgressDrawable" parent="Material.Drawable.LinearProgress">
-        <item name="lpd_strokeColor">@color/colorPrimary</item>
-        <item name="lpd_strokeSecondaryColor">@android:color/transparent</item>
-    </style>
-
-    <style name="LightDeterminateLinearProgressView" parent="LightLinearProgressView">
-        <item name="pv_progressStyle">@style/LightDeterminateLinearProgressDrawable</item>
-        <item name="pv_progressMode">determinate</item>
-    </style>
-
-    <style name="LightDeterminateLinearProgressDrawable" parent="Material.Drawable.LinearProgress.Determinate">
-        <item name="lpd_strokeColor">@color/colorPrimary</item>
-        <item name="lpd_strokeSecondaryColor">@color/colorButtonProgressBar</item>
+    <style name="AnimFade" parent="@android:style/Animation.Activity">
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!--  这个是加入的代码 -->

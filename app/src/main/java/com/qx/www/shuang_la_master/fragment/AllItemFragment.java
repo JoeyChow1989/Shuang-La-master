@@ -32,6 +32,7 @@ import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,7 +101,6 @@ public class AllItemFragment extends BaseFragment implements SwipeRefreshLayout.
                 {
                     JSONObject jsonObject = new JSONObject(result);
                     String infos = jsonObject.getString("infos");
-
                     if (!infos.equals("1")){
                         Gson gson = new Gson();
                         Detail detail = gson.fromJson(result, Detail.class);

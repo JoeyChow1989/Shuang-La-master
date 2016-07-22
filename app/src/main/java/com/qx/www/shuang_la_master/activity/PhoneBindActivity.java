@@ -125,7 +125,7 @@ public class PhoneBindActivity extends BaseActivity
                             mMaterialDialog.dismiss();
                         }
                     }).show();
-                } else if (AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()))
+                } else if (!AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()) || idPhoneEditPhone.getText().toString().trim().length() != 11)
                 {
                     mMaterialDialog = new MaterialDialog(this);
                     mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
@@ -154,7 +154,7 @@ public class PhoneBindActivity extends BaseActivity
                             mMaterialDialog.dismiss();
                         }
                     }).show();
-                } else if (AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()))
+                } else if (!AppUtils.isMobileNO(idPhoneEditPhone.getText().toString().trim()) || idPhoneEditPhone.getText().toString().trim().length() != 11)
                 {
                     mMaterialDialog = new MaterialDialog(this);
                     mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()

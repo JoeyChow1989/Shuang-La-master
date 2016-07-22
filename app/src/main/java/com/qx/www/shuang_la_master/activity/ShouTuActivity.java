@@ -3,24 +3,32 @@ package com.qx.www.shuang_la_master.activity;
 import android.Manifest;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.qx.www.shuang_la_master.BaseActivity;
 import com.qx.www.shuang_la_master.R;
+import com.qx.www.shuang_la_master.domain.UserInfo;
 import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.Constants;
+import com.qx.www.shuang_la_master.utils.SaveImageUtils;
+import com.qx.www.shuang_la_master.utils.VolleyInterface;
+import com.qx.www.shuang_la_master.utils.VolleyRequest;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -28,14 +36,17 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.utils.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class ShouTuActivity extends BaseActivity
 {
 
-    SharedPreferences sp;
     @Bind(R.id.toolbar1)
     Toolbar toolbar1;
     @Bind(R.id.id_shoutu_bidu)
@@ -44,10 +55,7 @@ public class ShouTuActivity extends BaseActivity
     TextView idShoutuInventcode;
     @Bind(R.id.id_shoutu_copyinventcode)
     Button idShoutuCopyinventcode;
-    @Bind(R.id.appbar)
-    AppBarLayout appbar;
 
-    String sy, total, num, tnum, tsy;
     @Bind(R.id.id_shoutu_tudi_geshu)
     TextView idShoutuTudiGeshu;
     @Bind(R.id.id_shoutu_jiangli_tudi)
@@ -56,6 +64,16 @@ public class ShouTuActivity extends BaseActivity
     Button idShoutuShare;
     @Bind(R.id.id_shoutu_total)
     TextView idShoutuTotal;
+    @Bind(R.id.id_shoutu_erweima)
+    ImageView idShoutuErweima;
+
+    SharedPreferences sp;
+    String uid;
+    String url_userinfo;
+    String tokenBeforeMD5_info, token_info;
+    SharedPreferences info;
+    SharedPreferences.Editor editor;
+    UserInfo userinfo;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -71,7 +89,7 @@ public class ShouTuActivity extends BaseActivity
     @Override
     public void initView()
     {
-        toolbar1.setTitle("");
+        toolbar1.setTitle("收徒");
         setSupportActionBar(toolbar1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar1.setNavigationOnClickListener(new View.OnClickListener()
@@ -82,47 +100,44 @@ public class ShouTuActivity extends BaseActivity
                 onBackPressed();
             }
         });
-        sp = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        sp = getSharedPreferences("LoginInfo", MODE_PRIVATE);
+        uid = String.valueOf(sp.getInt("uid", 0));
+        info = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        editor = info.edit();
 
+        tokenBeforeMD5_info = GetThePhoneInfo() + Constants.KEY + "/" + Constants.USERINFO_Url;
+        token_info = AppUtils.getMd5Value(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4) + AppUtils.getMd5Value(tokenBeforeMD5_info).replace(AppUtils.getMd5Value(tokenBeforeMD5_info).substring(AppUtils.getMd5Value(tokenBeforeMD5_info).length() - 4), ""));
+
+        System.out.println("---tokenBeforeMD5_info---:" + tokenBeforeMD5_info);
+        System.out.println("---token_info---:" + token_info);
+
+        idShoutuErweima.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ShouTuActivity.this);
+                builder.setItems(new String[]{getResources().getString(R.string.save_picture)}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        idShoutuErweima.setDrawingCacheEnabled(true);
+                        Bitmap imageBitmap = idShoutuErweima.getDrawingCache();
+                        if (imageBitmap != null) {
+                            new SaveImageUtils(ShouTuActivity.this, idShoutuErweima).execute(imageBitmap);
+                        }
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
     }
 
     @Override
     public void initData()
     {
-        //总邀请的徒弟收益
-        sy = sp.getString("sy", "");
-        //总收益
-        total = sp.getString("total", "");
-        //总邀请的徒弟数量
-        num = sp.getString("num", "");
-        //今天邀请的徒弟数量
-        tnum = sp.getString("tnum", "");
-        //今天邀请的徒弟收益
-        tsy = sp.getString("tsy", "");
-
-        if (num.equals("0"))
-        {
-            idShoutuTudiGeshu.setText("0人");
-        } else
-        {
-            idShoutuTudiGeshu.setText(AppUtils.numZhuanHuan(num) + "人");
-        }
-
-        if (sy.equals("0"))
-        {
-            idShoutuJiangliTudi.setText("0");
-        } else
-        {
-            idShoutuJiangliTudi.setText(AppUtils.numZhuanHuan(sy));
-        }
-
-        if (tsy.equals("0"))
-        {
-            idShoutuTotal.setText("00.00");
-        } else
-        {
-            idShoutuTotal.setText(AppUtils.numZhuanHuan(tsy));
-        }
+        url_userinfo = Constants.BaseUrl + "/site/getInfo";
+        GetUserInfo(url_userinfo, token_info);
     }
 
     @Override
@@ -137,13 +152,19 @@ public class ShouTuActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.id_shoutu_bidu:
-                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setMessage("“http://m.shuangla.cc”\n\n" +
+                final MaterialDialog materialDialog = new MaterialDialog(this);
+                materialDialog.setMessage("“http://m.shuangla.cc”\n\n" +
                         "1.徒弟完成IOS限时任务，您可以获得100%等额奖励\n" +
                         "2.徒弟完成Android任务，（含限时、专属、联盟）您可获得20%奖励\n" +
                         "3.师傅从每个徒弟获得最高10元奖励，收的越多奖励越多\n" +
-                        "4.老徒弟规则保留到2015年12月31日");
-                alertDialog.show();
+                        "4.老徒弟规则保留到2015年12月31日").setPositiveButton("ok", new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        materialDialog.dismiss();
+                    }
+                }).show();
                 break;
             case R.id.id_shoutu_copyinventcode:
                 ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -159,7 +180,7 @@ public class ShouTuActivity extends BaseActivity
 
     private void ShareUmeng()
     {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
         UMImage image = new UMImage(ShouTuActivity.this, bitmap);
         //UMImage image = new UMImage(ShouTuActivity.this, "http://www.umeng.com/images/pic/social/integrated_3.png");
         //UMImage image = new UMImage(ShareActivity.this,new File("/SDCARD/image_jpg.jpg"));
@@ -175,7 +196,7 @@ public class ShouTuActivity extends BaseActivity
         // share URL
         String url = AppUtils.SHUANGLA_URL;
 
-        new ShareAction(this).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE)
+        new ShareAction(this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                 .withTitle("爽啦分享")
                 .withText("分享你的邀请码，邀请更多人吧")
                 .withMedia(image)
@@ -222,5 +243,81 @@ public class ShouTuActivity extends BaseActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    public String GetThePhoneInfo()
+    {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
+    }
+
+    private void GetUserInfo(String url, String token_info)
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("uid", uid);
+        params.put("token", token_info);
+
+        VolleyRequest.RequestPost(this, url, "info", params, new VolleyInterface(this,
+                VolleyInterface.mSuccessListener, VolleyInterface.mErrorListener)
+        {
+            @Override
+            public void onMySuccess(String result)
+            {
+                System.out.println("--------------getInfo-------------" + result);
+                Gson gson = new Gson();
+                userinfo = gson.fromJson(result, UserInfo.class);
+
+                editor.putString("avatar", userinfo.getInfos().getAvatar());
+                editor.putString("mobile", userinfo.getInfos().getMobile());
+                editor.putString("status", userinfo.getInfos().getStatus());
+                editor.putString("work", userinfo.getInfos().getWork());
+                editor.putString("weixin", userinfo.getInfos().getWeixin());
+                editor.putString("nickname", userinfo.getInfos().getNickname());
+                editor.putString("sex", userinfo.getInfos().getSex());
+                editor.putString("birthday", userinfo.getInfos().getBirthday());
+                editor.putString("uid", userinfo.getInfos().getUid());
+                editor.putString("semi", userinfo.getInfos().getSemi());
+                editor.putString("logintime", userinfo.getInfos().getLogintime());
+                editor.putString("tnum", userinfo.getInfos().getTnum());
+                editor.putString("tsy", userinfo.getInfos().getTsy());
+                editor.putString("num", userinfo.getInfos().getNum());
+                editor.putString("sy", userinfo.getInfos().getSy());
+                editor.putString("total", userinfo.getInfos().getTotal());
+
+                editor.commit();
+                System.out.println("mobile-----------------:" + userinfo.getInfos().getMobile());
+
+                if (userinfo.getInfos().getNum().equals("0"))
+                {
+                    idShoutuTudiGeshu.setText("0人");
+                } else
+                {
+                    idShoutuTudiGeshu.setText(userinfo.getInfos().getNum() + "人");
+                }
+
+                if (userinfo.getInfos().getSy().equals("0"))
+                {
+                    idShoutuJiangliTudi.setText("0");
+                } else
+                {
+                    idShoutuJiangliTudi.setText(userinfo.getInfos().getSy());
+                }
+
+                if (userinfo.getInfos().getTsy().equals("0"))
+                {
+                    idShoutuTotal.setText("00.00");
+                } else
+                {
+                    idShoutuTotal.setText(userinfo.getInfos().getTsy());
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error)
+            {
+                Toast.makeText(ShouTuActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

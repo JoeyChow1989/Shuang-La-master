@@ -179,7 +179,7 @@ public class PhoneTiXianActivity extends BaseActivity
                     mMaterialDialog.dismiss();
                 }
             }).show();
-        } else if (AppUtils.isMobileNO(idPhonetixianEdittext.getText().toString().trim()))
+        } else if (!AppUtils.isMobileNO(idPhonetixianEdittext.getText().toString().trim())|| idPhonetixianEdittext.getText().toString().trim().length() != 11)
         {
             mMaterialDialog = new MaterialDialog(this);
             mMaterialDialog.setMessage("手机号码格式不正确!").setPositiveButton("ok", new View.OnClickListener()
