@@ -153,7 +153,6 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
 
                                 //开启计时器服务
                                 countDownTimerService.startCountDown();
-
                             } else if (AppUtils.isAvilible(context, mPackageName))
                             {
                                 Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(mPackageName);

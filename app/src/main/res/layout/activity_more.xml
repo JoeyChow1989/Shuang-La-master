@@ -139,9 +139,14 @@
                 />
 
             <TextView
+                android:id="@+id/id_more_weixin_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="right|center"
+                android:paddingRight="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 />
 
             <ImageView

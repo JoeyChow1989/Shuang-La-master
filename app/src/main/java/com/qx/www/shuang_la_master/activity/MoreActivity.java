@@ -64,6 +64,8 @@ public class MoreActivity extends BaseActivity
     TextView idMoreZiliaoShouji;
     @Bind(R.id.id_more_vname)
     TextView idMoreVname;
+    @Bind(R.id.id_more_weixin_text)
+    TextView idMoreWeixinText;
 
     SharedPreferences sp;
     String uid;
@@ -72,7 +74,6 @@ public class MoreActivity extends BaseActivity
     SharedPreferences info;
     SharedPreferences.Editor editor;
     UserInfo userinfo;
-
 
     @Override
     public void initData()
@@ -237,6 +238,12 @@ public class MoreActivity extends BaseActivity
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.mipmap.ic_launcher)
                         .into(idMoreZiliaoHeadpic);
+
+                if (userinfo.getInfos().getWeixin().equals("1"))
+                {
+                    idMoreWeixinText.setText("已绑定微信");
+                }
+
 
                 idMoreZiliaoShouji.setText(userinfo.getInfos().getMobile());
                 idMoreTextId.setText(userinfo.getInfos().getUid());

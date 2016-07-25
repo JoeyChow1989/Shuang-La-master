@@ -45,7 +45,5 @@
             android:paddingRight="20dp"
             android:layout_weight="1"
             android:text="* 此邮箱仅处理商务合作，不回复任何客服问题，客服问题请前往客服中心"/>
-
     </LinearLayout>
-
 </RelativeLayout>
