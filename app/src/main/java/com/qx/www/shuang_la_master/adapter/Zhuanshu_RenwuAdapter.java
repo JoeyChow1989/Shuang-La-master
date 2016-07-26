@@ -116,8 +116,6 @@ public class Zhuanshu_RenwuAdapter extends RecyclerView.Adapter
 
     static class ZhuanshuViewHolder extends RecyclerView.ViewHolder
     {
-        @Bind(R.id.id_zhuanshurenwu_time)
-        TextView idZhuanshurenwuTime;
         @Bind(R.id.id_zhuanshurenwu_img)
         ImageView idzhuanshurenwuImg;
         @Bind(R.id.id_zhuanshurenwu_title)

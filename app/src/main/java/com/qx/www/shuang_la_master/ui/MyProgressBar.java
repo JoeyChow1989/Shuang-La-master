@@ -63,6 +63,7 @@ public class MyProgressBar extends ProgressBar
         this.mPaint = new Paint();
         this.mPaint.setColor(Color.WHITE);
         this.mPaint.setTextSize(30);
+        this.text = "开始任务";
     }
 
     private void setText(){

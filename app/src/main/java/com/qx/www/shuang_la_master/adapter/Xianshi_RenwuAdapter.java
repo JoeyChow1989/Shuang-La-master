@@ -1,7 +1,9 @@
 package com.qx.www.shuang_la_master.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.qx.www.shuang_la_master.domain.BeginTask;
 import com.qx.www.shuang_la_master.domain.XianshiRenwu;
 import com.qx.www.shuang_la_master.ui.CustemDialog;
 import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.ButtonUtil;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
 import com.qx.www.shuang_la_master.utils.VolleyRequest;
@@ -35,6 +38,8 @@ import me.drakeet.materialdialog.MaterialDialog;
 public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
 {
 
+    @Bind(R.id.id_xianshirenwu_cardview)
+    CardView idXianshirenwuCardview;
     private XianshiRenwu xianshiRenwu;
     private Context context;
     private String uid;
@@ -117,59 +122,67 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
     {
         xianshiViewHolder = (XianshiViewHolder) holder;
 
-        // TODO: 2016/7/1 adapter
-        Glide.with(context)
-                .load(Constants.BACKGROUDUrl + xianshiRenwu.getInfos().get(position).getIcon())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(xianshiViewHolder.idXianshirenwuImg);
-
-        System.out.println(Constants.BACKGROUDUrl + xianshiRenwu.getInfos().get(position).getIcon());
-
-        xianshiViewHolder.idXianshirenwuTitle.setText(xianshiRenwu.getInfos().get(position).getTitle());
-        xianshiViewHolder.idXianshirenwuCount.setText("剩余" + xianshiRenwu.getInfos().get(position).getSln());
-
-        if (xianshiRenwu.getInfos().get(position).getMoretask().equals("0"))
+        if (xianshiRenwu.getInfos().get(position).getApp_status() == "1")
         {
-            xianshiViewHolder.idXianshirenwuZhuanshu.setVisibility(View.INVISIBLE);
-        }
+            Glide.with(context)
+                    .load(Constants.BACKGROUDUrl + xianshiRenwu.getInfos().get(position).getIcon())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(xianshiViewHolder.idXianshirenwuImg);
 
-        xianshiViewHolder.idXianshiShouyi.setText("+" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getReward()) + "元");
-        xianshiViewHolder.idXianshiZhuanshushouyi.setText("含专属收益" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getZs_reward()) + "元");
+            System.out.println(Constants.BACKGROUDUrl + xianshiRenwu.getInfos().get(position).getIcon());
 
-        if (xianshiRenwu.getInfos().get(position).getIsfinish().equals("1"))
-        {
+            xianshiViewHolder.idXianshirenwuTitle.setText(xianshiRenwu.getInfos().get(position).getTitle());
+            xianshiViewHolder.idXianshirenwuCount.setText("剩余" + xianshiRenwu.getInfos().get(position).getSln());
 
-            xianshiViewHolder.idXianshiShouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
-            xianshiViewHolder.idXianshiZhuanshushouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
-            xianshiViewHolder.idXianshirenwuZhuanshu.setBackgroundColor(context.getResources().getColor(R.color.item_left));
-        }
-
-
-        //点击抢夺任务;
-        this.setOnItemClickListener(new OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(View view, int position)
+            if (xianshiRenwu.getInfos().get(position).getMoretask().equals("0"))
             {
-
-                System.out.println("position--------------------" + position);
-
-                tokenBeforeMd5_begintask = semi + uid + Constants.KEY + xianshiRenwu.getInfos().get(position).getPacket();
-                token_begintask = AppUtils.getMd5Value(tokenBeforeMd5_begintask);
-                System.out.println("token_begintask---------------------:" + token_begintask);
-                String tid = xianshiRenwu.getInfos().get(position).getId();
-                String packet = xianshiRenwu.getInfos().get(position).getPacket();
-                QiangXianshiRenwu(tid, packet);
+                xianshiViewHolder.idXianshirenwuZhuanshu.setVisibility(View.INVISIBLE);
             }
 
-            @Override
-            public void onItemLongClick(View view, int position)
+            xianshiViewHolder.idXianshiShouyi.setText("+" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getReward()) + "元");
+            xianshiViewHolder.idXianshiZhuanshushouyi.setText("含专属收益" + AppUtils.numZhuanHuan(xianshiRenwu.getInfos().get(position).getZs_reward()) + "元");
+
+            if (xianshiRenwu.getInfos().get(position).getIsfinish().equals("1"))
             {
 
+                xianshiViewHolder.idXianshiShouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
+                xianshiViewHolder.idXianshiZhuanshushouyi.setBackgroundColor(context.getResources().getColor(R.color.item_left));
+                xianshiViewHolder.idXianshirenwuZhuanshu.setBackgroundColor(context.getResources().getColor(R.color.item_left));
             }
-        });
 
-        setUpItemEvent(xianshiViewHolder);
+            //点击抢夺任务;
+            this.setOnItemClickListener(new OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(View view, int position)
+                {
+                    if (ButtonUtil.isFastDoubleClick(view.getId()))
+                    {
+                        //这儿进行控制，时间自己控制
+                        Log.e("----->显示点击时间和开始时间", "开始时间");
+                        Toast.makeText(context, "点击过于频繁!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    System.out.println("position--------------------" + position);
+                    tokenBeforeMd5_begintask = semi + uid + Constants.KEY + xianshiRenwu.getInfos().get(position).getPacket();
+                    token_begintask = AppUtils.getMd5Value(tokenBeforeMd5_begintask);
+                    System.out.println("token_begintask---------------------:" + token_begintask);
+                    String tid = xianshiRenwu.getInfos().get(position).getId();
+                    String packet = xianshiRenwu.getInfos().get(position).getPacket();
+                    QiangXianshiRenwu(tid, packet);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position)
+                {
+
+                }
+            });
+            setUpItemEvent(xianshiViewHolder);
+        } else
+        {
+            xianshiViewHolder.idXianshirenwuCardview.setVisibility(View.GONE);
+        }
     }
 
     private void QiangXianshiRenwu(final String tid, final String packet)
@@ -264,6 +277,8 @@ public class Xianshi_RenwuAdapter extends RecyclerView.Adapter
         TextView idXianshiShouyi;
         @Bind(R.id.id_xianshi_zhuanshushouyi)
         TextView idXianshiZhuanshushouyi;
+        @Bind(R.id.id_xianshirenwu_cardview)
+        CardView idXianshirenwuCardview;
 
         public XianshiViewHolder(View view)
         {

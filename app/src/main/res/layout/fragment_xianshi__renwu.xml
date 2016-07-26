@@ -5,10 +5,15 @@
              android:background="@android:color/white"
              tools:context="com.qx.www.shuang_la_master.fragment.Xianshi_RenwuFragment">
 
-    <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
-        android:id="@+id/id_autorecy_xianshirenwu"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_xianshi_sw"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
 
+        <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
+            android:id="@+id/id_autorecy_xianshirenwu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

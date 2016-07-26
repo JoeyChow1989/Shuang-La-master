@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.qx.www.shuang_la_master.CountDownTimerListener;
 import com.qx.www.shuang_la_master.R;
 import com.qx.www.shuang_la_master.service.CountDownTimerService;
 import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.ButtonUtil;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.CountDownTimerUtil;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
@@ -113,13 +115,15 @@ public class CustemDialog extends AlertDialog.Builder
             ArrayList<HashMap<String, Object>> list = AppUtils.LoadList(context, pm);
             for (int i = 0; i < list.size(); i++)
             {
+                System.out.println("---------runlist-----------" + list.get(i).get("name"));
                 if (list.get(i).get("name").equals(title))
                 {
                     isFinish = true;
                 }
             }
 
-            if ((isFinish == true && countDownTimerService.getCountingTime() == 0) || countDownTimerService.getCountingTime() == 0)
+            if ((isFinish == true && countDownTimerService.getCountingTime() == 0 && AppUtils.isAvilible(context, mPackageName)) || countDownTimerService.getCountingTime() == 0 &&
+                    AppUtils.isAvilible(context, "com.hb.qx"))
             {
                 isShenHe = true;
                 SendFinishTask();
@@ -161,7 +165,8 @@ public class CustemDialog extends AlertDialog.Builder
             @Override
             public void onClick(View v)
             {
-                if (!getSDPath().equals(""))
+
+                if (!getSDPath().equals("") && downloading == 0)
                 {
                     if (fileIsExists(mPackageName) == true)
                     {
@@ -170,24 +175,32 @@ public class CustemDialog extends AlertDialog.Builder
                         intent.setDataAndType(uri, "application/vnd.android.package-archive");
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         context.startActivity(intent);
-                        countDownTimerService.startCountDown();
-
+                        if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.PREPARE)
+                        {
+                            countDownTimerService.startCountDown();
+                        }
                     } else if (AppUtils.isAvilible(context, mPackageName))
                     {
                         Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(mPackageName);
                         LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         context.startActivity(LaunchIntent);
                         //开启计时器服务
-                        countDownTimerService.startCountDown();
+                        if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.PREPARE)
+                        {
+                            countDownTimerService.startCountDown();
+                        }
 
                     } else
                     {
                         DownLoadApk();
+                        if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.PREPARE)
+                        {
+                            countDownTimerService.startCountDown();
+                        }
                     }
                 }
             }
         });
-
 
         mBtShenhe.setOnClickListener(new View.OnClickListener()
         {
@@ -253,7 +266,10 @@ public class CustemDialog extends AlertDialog.Builder
                     if (status.equals("ok"))
                     {
                         mDialog.dismiss();
-                        countDownTimerService.stopCountDown();
+                        if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.START)
+                        {
+                            countDownTimerService.stopCountDown();
+                        }
                         Toast.makeText(context, "任务已经放弃!", Toast.LENGTH_SHORT).show();
                     }
 
@@ -301,15 +317,13 @@ public class CustemDialog extends AlertDialog.Builder
 
                     if (s.equals("ok"))
                     {
-                        Toast.makeText(context,"任务已经完成!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "任务已经完成!", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e)
                 {
                     e.printStackTrace();
                 }
-
-
                 mDialog.dismiss();
             }
 
@@ -328,6 +342,7 @@ public class CustemDialog extends AlertDialog.Builder
     private static final int DOWN_ERROR = 0;
     int totalSize;// 文件总大小
 
+    private float downloading;
     /**
      * 使用Handler更新UI界面信息
      */
@@ -337,7 +352,14 @@ public class CustemDialog extends AlertDialog.Builder
         @Override
         public void handleMessage(Message msg)
         {
+
+            System.out.println("------downloadCount-----" + msg.getData().getFloat("size") + "------------totalSize-------------" + totalSize);
+
+            downloading = msg.getData().getFloat("size");
+
             float num = msg.getData().getFloat("size") / totalSize * 100;
+
+            System.out.println("--------------num------------" + num);
             String temp = String.valueOf(num).substring(0, String.valueOf(num).indexOf("."));
 
             System.out.println("temp---------------------:" + temp);
@@ -413,7 +435,6 @@ public class CustemDialog extends AlertDialog.Builder
         };
 
         final Message message = new Message();
-
         new Thread(new Runnable()
         {
             @Override
@@ -474,7 +495,8 @@ public class CustemDialog extends AlertDialog.Builder
             downloadCount += readsize;// 时时获取下载到的大小
 
             Message msg = new Message();
-            msg.getData().putInt("size", downloadCount);
+            msg.getData().putFloat("size", downloadCount);
+
             mHandler.sendMessage(msg);
 
         }

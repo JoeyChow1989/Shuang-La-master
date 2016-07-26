@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import com.qx.www.shuang_la_master.common.DividerItemDecoration;
 import com.qx.www.shuang_la_master.domain.ZhanshuRenwu;
 import com.qx.www.shuang_la_master.service.CountDownTimerService;
 import com.qx.www.shuang_la_master.utils.AppUtils;
+import com.qx.www.shuang_la_master.utils.ButtonUtil;
 import com.qx.www.shuang_la_master.utils.Constants;
 import com.qx.www.shuang_la_master.utils.CountDownTimerUtil;
 import com.qx.www.shuang_la_master.utils.VolleyInterface;
@@ -46,12 +49,14 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecylerView.loadMoreListener
+public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecylerView.loadMoreListener, SwipeRefreshLayout.OnRefreshListener
 {
 
 
     @Bind(R.id.id_autorecy_zhuanshurenwu)
     AutoLoadRecylerView idAutorecyZhuanshurenwu;
+    @Bind(R.id.id_zhuanshu_sw)
+    SwipeRefreshLayout idZhuanshuSw;
     private LinearLayoutManager layoutManager;
     private List<ZhanshuRenwu> mList;
     private Zhuanshu_RenwuAdapter adapter;
@@ -130,6 +135,7 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
 
                 adapter = new Zhuanshu_RenwuAdapter(mList, context);
                 idAutorecyZhuanshurenwu.setAdapter(adapter);
+                idZhuanshuSw.setRefreshing(false);
 
                 adapter.setOnItemClickListener(new Zhuanshu_RenwuAdapter.OnItemClickListener()
                 {
@@ -141,7 +147,13 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
                         tid = mList.get(position).getTid();
                         System.out.println("mPackageName--------------:" + mPackageName);
 
-                        if (!getSDPath().equals(""))
+                        if (ButtonUtil.isFastDoubleClick(view.getId()))
+                        {
+                            //这儿进行控制，时间自己控制
+                            Log.e("----->显示点击时间和开始时间", "开始时间");
+                            Toast.makeText(context, "点击过于频繁!", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (!getSDPath().equals(""))
                         {
                             if (fileIsExists(mPackageName) == true)
                             {
@@ -152,14 +164,23 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
                                 context.startActivity(intent);
 
                                 //开启计时器服务
-                                countDownTimerService.startCountDown();
-                            } else if (AppUtils.isAvilible(context, mPackageName))
+                                if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.PREPARE)
+                                {
+                                    countDownTimerService.startCountDown();
+                                }
+                            } else if (AppUtils.isAvilible(context, "com.hb.qx"))
                             {
-                                Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(mPackageName);
+                                Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage("com.hb.qx");
                                 LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 context.startActivity(LaunchIntent);
                                 //开启计时器服务
-                                countDownTimerService.startCountDown();
+                                if (countDownTimerService.getTimerStatus() == CountDownTimerUtil.PREPARE)
+                                {
+                                    countDownTimerService.startCountDown();
+                                }
+                            } else
+                            {
+
                             }
                         }
                     }
@@ -186,6 +207,8 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
         sp = context.getSharedPreferences("LoginInfo", context.MODE_PRIVATE);
         uid = String.valueOf(sp.getInt("uid", 0));
 
+        idZhuanshuSw.setOnRefreshListener(this);
+        idZhuanshuSw.setColorSchemeColors(R.color.buleDark, R.color.colorAccent, R.color.friend_shane_shoutu, R.color.color_bt_shoutu_share);
         layoutManager = new LinearLayoutManager(context);
         idAutorecyZhuanshurenwu.setLayoutManager(layoutManager);
         idAutorecyZhuanshurenwu.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
@@ -264,6 +287,13 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
         return true;
     }
 
+    @Override
+    public void onRefresh()
+    {
+        mList.clear();
+        GetZhuanshuRenwu();
+    }
+
     private class MyCountDownLisener implements CountDownTimerListener
     {
         @Override
@@ -279,7 +309,7 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
             }
             System.out.println(countDownTimerService.getCountingTime());
 
-            if (countDownTimerService.getCountingTime() == service_distination_total)
+            if (countDownTimerService.getCountingTime() == 0)
             {
                 FinishZhuanshuTask();
             }
@@ -313,7 +343,7 @@ public class Zhuanshu_RenwuFragment extends BaseFragment implements AutoLoadRecy
 
                     if (s.equals("ok"))
                     {
-                        Toast.makeText(context,"专属任务已完成!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "专属任务已完成!", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e)

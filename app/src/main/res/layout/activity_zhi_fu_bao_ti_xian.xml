@@ -301,7 +301,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="2.2"
+                android:layout_weight="2.1"
                 android:gravity="left|center"
                 android:text="实际支出"
                 />
@@ -318,7 +318,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="2.3"
+                android:layout_weight="2.2"
                 android:gravity="left|center"
                 android:text="元 （余额"
                 />
@@ -327,7 +327,7 @@
                 android:id="@+id/id_zhifubaotixian_yue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="2.5"
+                android:layout_weight="2.4"
                 android:gravity="left|center"
                 android:text="11.11"
                 android:textColor="@color/xinrenfuli"/>

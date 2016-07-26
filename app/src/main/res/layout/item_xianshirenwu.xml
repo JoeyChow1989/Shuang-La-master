@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:id="@+id/id_xianshirenwu_cardview"
                                     android:layout_width="match_parent"
                                     android:layout_height="80dp"
                                     android:background="@android:color/white"
@@ -18,7 +19,6 @@
             android:layout_marginRight="5dp"
             android:layout_weight="2"
             android:background="@drawable/renwu_ing_bg"
-            android:src="@mipmap/ic_launcher"
             />
 
         <LinearLayout
@@ -35,7 +35,6 @@
                 android:layout_weight="1"
                 android:gravity="left|center|bottom"
                 android:paddingLeft="10dp"
-                android:text="平安通天下"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 />
@@ -71,7 +70,6 @@
                     android:layout_weight="2.5"
                     android:background="@color/item_left"
                     android:gravity="center"
-                    android:text="剩余1295"
                     android:textColor="@android:color/white"/>
 
                 <TextView
@@ -88,7 +86,6 @@
                 android:layout_weight="1"
                 android:gravity="left|center|top"
                 android:paddingLeft="10dp"
-                android:text="是时候有一个随身的理财顾问了！"
                 android:textColor="@color/friend_shane_shoutu"/>
         </LinearLayout>
 
@@ -109,7 +106,6 @@
                 android:layout_weight="1"
                 android:background="@color/friend_shane_shoutu"
                 android:gravity="center"
-                android:text="+1.10元"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -123,7 +119,6 @@
                 android:layout_weight="1"
                 android:background="@color/zhuanshu"
                 android:gravity="center"
-                android:text="含专属0.1元"
                 android:textColor="@android:color/white"
                 android:textSize="9sp"
                 android:textStyle="bold"

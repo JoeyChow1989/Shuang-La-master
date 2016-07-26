@@ -4,6 +4,9 @@ package com.qx.www.shuang_la_master.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -26,16 +29,20 @@ import com.qx.www.shuang_la_master.utils.VolleyRequest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecylerView.loadMoreListener
+public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecylerView.loadMoreListener, SwipeRefreshLayout.OnRefreshListener
 {
 
 
     @Bind(R.id.id_autorecy_xianshirenwu)
     AutoLoadRecylerView idAutorecyxiashishurenwu;
+    @Bind(R.id.id_xianshi_sw)
+    SwipeRefreshLayout idXianshiSw;
     private LinearLayoutManager layoutManager;
     private Xianshi_RenwuAdapter adapter;
 
@@ -77,6 +84,7 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
                     System.out.println("result------------------------------:" + result);
                     adapter = new Xianshi_RenwuAdapter(xianshiRenwu, context, uid, GetThePhoneInfo());
                     idAutorecyxiashishurenwu.setAdapter(adapter);
+                    idXianshiSw.setRefreshing(false);
                 }
             }
 
@@ -92,6 +100,8 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
     protected void initView()
     {
         layoutManager = new LinearLayoutManager(context);
+        idXianshiSw.setOnRefreshListener(this);
+        idXianshiSw.setColorSchemeColors(R.color.buleDark, R.color.colorAccent, R.color.friend_shane_shoutu, R.color.color_bt_shoutu_share);
         idAutorecyxiashishurenwu.setLayoutManager(layoutManager);
         idAutorecyxiashishurenwu.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
         idAutorecyxiashishurenwu.setLoadMoreListener(this);
@@ -138,5 +148,11 @@ public class Xianshi_RenwuFragment extends BaseFragment implements AutoLoadRecyl
     public void onResume()
     {
         super.onResume();
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        GetXianshiData();
     }
 }

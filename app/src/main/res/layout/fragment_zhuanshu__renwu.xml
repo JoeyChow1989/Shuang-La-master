@@ -4,10 +4,15 @@
              android:layout_height="match_parent"
              tools:context="com.qx.www.shuang_la_master.fragment.Zhuanshu_RenwuFragment">
 
-    <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
-        android:id="@+id/id_autorecy_zhuanshurenwu"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_zhuanshu_sw"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
 
+        <com.qx.www.shuang_la_master.common.AutoLoadRecylerView
+            android:id="@+id/id_autorecy_zhuanshurenwu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.qx.www.shuang_la_master.common.AutoLoadRecylerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

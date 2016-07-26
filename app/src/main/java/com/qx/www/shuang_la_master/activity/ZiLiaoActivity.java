@@ -280,7 +280,7 @@ public class ZiLiaoActivity extends BaseActivity
                 showZhiyePopup();
                 break;
             case R.id.id_ziliao_sendup:
-                if (mPhotoList.get(0).getPhotoPath() == null)
+                if (mPhotoList.size() == 0)
                 {
                     dialog = new MaterialDialog(this);
                     dialog.setMessage("图片为空！").setPositiveButton("ok", new View.OnClickListener()
